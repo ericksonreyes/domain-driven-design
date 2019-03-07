@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ericksonreyes/domain-driven-design" default="build">
+    <property name="source" value="src/DomainDrivenDesign"/>
+    <property name="phpcs.reportsdir" value="${project.basedir}/build/logs/phpcs"/>
+    <property name="phpmd.reportsdir" value="${project.basedir}/build/logs/phpmd"/>
+    <property name="phpcpd.reportsdir" value="${project.basedir}/build/logs/phpcpd"/>
+    <property name="coverage.reportsdir" value="${project.basedir}/build/logs/phpspec_coverage"/>
+
+    <target name="build" depends="main" hidden="true"/>
+
+    <!-- ============================================  -->
+    <!-- Target: Main PHPCS target                     -->
+    <!-- ============================================  -->
+    <target name="main" hidden="true">
+        <phingcall target="Reset build log folders"/>
+        <phingcall target="Perform unit testing"/>
+        <phingcall target="Check PSR2 coding standard compliance"/>
+        <phingcall target="Check for clean code violations"/>
+        <phingcall target="Check for duplicate codes"/>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: Empty Reports Folders                 -->
+    <!-- ============================================  -->
+    <target name="Reset build log folders" description="Empty Reports Folder">
+        <delete dir="${phpcpd.reportsdir}" quiet="true"/>
+        <mkdir dir="${phpcpd.reportsdir}"/>
+        <delete dir="${phpcs.reportsdir}" quiet="true"/>
+        <mkdir dir="${phpcs.reportsdir}"/>
+        <delete dir="${phpmd.reportsdir}" quiet="true"/>
+        <mkdir dir="${phpmd.reportsdir}"/>
+        <delete dir="${coverage.reportsdir}" quiet="true"/>
+        <mkdir dir="${coverage.reportsdir}"/>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PHPCBF                                -->
+    <!-- ============================================  -->
+    <target name="Beautify source code" description="PHP Code Beautifier">
+        <exec
+            logoutput="false"
+            checkreturn="false"
+            passthru="false"
+            command="./php '${project.basedir}/bin/phpcbf' --standard=PSR2 ${source}"
+        />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PHPCS                                 -->
+    <!-- ============================================  -->
+    <target name="Check PSR2 coding standard compliance" description="Check for coding standard violations">
+
+        <exec
+            logoutput="true"
+            checkreturn="true"
+            passthru="true"
+            command="./php '${project.basedir}/bin/phpcs' '${source}' --standard=PSR2 --report-full='${phpcs.reportsdir}/report.txt'"
+        />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PHPMD                                 -->
+    <!-- ============================================  -->
+    <target name="Check for clean code violations" description="Detect clean code violations">
+        <exec
+            logoutput="false"
+            checkreturn="true"
+            passthru="false"
+            command="./php '${project.basedir}/bin/phpmd' '${source}' html '${project.basedir}/phpmd.xml' --reportfile '${phpmd.reportsdir}/index.html'"
+        />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PHPCPD                                -->
+    <!-- ============================================  -->
+    <target name="Check for duplicate codes" description="Generate pmd-cpd.xml using PHPCPD">
+        <exec
+            logoutput="false"
+            checkreturn="true"
+            passthru="false"
+            command="./php ./bin/phpcpd --log-pmd '${phpcpd.reportsdir}/pmd-cpd.xml' '${source}'"
+        />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PhpSpec                               -->
+    <!-- ============================================  -->
+    <target name="Perform unit testing" description="Unit Testing">
+        <exec
+            logoutput="true"
+            checkreturn="true"
+            passthru="false"
+            command="./php '${project.basedir}/bin/phpspec' run --config '${project.basedir}/phpspec.build.yml' --no-ansi"
+        />
+    </target>
+
+</project>

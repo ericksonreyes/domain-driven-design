@@ -1,0 +1,9 @@
+formatter.name: dot
+stop_on_failure: false
+
+extensions:
+  LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    format:
+      - html
+    output:
+      html: ./build/logs/phpspec_coverage
