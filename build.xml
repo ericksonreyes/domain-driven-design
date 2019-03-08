@@ -12,17 +12,18 @@
     <!-- Target: Main PHPCS target                     -->
     <!-- ============================================  -->
     <target name="main" hidden="true">
-        <phingcall target="Reset build log folders"/>
-        <phingcall target="Perform unit testing"/>
-        <phingcall target="Check PSR2 coding standard compliance"/>
-        <phingcall target="Check for clean code violations"/>
-        <phingcall target="Check for duplicate codes"/>
+        <phingcall target="reset_folders"/>
+        <phingcall target="unit_testing"/>
+        <phingcall target="beautify_source_code"/>
+        <phingcall target="check_coding_standard_compliance"/>
+        <phingcall target="check_for_clean_code_violations"/>
+        <phingcall target="check_for_duplicate_codes"/>
     </target>
 
     <!-- ============================================  -->
     <!-- Target: Empty Reports Folders                 -->
     <!-- ============================================  -->
-    <target name="Reset build log folders" description="Empty Reports Folder">
+    <target name="reset_folders" description="Empty Reports Folder">
         <delete dir="${phpcpd.reportsdir}" quiet="true"/>
         <mkdir dir="${phpcpd.reportsdir}"/>
         <delete dir="${phpcs.reportsdir}" quiet="true"/>
@@ -36,7 +37,7 @@
     <!-- ============================================  -->
     <!-- Target: PHPCBF                                -->
     <!-- ============================================  -->
-    <target name="Beautify source code" description="PHP Code Beautifier">
+    <target name="beautify_source_code" description="beautify_source_code">
         <exec
             logoutput="false"
             checkreturn="false"
@@ -48,7 +49,7 @@
     <!-- ============================================  -->
     <!-- Target: PHPCS                                 -->
     <!-- ============================================  -->
-    <target name="Check PSR2 coding standard compliance" description="Check for coding standard violations">
+    <target name="check_coding_standard_compliance" description="Check for coding standard violations">
 
         <exec
             logoutput="true"
@@ -61,7 +62,7 @@
     <!-- ============================================  -->
     <!-- Target: PHPMD                                 -->
     <!-- ============================================  -->
-    <target name="Check for clean code violations" description="Detect clean code violations">
+    <target name="check_for_clean_code_violations" description="Detect clean code violations">
         <exec
             logoutput="false"
             checkreturn="true"
@@ -73,7 +74,7 @@
     <!-- ============================================  -->
     <!-- Target: PHPCPD                                -->
     <!-- ============================================  -->
-    <target name="Check for duplicate codes" description="Generate pmd-cpd.xml using PHPCPD">
+    <target name="check_for_duplicate_codes" description="Generate pmd-cpd.xml using PHPCPD">
         <exec
             logoutput="false"
             checkreturn="true"
@@ -85,7 +86,7 @@
     <!-- ============================================  -->
     <!-- Target: PhpSpec                               -->
     <!-- ============================================  -->
-    <target name="Perform unit testing" description="Unit Testing">
+    <target name="unit_testing" description="Unit Testing">
         <exec
             logoutput="true"
             checkreturn="true"

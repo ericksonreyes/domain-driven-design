@@ -93,6 +93,4 @@ class Money
         $newAmount = $this->amount() * $exchangeRate;
         return new self($newAmount, $newCurrency);
     }
-
-
 }
