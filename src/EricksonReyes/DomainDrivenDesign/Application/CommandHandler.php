@@ -46,7 +46,6 @@ class CommandHandler
         $executionResult = [];
         $commandClassName = get_class($commandClassInstance);
         foreach ($this->commands() as $storedCommandClassName => $commandHandlers) {
-
             if ($storedCommandClassName === $commandClassName) {
                 foreach ($commandHandlers as $commandHandler) {
                     $commandHandlerClassName = get_class($commandHandler);
