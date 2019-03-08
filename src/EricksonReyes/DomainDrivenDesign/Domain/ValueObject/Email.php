@@ -9,7 +9,7 @@ class Email extends Text
      */
     public function isValid(): bool
     {
-        if (filter_var(parent::value(), FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($this->value(), FILTER_VALIDATE_EMAIL)) {
             return true;
         }
         return false;

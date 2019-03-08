@@ -20,7 +20,7 @@ class UnitOfMeasurement
 
     /**
      * @param string $string
-     * @return Currency
+     * @return UnitOfMeasurement
      */
     public static function fromString(string $string): self
     {

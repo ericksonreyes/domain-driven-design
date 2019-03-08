@@ -1,6 +1,6 @@
 <?php
 
-namespace EricksonReyes\DomainDrivenDesign;
+namespace EricksonReyes\DomainDrivenDesign\Domain;
 
 use DateTimeImmutable;
 
@@ -8,7 +8,7 @@ use DateTimeImmutable;
  * Interface DomainEvent
  * @package EricksonReyes\DomainDrivenDesign
  */
-interface DomainEvent
+interface Event
 {
     /**
      * @return string
@@ -57,7 +57,7 @@ interface DomainEvent
 
     /**
      * @param array $array
-     * @return DomainEvent
+     * @return Event
      */
     public static function fromArray(array $array): self;
 }

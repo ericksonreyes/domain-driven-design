@@ -16,7 +16,7 @@ class Text
     }
 
     /**
-     * @param string $string
+     * @param string $string $string
      * @return Text
      */
     public static function fromString(string $string): self

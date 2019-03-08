@@ -2,12 +2,12 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Domain\ValueObject;
 
-class Currency
+class Identifier
 {
     use CanCompareStrings;
 
     /**
-     * Currency constructor.
+     * Text constructor.
      * @param string $string
      */
     public function __construct(string $string)
@@ -16,8 +16,8 @@ class Currency
     }
 
     /**
-     * @param string $string $string
-     * @return Currency
+     * @param string $string
+     * @return Identifier
      */
     public static function fromString(string $string): self
     {

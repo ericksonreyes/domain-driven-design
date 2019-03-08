@@ -31,7 +31,7 @@ class Number
      * @param int $amount
      * @return Number
      */
-    public function incrementBy(int $amount): Number
+    public function incrementBy(int $amount): self
     {
         $newAmount = $this->amount() + $amount;
         return new self($newAmount);
@@ -41,7 +41,7 @@ class Number
      * @param int $amount
      * @return Number
      */
-    public function decrementBy(int $amount): Number
+    public function decrementBy(int $amount): self
     {
         $newAmount = $this->amount() - $amount;
         return new self($newAmount);
@@ -51,7 +51,7 @@ class Number
      * @param int $number
      * @return Number
      */
-    public function multiplyBy(int $number): Number
+    public function multiplyBy(int $number): self
     {
         $newAmount = $this->amount() * $number;
         return new self($newAmount);
@@ -61,7 +61,7 @@ class Number
      * @param int $number
      * @return Number
      */
-    public function divideBy(int $number): Number
+    public function divideBy(int $number): self
     {
         $newAmount = $this->amount() / $number;
         return new self($newAmount);

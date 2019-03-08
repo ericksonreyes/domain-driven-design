@@ -16,8 +16,8 @@ class Measurement
 
     /**
      * Measurement constructor.
-     * @param UnitOfMeasurement $unitOfMeasurement
      * @param int $value
+     * @param UnitOfMeasurement $unitOfMeasurement
      */
     public function __construct(int $value, UnitOfMeasurement $unitOfMeasurement)
     {

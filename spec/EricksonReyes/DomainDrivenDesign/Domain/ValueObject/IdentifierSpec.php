@@ -2,13 +2,13 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Domain\ValueObject;
 
+use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 use Faker\Factory;
 use Faker\Generator;
-use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Text;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class TextSpec extends ObjectBehavior
+class IdentifierSpec extends ObjectBehavior
 {
     /**
      * @var string
@@ -27,18 +27,18 @@ class TextSpec extends ObjectBehavior
 
     public function let()
     {
-        $this->beConstructedWith($this->value = $this->seeder->paragraph);
+        $this->beConstructedWith($this->value = $this->seeder->uuid);
     }
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(Text::class);
+        $this->shouldHaveType(Identifier::class);
         $this->value()->shouldReturn($this->value);
     }
 
     public function it_can_be_created_from_static_factory_method()
     {
-        $this::fromString($this->seeder->paragraph)->shouldHaveType(Text::class);
+        $this::fromString($this->seeder->paragraph)->shouldHaveType(Identifier::class);
         $this->value()->shouldReturn($this->value);
     }
 
@@ -55,4 +55,5 @@ class TextSpec extends ObjectBehavior
         $this->isEmpty()->shouldReturn(false);
         $this->isNotEmpty()->shouldReturn(true);
     }
+
 }

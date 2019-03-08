@@ -10,7 +10,7 @@ class Password extends Text
      */
     public function lengthIsLessThan(int $expectedLength): bool
     {
-        return strlen(parent::value()) < $expectedLength;
+        return strlen($this->value()) < $expectedLength;
     }
 
     /**
@@ -19,7 +19,7 @@ class Password extends Text
      */
     public function lengthIsEqualTo(int $expectedLength): bool
     {
-        return strlen(parent::value()) === $expectedLength;
+        return strlen($this->value()) === $expectedLength;
     }
 
     /**
@@ -28,7 +28,7 @@ class Password extends Text
      */
     public function lengthIsGreaterThan(int $expectedLength): bool
     {
-        return strlen(parent::value()) > $expectedLength;
+        return strlen($this->value()) > $expectedLength;
     }
 
 
@@ -38,7 +38,7 @@ class Password extends Text
      */
     public function lengthIsLessThanOrEqualTo(int $expectedLength): bool
     {
-        return strlen(parent::value()) <= $expectedLength;
+        return strlen($this->value()) <= $expectedLength;
     }
 
     /**
@@ -47,7 +47,7 @@ class Password extends Text
      */
     public function lengthIsGreaterThanOrEqualTo(int $expectedLength): bool
     {
-        return strlen(parent::value()) >= $expectedLength;
+        return strlen($this->value()) >= $expectedLength;
     }
 
     /**
@@ -55,8 +55,8 @@ class Password extends Text
      */
     public function containsLettersAndNumbers(): bool
     {
-        $hasALetter = preg_match('/[a-zA-Z]/', parent::value());
-        $hasANumber = preg_match('/\d/', parent::value());
+        $hasALetter = preg_match('/[a-zA-Z]/', $this->value());
+        $hasANumber = preg_match('/\d/', $this->value());
         return $hasALetter && $hasANumber;
     }
 
