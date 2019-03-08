@@ -4,7 +4,7 @@ namespace EricksonReyes\DomainDrivenDesign\Domain\Exception;
 
 use InvalidArgumentException;
 
-class EmptyIdentifierException extends InvalidArgumentException
+abstract class EmptyIdentifierException extends InvalidArgumentException
 {
 
 }

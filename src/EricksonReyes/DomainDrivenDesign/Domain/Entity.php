@@ -4,6 +4,10 @@ namespace EricksonReyes\DomainDrivenDesign\Domain;
 
 use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 
+/**
+ * Interface Entity
+ * @package EricksonReyes\DomainDrivenDesign\Domain
+ */
 interface Entity
 {
     /**

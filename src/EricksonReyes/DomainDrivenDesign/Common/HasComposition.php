@@ -2,6 +2,10 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common;
 
+/**
+ * Interface HasComposition
+ * @package EricksonReyes\DomainDrivenDesign\Common
+ */
 interface HasComposition
 {
     /**

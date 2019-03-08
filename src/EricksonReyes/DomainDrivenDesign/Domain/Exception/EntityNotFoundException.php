@@ -2,8 +2,8 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Domain\Exception;
 
-use InvalidArgumentException;
+use EricksonReyes\DomainDrivenDesign\Common\Exception\RecordNotFoundException;
 
-class EntityNotFoundException extends InvalidArgumentException
+abstract class EntityNotFoundException extends RecordNotFoundException
 {
 }

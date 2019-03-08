@@ -4,7 +4,12 @@ namespace EricksonReyes\DomainDrivenDesign\Application;
 
 use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateCommandHandlerException;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\MissingHandlerMethodException;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandException;
 
+/**
+ * Class CommandHandler
+ * @package EricksonReyes\DomainDrivenDesign\Application
+ */
 class CommandHandler
 {
 
@@ -40,6 +45,7 @@ class CommandHandler
     /**
      * @param $commandClassInstance
      * @return array
+     * @throws UnhandledCommandException
      */
     public function execute($commandClassInstance): array
     {
@@ -53,6 +59,11 @@ class CommandHandler
                 }
             }
         }
+
+        if ($executionResult === []) {
+            throw new UnhandledCommandException("There is no command handler for {$commandClassName}");
+        }
+
         return $executionResult;
     }
 

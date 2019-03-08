@@ -5,6 +5,10 @@ namespace EricksonReyes\DomainDrivenDesign\Common;
 use Countable;
 use Iterator;
 
+/**
+ * Class Collection
+ * @package EricksonReyes\DomainDrivenDesign\Common
+ */
 abstract class Collection implements Iterator, Countable
 {
     /**
