@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ericksonreyes/domain-driven-design" default="build">
-    <property name="source" value="src/DomainDrivenDesign"/>
+    <property name="source" value="src/EricksonReyes/DomainDrivenDesign"/>
     <property name="phpcs.reportsdir" value="${project.basedir}/build/logs/phpcs"/>
     <property name="phpmd.reportsdir" value="${project.basedir}/build/logs/phpmd"/>
     <property name="phpcpd.reportsdir" value="${project.basedir}/build/logs/phpcpd"/>

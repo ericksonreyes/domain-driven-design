@@ -20,8 +20,8 @@
   },
   "autoload": {
     "psr-4": {
-      "EricksonReyes\\DomainDrivenDesign\\": "src/DomainDrivenDesign",
-      "spec\\": "spec/"
+      "EricksonReyes\\": "src",
+      "spec\\": "spec"
     },
     "psr-0": {
       "": [
