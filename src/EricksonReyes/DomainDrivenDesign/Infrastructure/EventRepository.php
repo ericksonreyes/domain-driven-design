@@ -3,6 +3,7 @@
 namespace EricksonReyes\DomainDrivenDesign\Infrastructure;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
+use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 
 /**
  * Interface EventRepository
@@ -13,22 +14,19 @@ interface EventRepository
 
     /**
      * @param Event $domainEvent
-     * @return mixed
      */
     public function store(Event $domainEvent): void;
 
+    /**
+     * @param string $eventId
+     * @return Event
+     */
+    public function findById(string $eventId): ?Event;
 
     /**
-     * @param string $contextName
-     * @param string $entityType
-     * @param string $entityId
-     * @return Event[]
+     * @param Identifier $entityId
+     * @return null|Event[]
      */
-    public function getEventsFor(string $contextName, string $entityType, string $entityId): array;
+    public function findAllByEntityId(Identifier $entityId): ?array;
 
-    /**
-     * @param $entityId
-     * @return array|null
-     */
-    public function getEventsForId($entityId): ?array;
 }

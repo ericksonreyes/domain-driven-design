@@ -2,8 +2,8 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Domain\Exception;
 
-use InvalidArgumentException;
+use EricksonReyes\DomainDrivenDesign\Common\Exception\DeletedRecordException;
 
-class MissingEntityException extends InvalidArgumentException
+abstract class MissingEntityException extends DeletedRecordException
 {
 }
