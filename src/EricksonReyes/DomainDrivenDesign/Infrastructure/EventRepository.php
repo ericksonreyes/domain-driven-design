@@ -1,26 +1,28 @@
 <?php
 
-namespace EricksonReyes\DomainDrivenDesign;
+namespace EricksonReyes\DomainDrivenDesign\Infrastructure;
+
+use EricksonReyes\DomainDrivenDesign\Domain\Event;
 
 /**
- * Interface DomainEventRepository
- * @package EricksonReyes\DomainDrivenDesign
+ * Interface EventRepository
+ * @package EricksonReyes\DomainDrivenDesign\Infrastructure
  */
-interface DomainEventRepository
+interface EventRepository
 {
 
     /**
-     * @param DomainEvent $domainEvent
+     * @param Event $domainEvent
      * @return mixed
      */
-    public function store(DomainEvent $domainEvent): void;
+    public function store(Event $domainEvent): void;
 
 
     /**
      * @param string $contextName
      * @param string $entityType
      * @param string $entityId
-     * @return DomainEvent[]
+     * @return Event[]
      */
     public function getEventsFor(string $contextName, string $entityType, string $entityId): array;
 

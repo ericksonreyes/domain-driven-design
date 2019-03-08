@@ -2,23 +2,26 @@
 
 namespace EricksonReyes\DomainDrivenDesign;
 
+use EricksonReyes\DomainDrivenDesign\Domain\Entity;
+use EricksonReyes\DomainDrivenDesign\Domain\Event;
 use EricksonReyes\DomainDrivenDesign\Domain\Exception\MissingEventReplayMethodException;
 
 /**
  * Class EventSourcedEntity
  * @package EricksonReyes\DomainDrivenDesign
  */
-abstract class EventSourcedDomainEntity
+abstract class EventSourcedEntity implements Entity
 {
+
     /**
-     * @var DomainEvent[]
+     * @var Event[]
      */
     private $storedEvents = [];
 
     /**
-     * @param DomainEvent $event
+     * @param Event $event
      */
-    final protected function storeThis(DomainEvent $event): void
+    final protected function storeThis(Event $event): void
     {
         $this->storedEvents[] = $event;
     }
@@ -42,9 +45,9 @@ abstract class EventSourcedDomainEntity
     abstract public function isDeleted(): bool;
 
     /**
-     * @param DomainEvent $domainEvent
+     * @param Event $domainEvent
      */
-    public function replayThis(DomainEvent $domainEvent): void
+    public function replayThis(Event $domainEvent): void
     {
         $eventMethod = 'replay' . $domainEvent->eventName();
         if (method_exists($this, $eventMethod) === false) {
