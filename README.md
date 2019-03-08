@@ -1,4 +1,4 @@
-# ddd-toolkit
+# Domain Driven Design Classes and Interfaces
 A collection of Domain Driven Design inspired Classes and Interfaces.
 
 [![pipeline status](https://api.travis-ci.org/ericksonreyes/domain-driven-design.svg?branch=master)](https://github.com/ericksonreyes/domain-driven-design/tree/master) 
