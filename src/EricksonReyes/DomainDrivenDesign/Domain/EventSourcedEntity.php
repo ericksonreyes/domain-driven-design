@@ -19,14 +19,6 @@ abstract class EventSourcedEntity implements Entity
     private $storedEvents = [];
 
     /**
-     * @param Event $event
-     */
-    final protected function storeThis(Event $event): void
-    {
-        $this->storedEvents[] = $event;
-    }
-
-    /**
      * @return array
      */
     final public function storedEvents(): array
@@ -40,11 +32,6 @@ abstract class EventSourcedEntity implements Entity
     }
 
     /**
-     * @return bool
-     */
-    abstract public function isDeleted(): bool;
-
-    /**
      * @param Event $domainEvent
      */
     public function replayThis(Event $domainEvent): void
@@ -56,5 +43,13 @@ abstract class EventSourcedEntity implements Entity
             );
         }
         $this->$eventMethod($domainEvent);
+    }
+
+    /**
+     * @param Event $event
+     */
+    final protected function storeThis(Event $event): void
+    {
+        $this->storedEvents[] = $event;
     }
 }
