@@ -4,22 +4,10 @@ namespace spec\EricksonReyes\DomainDrivenDesign\Example;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
 use EricksonReyes\DomainDrivenDesign\Example\DomainEntityWasDeletedEvent;
-use Faker\Factory;
-use Faker\Generator;
-use PhpSpec\ObjectBehavior;
+use spec\EricksonReyes\DomainDrivenDesign\Domain\DomainEventUnitTest;
 
-class DomainEntityWasDeletedEventSpec extends ObjectBehavior
+class DomainEntityWasDeletedEventSpec extends DomainEventUnitTest
 {
-
-    /**
-     * @var string
-     */
-    private $entityId;
-
-    /**
-     * @var \DateTimeImmutable;
-     */
-    private $happenedOn;
 
     /**
      * @var string
@@ -27,24 +15,21 @@ class DomainEntityWasDeletedEventSpec extends ObjectBehavior
     private $additionalData;
 
     /**
-     * @var Generator
-     */
-    private $seeder;
-
-    public function __construct()
-    {
-        $this->seeder = Factory::create();
-    }
-
-    /**
      * @throws \Exception
      */
     public function let()
     {
+        $this->eventName = 'DomainEntityWasDeleted';
+        $this->eventContext = 'ExampleDomainContext';
+        $this->entityId = $this->seeder->uuid;
+        $this->entityType = 'ExampleDomainEntityType';
+        $this->happenedOn = new \DateTimeImmutable();
+        $this->additionalData = $this->seeder->paragraph;
+
         $this->beConstructedThrough('raise', [
-            $this->entityId = $this->seeder->uuid,
-            $this->happenedOn = new \DateTimeImmutable(),
-            $this->additionalData = $this->seeder->paragraph
+            $this->entityId,
+            $this->happenedOn,
+            $this->additionalData
         ]);
     }
 
@@ -52,34 +37,6 @@ class DomainEntityWasDeletedEventSpec extends ObjectBehavior
     {
         $this->shouldHaveType(DomainEntityWasDeletedEvent::class);
         $this->shouldHaveType(Event::class);
-    }
-
-    public function it_has_event_name()
-    {
-        $this::staticEventName()->shouldReturn('DomainEntityWasDeleted');
-        $this->eventName()->shouldReturn('DomainEntityWasDeleted');
-    }
-
-    public function it_belongs_to_a_domain_context()
-    {
-        $this::staticEntityContext()->shouldReturn('ExampleDomainContext');
-        $this->entityContext()->shouldReturn('ExampleDomainContext');
-    }
-
-    public function it_belongs_to_an_domain_entity_type()
-    {
-        $this::staticEntityType()->shouldReturn('ExampleDomainEntityType');
-        $this->entityType()->shouldReturn('ExampleDomainEntityType');
-    }
-
-    public function it_has_event_date()
-    {
-        $this->happenedOn()->shouldReturn($this->happenedOn);
-    }
-
-    public function it_belongs_to_an_entity()
-    {
-        $this->entityId()->shouldReturn($this->entityId);
     }
 
     public function it_can_have_additional_data()

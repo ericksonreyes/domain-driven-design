@@ -5,26 +5,10 @@ namespace spec\EricksonReyes\DomainDrivenDesign\Example;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 use EricksonReyes\DomainDrivenDesign\Example\DomainEntity;
-use Faker\Factory;
-use Faker\Generator;
-use PhpSpec\ObjectBehavior;
+use spec\EricksonReyes\DomainDrivenDesign\Domain\DomainEntityUnitTest;
 
-class DomainEntitySpec extends ObjectBehavior
+class DomainEntitySpec extends DomainEntityUnitTest
 {
-    /**
-     * @var Identifier
-     */
-    private $id;
-
-    /**
-     * @var Generator
-     */
-    private $seeder;
-
-    public function __construct()
-    {
-        $this->seeder = Factory::create();
-    }
 
     public function let()
     {
@@ -37,11 +21,6 @@ class DomainEntitySpec extends ObjectBehavior
     {
         $this->shouldHaveType(DomainEntity::class);
         $this->shouldHaveType(Entity::class);
-    }
-
-    public function it_has_identity()
-    {
-        $this->id()->shouldReturn($this->id);
     }
 
     public function it_can_be_mark_as_deleted()

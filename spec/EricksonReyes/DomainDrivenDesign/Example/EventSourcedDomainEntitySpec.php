@@ -10,26 +10,10 @@ use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
 use EricksonReyes\DomainDrivenDesign\Example\DomainEntityWasDeletedEvent;
 use EricksonReyes\DomainDrivenDesign\Example\EventSourcedDomainEntity;
-use Faker\Factory;
-use Faker\Generator;
-use PhpSpec\ObjectBehavior;
+use spec\EricksonReyes\DomainDrivenDesign\Domain\EventSourcedDomainEntityUnitTest;
 
-class EventSourcedDomainEntitySpec extends ObjectBehavior
+class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
 {
-    /**
-     * @var Identifier
-     */
-    private $id;
-
-    /**
-     * @var Generator
-     */
-    private $seeder;
-
-    public function __construct()
-    {
-        $this->seeder = Factory::create();
-    }
 
     public function let()
     {
@@ -45,11 +29,6 @@ class EventSourcedDomainEntitySpec extends ObjectBehavior
         $this->shouldHaveType(Entity::class);
     }
 
-    public function it_has_identity()
-    {
-        $this->id()->shouldReturn($this->id);
-    }
-
     public function it_can_be_mark_as_deleted()
     {
         // Arrange
@@ -63,9 +42,18 @@ class EventSourcedDomainEntitySpec extends ObjectBehavior
             $storedEvent->shouldContain(DomainEntityWasDeletedEvent::class);
         }
         $this->isDeleted()->shouldReturn(true);
+
     }
 
-    public function it_requires_a_domain_event_replay_method()
+    public function it_can_be_restored_from_event(DomainEntityWasDeletedEvent $event)
+    {
+        $event->eventName()->shouldBeCalled()->willReturn('DomainEntityWasDeleted');
+        $event->happenedOn()->shouldBeCalled()->willReturn(new DateTimeImmutable());
+        $this->restoreFromEvent($event);
+        $this->isDeleted()->shouldReturn(true);
+    }
+
+    public function it_requires_domain_events_to_have_replay_methods()
     {
         $event = new class implements Event
         {
@@ -124,12 +112,6 @@ class EventSourcedDomainEntitySpec extends ObjectBehavior
             'restoreFromEvent',
             [$event]
         );
-    }
-
-    public function it_can_delete_all_stored_events()
-    {
-        $this->clearStoredEvents()->shouldBeNull();
-        $this->storedEvents()->shouldReturn([]);
     }
 
 }
