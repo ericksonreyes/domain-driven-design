@@ -32,7 +32,7 @@ abstract class Collection implements Iterator, Countable
         $this->count = 0;
     }
 
-    public function rewind(): int
+    public function rewind(): void
     {
         $this->position = 0;
     }

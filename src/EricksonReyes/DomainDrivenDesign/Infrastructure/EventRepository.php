@@ -28,5 +28,4 @@ interface EventRepository
      * @return null|Event[]
      */
     public function findAllByEntityId(Identifier $entityId): ?array;
-
 }

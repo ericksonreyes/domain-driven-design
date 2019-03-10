@@ -14,4 +14,9 @@ interface Entity
      * @return Identifier
      */
     public function id(): Identifier;
+
+    /**
+     * @return bool
+     */
+    public function isDeleted(): bool;
 }

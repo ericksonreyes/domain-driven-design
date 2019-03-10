@@ -3,10 +3,8 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\Validation;
 
-use EricksonReyes\DomainDrivenDesign\Common\HasComposition;
 use EricksonReyes\DomainDrivenDesign\Common\Validation\ComposedClass;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ComposedClassSpec extends ObjectBehavior
 {
@@ -131,6 +129,7 @@ class ComposedClassSpec extends ObjectBehavior
         $this->beConstructedWith($shoppingBag);
         $this->extract(Lego::class)->shouldReturn($lego);
         $this->extract(ForKids::class)->shouldReturn($lego);
+        $this->extract(ShoppingBag::class)->shouldReturn($shoppingBag);
     }
 
     public function it_returns_null_if_the_class_was_not_inherited()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ericksonreyes/domain-driven-design" default="build">
-    <property name="source" value="src/EricksonReyes/DomainDrivenDesign"/>
+    <property name="source" value="src/EricksonReyes"/>
     <property name="phpcs.reportsdir" value="${project.basedir}/build/logs/phpcs"/>
     <property name="phpmd.reportsdir" value="${project.basedir}/build/logs/phpmd"/>
     <property name="phpcpd.reportsdir" value="${project.basedir}/build/logs/phpcpd"/>
@@ -39,10 +39,10 @@
     <!-- ============================================  -->
     <target name="beautify_source_code" description="beautify_source_code">
         <exec
-            logoutput="false"
-            checkreturn="false"
-            passthru="false"
-            command="./php '${project.basedir}/bin/phpcbf' --standard=PSR2 ${source}"
+                logoutput="false"
+                checkreturn="false"
+                passthru="false"
+                command="./php '${project.basedir}/bin/phpcbf' --standard=PSR2 ${source}"
         />
     </target>
 
@@ -51,10 +51,10 @@
     <!-- ============================================  -->
     <target name="check_coding_standard_compliance" description="Check for coding standard violations">
         <exec
-            logoutput="true"
-            checkreturn="true"
-            passthru="true"
-            command="./php '${project.basedir}/bin/phpcs' '${source}' --standard=PSR2 --report-full='${phpcs.reportsdir}/report.txt'"
+                logoutput="true"
+                checkreturn="true"
+                passthru="true"
+                command="./php '${project.basedir}/bin/phpcs' '${source}' --standard=PSR2 --report-full='${phpcs.reportsdir}/report.txt'"
         />
     </target>
 
@@ -63,10 +63,10 @@
     <!-- ============================================  -->
     <target name="check_for_clean_code_violations" description="Detect clean code violations">
         <exec
-            logoutput="false"
-            checkreturn="true"
-            passthru="false"
-            command="./php '${project.basedir}/bin/phpmd' '${source}' html '${project.basedir}/phpmd.xml' --reportfile '${phpmd.reportsdir}/index.html'"
+                logoutput="false"
+                checkreturn="true"
+                passthru="false"
+                command="./php '${project.basedir}/bin/phpmd' '${source}' html '${project.basedir}/phpmd.xml' --reportfile '${phpmd.reportsdir}/index.html'"
         />
     </target>
 
@@ -75,10 +75,10 @@
     <!-- ============================================  -->
     <target name="check_for_duplicate_codes" description="Generate pmd-cpd.xml using PHPCPD">
         <exec
-            logoutput="false"
-            checkreturn="true"
-            passthru="false"
-            command="./php ./bin/phpcpd --log-pmd '${phpcpd.reportsdir}/pmd-cpd.xml' '${source}'"
+                logoutput="false"
+                checkreturn="true"
+                passthru="false"
+                command="./php ./bin/phpcpd --log-pmd '${phpcpd.reportsdir}/pmd-cpd.xml' '${source}'"
         />
     </target>
 
@@ -87,10 +87,10 @@
     <!-- ============================================  -->
     <target name="unit_testing" description="Unit Testing">
         <exec
-            logoutput="true"
-            checkreturn="true"
-            passthru="false"
-            command="./php '${project.basedir}/bin/phpspec' run --config '${project.basedir}/phpspec.build.yml' --no-ansi"
+                logoutput="false"
+                checkreturn="true"
+                passthru="false"
+                command="./php '${project.basedir}/bin/phpspec' run --config '${project.basedir}/phpspec.build.yml' --no-ansi"
         />
     </target>
 

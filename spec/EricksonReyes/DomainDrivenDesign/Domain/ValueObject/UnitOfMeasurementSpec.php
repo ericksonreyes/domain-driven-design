@@ -6,19 +6,17 @@ use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\UnitOfMeasurement;
 use Faker\Factory;
 use Faker\Generator;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class UnitOfMeasurementSpec extends ObjectBehavior
 {
     /**
-     * @var string
-     */
-    private $code;
-
-    /**
      * @var Generator
      */
     protected $seeder;
+    /**
+     * @var string
+     */
+    private $code;
 
     public function __construct()
     {
@@ -54,6 +52,19 @@ class UnitOfMeasurementSpec extends ObjectBehavior
         $this->beConstructedWith($this->code);
         $this->isEmpty()->shouldReturn(false);
         $this->isNotEmpty()->shouldReturn(true);
+    }
+
+    public function it_matches_strings()
+    {
+        $stringThatWillMatch = $this->code;
+        $stringThatWillNotMatch = md5(time());
+
+        $this->beConstructedWith($stringThatWillMatch);
+        $this->matches($stringThatWillMatch)->shouldReturn(true);
+        $this->doesNotMatch($stringThatWillMatch)->shouldReturn(false);
+
+        $this->matches($stringThatWillNotMatch)->shouldReturn(false);
+        $this->doesNotMatch($stringThatWillNotMatch)->shouldReturn(true);
     }
 
 }

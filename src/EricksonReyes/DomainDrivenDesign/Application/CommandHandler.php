@@ -51,6 +51,7 @@ class CommandHandler
     {
         $executionResult = [];
         $commandClassName = get_class($commandClassInstance);
+
         foreach ($this->commands() as $storedCommandClassName => $commandHandlers) {
             if ($storedCommandClassName === $commandClassName) {
                 foreach ($commandHandlers as $commandHandler) {
@@ -63,7 +64,7 @@ class CommandHandler
         if ($executionResult === []) {
             throw new UnhandledCommandException("There is no command handler for {$commandClassName}");
         }
-
+        
         return $executionResult;
     }
 

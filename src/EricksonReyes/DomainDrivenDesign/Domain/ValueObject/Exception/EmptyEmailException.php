@@ -1,12 +1,8 @@
 <?php
 namespace EricksonReyes\DomainDrivenDesign\ValueObject\Exception;
 
-use Exception;
+use InvalidArgumentException;
 
-final class EmptyEmailException extends Exception
+final class EmptyEmailException extends InvalidArgumentException
 {
-    public function __construct()
-    {
-        parent::__construct('E-mail address is required.');
-    }
 }
