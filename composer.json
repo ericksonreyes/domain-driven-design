@@ -36,18 +36,5 @@
     "sort-packages": true,
     "optimize-autoloader": true,
     "bin-dir": "bin"
-  },
-  "extra": {
-    "hooks": {
-      "pre-commit": [
-        "echo committing as $(git config user.name)",
-        "./scripts/lint"
-      ],
-      "post-merge": [
-        "echo 'post-merge started'",
-        "./scripts/post-merge",
-        "echo 'post-merge finished';"
-      ]
-    }
   }
 }
