@@ -47,9 +47,57 @@ abstract class EventSourcedEntity implements Entity
 
     /**
      * @param Event $event
+     * @return bool
+     */
+    final public function isTheFirstOccurrenceOfThis(Event $event): bool
+    {
+        foreach ($this->storedEvents() as $storedEvent) {
+            if ($storedEvent instanceof $event) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $eventClassName
+     * @return bool
+     */
+    final public function eventAlreadyHappened(string $eventClassName): bool
+    {
+        foreach ($this->storedEvents() as $storedEvent) {
+            if ($storedEvent instanceof $eventClassName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $eventClassName
+     * @return bool
+     */
+    final public function eventNeverHappened(string $eventClassName): bool
+    {
+        return !$this->eventAlreadyHappened($eventClassName);
+    }
+
+    /**
+     * @param Event $event
      */
     final protected function storeThis(Event $event): void
     {
         $this->storedEvents[] = $event;
+    }
+
+    /**
+     * @param Event $event
+     */
+    final protected function storeAndReplayThis(Event $event): void
+    {
+        $this->storeThis($event);
+        $this->replayThis($event);
     }
 }
