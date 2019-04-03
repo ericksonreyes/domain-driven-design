@@ -45,6 +45,23 @@ class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
 
     }
 
+    public function it_can_only_be_deleted_once()
+    {
+        // Arrange
+        $this->isDeleted()->shouldReturn(false);
+
+        // Act
+        $this->delete()->shouldBeNull();
+        $this->delete()->shouldBeNull();
+
+        // Assert
+        foreach ($this->storedEvents() as $storedEvent) {
+            $storedEvent->shouldContain(DomainEntityWasDeletedEvent::class);
+        }
+        $this->isDeleted()->shouldReturn(true);
+
+    }
+
     public function it_can_be_restored_from_event(DomainEntityWasDeletedEvent $event)
     {
         $event->eventName()->shouldBeCalled()->willReturn('DomainEntityWasDeleted');

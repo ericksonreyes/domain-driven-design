@@ -73,12 +73,19 @@ class EventSourcedDomainEntity extends EventSourcedEntity
             $this->additionalData()
         );
 
-        $this->storeThis($event);
-        $this->replayThis($event);
+        if ($this->eventNeverHappened(DomainEntityWasDeletedEvent::class)) {
+            if ($this->isTheFirstOccurrenceOfThis($event)) {
+                $this->storeAndReplayThis($event);
+            }
+        }
+
+        if (!$this->isTheFirstOccurrenceOfThis($event)) {
+            return;
+        }
     }
 
     /**
-     * @throws \Exception
+     * @param Event $event
      */
     public function restoreFromEvent(Event $event): void
     {
