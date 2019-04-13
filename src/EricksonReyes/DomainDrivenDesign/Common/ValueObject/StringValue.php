@@ -2,13 +2,16 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
+use EricksonReyes\DomainDrivenDesign\Common\Attributes\HasLength;
 use EricksonReyes\DomainDrivenDesign\Common\Attributes\ValueObject;
 
 /**
  * Class StringValue
  * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class StringValue implements ValueObject
+class StringValue implements ValueObject, HasLength
 {
     /**
      * @var string
@@ -66,5 +69,56 @@ class StringValue implements ValueObject
     public function doesNotMatch(StringValue $anotherString): bool
     {
         return !$this->matches($anotherString);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->value() === '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotEmpty(): bool
+    {
+        return $this->value() !== '';
+    }
+
+    /**
+     * @return int
+     */
+    public function length(): int
+    {
+        return strlen($this->value());
+    }
+
+    /**
+     * @param int $expectedLength
+     * @return bool
+     */
+    public function lengthIsEqualTo(int $expectedLength): bool
+    {
+        return strlen($this->value()) === $expectedLength;
+    }
+
+    /**
+     * @param int $minimumLength
+     * @return bool
+     */
+    public function lengthIsEqualOrGreaterThan(int $minimumLength): bool
+    {
+        return strlen($this->value()) >= $minimumLength;
+    }
+
+    /**
+     * @param int $maximumLength
+     * @return bool
+     */
+    public function lengthIsEqualOrLessThan(int $maximumLength): bool
+    {
+        return strlen($this->value()) <= $maximumLength;
     }
 }

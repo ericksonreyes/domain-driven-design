@@ -2,6 +2,7 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
+use EricksonReyes\DomainDrivenDesign\Common\Attributes\HasLength;
 use EricksonReyes\DomainDrivenDesign\Common\Attributes\ValueObject;
 
 /**
@@ -10,7 +11,7 @@ use EricksonReyes\DomainDrivenDesign\Common\Attributes\ValueObject;
  *
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class PersonName implements ValueObject
+class PersonName implements ValueObject, HasLength
 {
     /**
      * @var string
@@ -166,6 +167,73 @@ class PersonName implements ValueObject
     {
         return !$this->matches($anotherPersonName);
     }
+
+
+    /**
+     * @return string
+     */
+    public function fullName(): string
+    {
+        return trim(
+            $this->honorific() . ' ' .
+            $this->firstName() . ' ' .
+            $this->middleName() . ' ' .
+            $this->lastName() . ' ' .
+            $this->postNominals()
+        );
+    }
+
+    /**
+     * @return int
+     */
+    public function length(): int
+    {
+        return strlen($this->fullName());
+    }
+
+    /**
+     * @param int $expectedLength
+     * @return bool
+     */
+    public function lengthIsEqualTo(int $expectedLength): bool
+    {
+        return strlen($this->fullName()) === $expectedLength;
+    }
+
+    /**
+     * @param int $minimumLength
+     * @return bool
+     */
+    public function lengthIsEqualOrGreaterThan(int $minimumLength): bool
+    {
+        return strlen($this->fullName()) >= $minimumLength;
+    }
+
+    /**
+     * @param int $maximumLength
+     * @return bool
+     */
+    public function lengthIsEqualOrLessThan(int $maximumLength): bool
+    {
+        return strlen($this->fullName()) <= $maximumLength;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->length() === 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotEmpty(): bool
+    {
+        return $this->length() > 0;
+    }
+
 
     /**
      * @return PersonName

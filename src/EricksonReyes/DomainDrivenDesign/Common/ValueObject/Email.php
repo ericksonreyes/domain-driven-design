@@ -2,16 +2,18 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
+use EricksonReyes\DomainDrivenDesign\Common\Attributes\HasLength;
 use EricksonReyes\DomainDrivenDesign\Common\Attributes\HasValue;
-use EricksonReyes\DomainDrivenDesign\Common\Attributes\IsString;
 use EricksonReyes\DomainDrivenDesign\Common\Attributes\ValueObject;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidEmailException;
 
 /**
  * Class Email
  * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class Email implements ValueObject, HasValue
+class Email implements ValueObject, HasValue, HasLength
 {
 
     /**
@@ -67,6 +69,57 @@ class Email implements ValueObject, HasValue
     public function doesNotMatch(Email $anotherEmail): bool
     {
         return !$this->matches($anotherEmail);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->value() === '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotEmpty(): bool
+    {
+        return $this->value() !== '';
+    }
+
+    /**
+     * @return int
+     */
+    public function length(): int
+    {
+        return strlen($this->value());
+    }
+
+    /**
+     * @param int $expectedLength
+     * @return bool
+     */
+    public function lengthIsEqualTo(int $expectedLength): bool
+    {
+        return strlen($this->value()) === $expectedLength;
+    }
+
+    /**
+     * @param int $minimumLength
+     * @return bool
+     */
+    public function lengthIsEqualOrGreaterThan(int $minimumLength): bool
+    {
+        return strlen($this->value()) >= $minimumLength;
+    }
+
+    /**
+     * @param int $maximumLength
+     * @return bool
+     */
+    public function lengthIsEqualOrLessThan(int $maximumLength): bool
+    {
+        return strlen($this->value()) <= $maximumLength;
     }
 
     /**

@@ -2,13 +2,16 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
+use EricksonReyes\DomainDrivenDesign\Common\Attributes\HasLength;
 use EricksonReyes\DomainDrivenDesign\Common\Attributes\ValueObject;
 
 /**
  * Class Address
  * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class Address implements ValueObject
+class Address implements ValueObject, HasLength
 {
     /**
      * @var string
@@ -45,11 +48,11 @@ class Address implements ValueObject
      */
     public function __construct(string $street, string $city, string $state, Country $country, string $zipCode)
     {
-        $this->street = $street;
-        $this->city = $city;
-        $this->state = $state;
+        $this->street = trim($street);
+        $this->city = trim($city);
+        $this->state = trim($state);
         $this->country = $country;
-        $this->zipCode = $zipCode;
+        $this->zipCode = trim($zipCode);
     }
 
     /**
@@ -92,6 +95,70 @@ class Address implements ValueObject
         return $this->zipCode;
     }
 
+    /**
+     * @return string
+     */
+    public function fullAddress(): string
+    {
+        return trim(
+            $this->street() . ' ' .
+            $this->city() . ' ' .
+            $this->street() . ' ' .
+            $this->country()->name() . ' ' .
+            $this->zipCode()
+        );
+    }
+
+    /**
+     * @return int
+     */
+    public function length(): int
+    {
+        return strlen($this->fullAddress());
+    }
+
+    /**
+     * @param int $expectedLength
+     * @return bool
+     */
+    public function lengthIsEqualTo(int $expectedLength): bool
+    {
+        return strlen($this->fullAddress()) === $expectedLength;
+    }
+
+    /**
+     * @param int $minimumLength
+     * @return bool
+     */
+    public function lengthIsEqualOrGreaterThan(int $minimumLength): bool
+    {
+        return strlen($this->fullAddress()) >= $minimumLength;
+    }
+
+    /**
+     * @param int $maximumLength
+     * @return bool
+     */
+    public function lengthIsEqualOrLessThan(int $maximumLength): bool
+    {
+        return strlen($this->fullAddress()) <= $maximumLength;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->length() === 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotEmpty(): bool
+    {
+        return $this->length() > 0;
+    }
 
     /**
      * @return array
