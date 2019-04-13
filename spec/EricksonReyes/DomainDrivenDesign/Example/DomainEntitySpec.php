@@ -3,7 +3,6 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Example;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
-use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 use EricksonReyes\DomainDrivenDesign\Example\DomainEntity;
 use spec\EricksonReyes\DomainDrivenDesign\Domain\DomainEntityUnitTest;
 
@@ -13,7 +12,7 @@ class DomainEntitySpec extends DomainEntityUnitTest
     public function let()
     {
         $this->beConstructedWith(
-            $this->id = Identifier::fromString($this->seeder->uuid)
+            $this->id = $this->seeder->uuid
         );
     }
 

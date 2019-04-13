@@ -34,14 +34,13 @@ class HistorySpec extends ObjectBehavior
     public function it_can_be_traversed(Event $event)
     {
         $events = [];
-        $expectedNumberOfEvents = mt_rand(1,1);
+        $expectedNumberOfEvents = mt_rand(1, 1);
         for ($eventCount = 0; $eventCount < $expectedNumberOfEvents; $eventCount++) {
             $events[] = $event->getWrappedObject();
             $this->recordThis($event);
         }
 
-        foreach ($this->getWrappedObject() as $index => $storedEvent)
-        {
+        foreach ($this->getWrappedObject() as $index => $storedEvent) {
             \assert($storedEvent === $events[$index]);
         }
     }

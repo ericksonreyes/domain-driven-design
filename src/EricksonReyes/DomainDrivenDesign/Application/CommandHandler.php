@@ -64,7 +64,7 @@ class CommandHandler
         if ($executionResult === []) {
             throw new UnhandledCommandException("There is no command handler for {$commandClassName}");
         }
-        
+
         return $executionResult;
     }
 

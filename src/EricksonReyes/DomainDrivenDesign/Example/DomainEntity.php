@@ -3,12 +3,11 @@
 namespace EricksonReyes\DomainDrivenDesign\Example;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
-use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 
 class DomainEntity implements Entity
 {
     /**
-     * @var Identifier
+     * @var string
      */
     private $id;
 
@@ -21,15 +20,15 @@ class DomainEntity implements Entity
      * DomainEntity constructor.
      * @param $id
      */
-    public function __construct(Identifier $id)
+    public function __construct(string $id)
     {
         $this->id = $id;
     }
 
     /**
-     * @return Identifier
+     * @return string
      */
-    public function id(): Identifier
+    public function id(): string
     {
         return $this->id;
     }

@@ -6,7 +6,7 @@ use DateTimeImmutable;
 
 /**
  * Interface DomainEvent
- * @package EricksonReyes\DomainDrivenDesign
+ * @package DomainDrivenDesign
  */
 interface Event
 {
@@ -24,6 +24,12 @@ interface Event
      * @return string
      */
     public static function staticEntityType(): string;
+
+    /**
+     * @param array $array
+     * @return Event
+     */
+    public static function fromArray(array $array): self;
 
     /**
      * @return DateTimeImmutable
@@ -54,10 +60,4 @@ interface Event
      * @return array
      */
     public function toArray(): array;
-
-    /**
-     * @param array $array
-     * @return Event
-     */
-    public static function fromArray(array $array): self;
 }

@@ -2,7 +2,6 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Domain;
 
-use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 use Faker\Factory;
 use Faker\Generator;
 use PhpSpec\ObjectBehavior;
@@ -10,7 +9,7 @@ use PhpSpec\ObjectBehavior;
 abstract class DomainEntityUnitTest extends ObjectBehavior
 {
     /**
-     * @var Identifier
+     * @var
      */
     protected $id;
 

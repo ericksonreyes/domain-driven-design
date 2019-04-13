@@ -2,8 +2,6 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Domain;
 
-use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
-
 /**
  * Interface Entity
  * @package EricksonReyes\DomainDrivenDesign\Domain
@@ -11,9 +9,9 @@ use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 interface Entity
 {
     /**
-     * @return Identifier
+     * @return string
      */
-    public function id(): Identifier;
+    public function id(): string;
 
     /**
      * @return bool

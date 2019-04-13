@@ -2,8 +2,6 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Domain;
 
-use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
-
 /**
  * Interface Repository
  * @package EricksonReyes\DomainDrivenDesign\Domain
@@ -11,10 +9,10 @@ use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 interface Repository
 {
     /**
-     * @param Identifier $entityId
+     * @param string $entityId
      * @return Entity|null
      */
-    public function findById(Identifier $entityId): ?Entity;
+    public function findById(string $entityId): ?Entity;
 
     /**
      * @param Entity $entity

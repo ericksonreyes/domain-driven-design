@@ -3,10 +3,9 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Example;
 
 use DateTimeImmutable;
+use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodException;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
-use EricksonReyes\DomainDrivenDesign\Domain\Exception\MissingEventReplayMethodException;
-use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
 use EricksonReyes\DomainDrivenDesign\Example\DomainEntityWasDeletedEvent;
 use EricksonReyes\DomainDrivenDesign\Example\EventSourcedDomainEntity;
@@ -18,7 +17,7 @@ class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
     public function let()
     {
         $this->beConstructedWith(
-            $this->id = Identifier::fromString($this->seeder->uuid)
+            $this->id = $this->seeder->uuid
         );
     }
 

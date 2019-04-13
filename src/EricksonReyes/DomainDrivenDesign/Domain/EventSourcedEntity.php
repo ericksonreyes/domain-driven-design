@@ -2,13 +2,13 @@
 
 namespace EricksonReyes\DomainDrivenDesign;
 
+use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodException;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
-use EricksonReyes\DomainDrivenDesign\Domain\Exception\MissingEventReplayMethodException;
 
 /**
  * Class EventSourcedEntity
- * @package EricksonReyes\DomainDrivenDesign
+ * @package DomainDrivenDesign
  */
 abstract class EventSourcedEntity implements Entity
 {

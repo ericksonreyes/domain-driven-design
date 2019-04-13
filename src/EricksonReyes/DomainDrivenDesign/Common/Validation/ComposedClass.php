@@ -20,14 +20,6 @@ final class ComposedClass
     }
 
     /**
-     * @return mixed
-     */
-    private function composedClass()
-    {
-        return $this->aComposedClass;
-    }
-
-    /**
      * @param string $theClassBeingSearched
      * @return bool
      */
@@ -52,5 +44,13 @@ final class ComposedClass
     public function extract($theClassBeingSearchedFor)
     {
         return ClassExtractor::extract($this->composedClass(), $theClassBeingSearchedFor);
+    }
+
+    /**
+     * @return mixed
+     */
+    private function composedClass()
+    {
+        return $this->aComposedClass;
     }
 }

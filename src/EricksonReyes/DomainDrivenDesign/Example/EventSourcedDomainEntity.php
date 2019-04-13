@@ -4,13 +4,12 @@ namespace EricksonReyes\DomainDrivenDesign\Example;
 
 use DateTimeImmutable;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
-use EricksonReyes\DomainDrivenDesign\Domain\ValueObject\Identifier;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
 
 class EventSourcedDomainEntity extends EventSourcedEntity
 {
     /**
-     * @var Identifier
+     * @var string
      */
     private $id;
 
@@ -33,15 +32,15 @@ class EventSourcedDomainEntity extends EventSourcedEntity
      * DomainEntity constructor.
      * @param $id
      */
-    public function __construct(Identifier $id)
+    public function __construct(string $id)
     {
         $this->id = $id;
     }
 
     /**
-     * @return Identifier
+     * @return string
      */
-    public function id(): Identifier
+    public function id(): string
     {
         return $this->id;
     }
@@ -68,7 +67,7 @@ class EventSourcedDomainEntity extends EventSourcedEntity
     public function delete(): void
     {
         $event = DomainEntityWasDeletedEvent::raise(
-            $this->id()->value(),
+            $this->id(),
             new DateTimeImmutable(),
             $this->additionalData()
         );
