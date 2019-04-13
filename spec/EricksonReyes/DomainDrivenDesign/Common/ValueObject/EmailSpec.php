@@ -68,4 +68,17 @@ class EmailSpec extends ObjectBehavior
         $this->matches($aDifferentEmail)->shouldReturn(false);
         $this->doesNotMatch($aDifferentEmail)->shouldReturn(true);
     }
+
+    public function it_can_be_sized()
+    {
+        $length = strlen($this->email);
+
+        $this->length()->shouldReturn($length);
+        $this->lengthIsEqualOrGreaterThan($length - 1)->shouldReturn(true);
+        $this->lengthIsEqualOrLessThan($length + 1)->shouldReturn(true);
+
+        $this->lengthIsEqualTo($length)->shouldReturn(true);
+        $this->isEmpty()->shouldReturn(false);
+        $this->isNotEmpty()->shouldReturn(true);
+    }
 }

@@ -57,4 +57,18 @@ class StringValueSpec extends ObjectBehavior
         $this->matches($differentString)->shouldReturn(false);
         $this->doesNotMatch($differentString)->shouldReturn(true);
     }
+
+    public function it_can_be_sized()
+    {
+        $value[] = $this->value;
+        $length = strlen(trim(implode(' ', $value)));
+
+        $this->length()->shouldReturn($length);
+        $this->lengthIsEqualOrGreaterThan($length - 1)->shouldReturn(true);
+        $this->lengthIsEqualOrLessThan($length + 1)->shouldReturn(true);
+
+        $this->lengthIsEqualTo($length)->shouldReturn(true);
+        $this->isEmpty()->shouldReturn(false);
+        $this->isNotEmpty()->shouldReturn(true);
+    }
 }

@@ -100,13 +100,13 @@ class Address implements ValueObject, HasLength
      */
     public function fullAddress(): string
     {
-        return trim(
-            $this->street() . ' ' .
-            $this->city() . ' ' .
-            $this->street() . ' ' .
-            $this->country()->name() . ' ' .
-            $this->zipCode()
-        );
+        $address[] = $this->street();
+        $address[] = $this->city();
+        $address[] = $this->state();
+        $address[] = $this->country()->name();
+        $address[] = $this->zipCode();
+
+        return trim(implode(' ', $address));
     }
 
     /**

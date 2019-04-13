@@ -45,8 +45,8 @@ class PersonName implements ValueObject, HasLength
      */
     public function __construct(string $firstName, string $lastName)
     {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
+        $this->firstName = trim($firstName);
+        $this->lastName = trim($lastName);
     }
 
     /**
@@ -71,7 +71,8 @@ class PersonName implements ValueObject, HasLength
      */
     public function withMiddleName(string $middleName): self
     {
-        if (trim($middleName) !== '') {
+        $middleName = trim($middleName);
+        if ($middleName !== '') {
             $this->middleName = $middleName;
         }
 
@@ -92,7 +93,8 @@ class PersonName implements ValueObject, HasLength
      */
     public function withHonorific(string $honorific): self
     {
-        if (trim($honorific) !== '') {
+        $honorific = trim($honorific);
+        if ($honorific !== '') {
             $this->honorific = $honorific;
         }
 
@@ -113,7 +115,8 @@ class PersonName implements ValueObject, HasLength
      */
     public function withPostNominals(string $postNominals): self
     {
-        if (trim($postNominals) !== '') {
+        $postNominals = trim($postNominals);
+        if ($postNominals !== '') {
             $this->postNominals = $postNominals;
         }
 
@@ -174,13 +177,13 @@ class PersonName implements ValueObject, HasLength
      */
     public function fullName(): string
     {
-        return trim(
-            $this->honorific() . ' ' .
-            $this->firstName() . ' ' .
-            $this->middleName() . ' ' .
-            $this->lastName() . ' ' .
-            $this->postNominals()
-        );
+        $fullName[] = $this->honorific();
+        $fullName[] = $this->firstName();
+        $fullName[] = $this->middleName();
+        $fullName[] = $this->lastName();
+        $fullName[] = $this->postNominals();
+
+        return trim(implode(' ', $fullName));
     }
 
     /**

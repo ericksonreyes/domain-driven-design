@@ -143,4 +143,23 @@ class PersonNameSpec extends ObjectBehavior
             'postNominals' => $this->postNominals
         ]);
     }
+
+    public function it_can_be_sized()
+    {
+        $fullName[] = $this->honorific;
+        $fullName[] = $this->firstName;
+        $fullName[] = $this->middleName;
+        $fullName[] = $this->lastName;
+        $fullName[] = $this->postNominals;
+
+        $length = strlen(trim(implode(' ', $fullName)));
+
+        $this->length()->shouldReturn($length);
+        $this->lengthIsEqualOrGreaterThan($length - 1)->shouldReturn(true);
+        $this->lengthIsEqualOrLessThan($length + 1)->shouldReturn(true);
+
+        $this->lengthIsEqualTo($length)->shouldReturn(true);
+        $this->isEmpty()->shouldReturn(false);
+        $this->isNotEmpty()->shouldReturn(true);
+    }
 }

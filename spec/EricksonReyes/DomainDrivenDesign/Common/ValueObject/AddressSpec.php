@@ -116,4 +116,24 @@ class AddressSpec extends ObjectBehavior
         $this->country->matches($this->country)->shouldBeCalled()->willReturn(false);
         $this->doesNotMatch($aDifferentAddress)->shouldReturn(true);
     }
+
+    public function it_can_be_sized()
+    {
+        $this->country->name()->shouldBeCalled()->willReturn('Philippines');
+
+        $country[] = $this->street;
+        $country[] = $this->city;
+        $country[] = $this->state;
+        $country[] = 'Philippines';
+        $country[] = $this->zipCode;
+        $length = strlen(trim(implode(' ', $country)));
+
+        $this->length()->shouldReturn($length);
+        $this->lengthIsEqualOrGreaterThan($length - 1)->shouldReturn(true);
+        $this->lengthIsEqualOrLessThan($length + 1)->shouldReturn(true);
+
+        $this->lengthIsEqualTo($length)->shouldReturn(true);
+        $this->isEmpty()->shouldReturn(false);
+        $this->isNotEmpty()->shouldReturn(true);
+    }
 }
