@@ -2,6 +2,7 @@
 
 namespace EricksonReyes\DomainDrivenDesign;
 
+use EricksonReyes\DomainDrivenDesign\Common\Exception\DomainEventOwnershipException;
 use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodException;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
@@ -40,6 +41,12 @@ abstract class EventSourcedEntity implements Entity
         if (method_exists($this, $eventMethod) === false) {
             throw new MissingEventReplayMethodException(
                 'Missing domain event replay method ' . $eventMethod . '.'
+            );
+        }
+
+        if ($domainEvent->entityId() !== $this->id()) {
+            throw new DomainEventOwnershipException(
+                'This entity does not own this ' . $domainEvent->eventName() . ' domain event.'
             );
         }
         $this->$eventMethod($domainEvent);

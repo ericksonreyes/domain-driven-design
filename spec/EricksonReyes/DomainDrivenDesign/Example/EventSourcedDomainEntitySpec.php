@@ -3,9 +3,9 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Example;
 
 use DateTimeImmutable;
+use EricksonReyes\DomainDrivenDesign\Common\Exception\DomainEventOwnershipException;
 use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodException;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
-use EricksonReyes\DomainDrivenDesign\Domain\Event;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
 use EricksonReyes\DomainDrivenDesign\Example\DomainEntityWasDeletedEvent;
 use EricksonReyes\DomainDrivenDesign\Example\EventSourcedDomainEntity;
@@ -63,6 +63,7 @@ class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
 
     public function it_can_be_restored_from_event(DomainEntityWasDeletedEvent $event)
     {
+        $event->entityId()->shouldBeCalled()->wilLReturn($this->id);
         $event->eventName()->shouldBeCalled()->willReturn('DomainEntityWasDeleted');
         $event->happenedOn()->shouldBeCalled()->willReturn(new DateTimeImmutable());
         $this->restoreFromEvent($event);
@@ -71,60 +72,18 @@ class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
 
     public function it_requires_domain_events_to_have_replay_methods()
     {
-        $event = new class implements Event
-        {
-            public static function staticEventName(): string
-            {
-                return '';
-            }
-
-            public static function staticEntityContext(): string
-            {
-                return '';
-            }
-
-            public static function staticEntityType(): string
-            {
-                return '';
-            }
-
-            public function happenedOn(): DateTimeImmutable
-            {
-                return new DateTimeImmutable();
-            }
-
-            public function eventName(): string
-            {
-                return '';
-            }
-
-            public function entityContext(): string
-            {
-                return '';
-            }
-
-            public function entityType(): string
-            {
-                return '';
-            }
-
-            public function entityId(): string
-            {
-                return '';
-            }
-
-            public function toArray(): array
-            {
-                return [];
-            }
-
-            public static function fromArray(array $array): Event
-            {
-                return new self;
-            }
-        };
-
+        $event = new MockDomainEvent($this->id);
         $this->shouldThrow(MissingEventReplayMethodException::class)->during(
+            'restoreFromEvent',
+            [$event]
+        );
+    }
+
+    public function it_prevents_restoration_from_events_that_doesnt_belong_to_it(DomainEntityWasDeletedEvent $event)
+    {
+        $event->entityId()->shouldBeCalled()->wilLReturn($this->seeder->uuid);
+        $event->eventName()->shouldBeCalled()->willReturn('DomainEntityWasDeleted');
+        $this->shouldThrow(DomainEventOwnershipException::class)->during(
             'restoreFromEvent',
             [$event]
         );
