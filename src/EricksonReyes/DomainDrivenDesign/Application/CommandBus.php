@@ -5,12 +5,13 @@ namespace EricksonReyes\DomainDrivenDesign\Application;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateCommandHandlerException;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\MissingHandlerMethodException;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandException;
+use EricksonReyes\DomainDrivenDesign\Infrastructure\CommandBus as CommandBusInterface;
 
 /**
  * Class CommandHandler
  * @package EricksonReyes\DomainDrivenDesign\Application
  */
-class CommandBus
+class CommandBus implements CommandBusInterface
 {
 
     /**
@@ -33,7 +34,7 @@ class CommandBus
             );
         }
 
-        if ($this->alreadyHandlesThisCommand($commandHandlerInstance, $commandClassName)) {
+        if ($this->commandIsBeingHandledAlready($commandHandlerInstance, $commandClassName)) {
             throw new DuplicateCommandHandlerException(
                 "{$handlerInstanceClassName} is already handling {$commandClassName}."
             );
@@ -81,7 +82,7 @@ class CommandBus
      * @param string $commandClassName
      * @return bool
      */
-    private function alreadyHandlesThisCommand($commandHandlerInstance, string $commandClassName): bool
+    private function commandIsBeingHandledAlready($commandHandlerInstance, string $commandClassName): bool
     {
         return in_array($commandHandlerInstance, $this->commands[$commandClassName], true);
     }
