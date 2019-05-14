@@ -6,6 +6,7 @@ use EricksonReyes\DomainDrivenDesign\Application\CommandBus;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateCommandHandlerException;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\MissingHandlerMethodException;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandException;
+use EricksonReyes\DomainDrivenDesign\Infrastructure\CommandBus as CommandBusInterface;
 use PhpSpec\ObjectBehavior;
 
 class CommandBusSpec extends ObjectBehavior
@@ -26,9 +27,13 @@ class CommandBusSpec extends ObjectBehavior
         $this->handler = new MockHandler();
     }
 
+    /**
+     *
+     */
     public function it_is_initializable()
     {
         $this->shouldHaveType(CommandBus::class);
+        $this->shouldHaveType(CommandBusInterface::class);
     }
 
     public function it_accepts_handlers()

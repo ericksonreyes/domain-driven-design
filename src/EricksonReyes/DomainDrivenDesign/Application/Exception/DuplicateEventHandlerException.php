@@ -5,9 +5,9 @@ namespace EricksonReyes\DomainDrivenDesign\Application\Exception;
 use RuntimeException;
 
 /**
- * Class DuplicateCommandHandlerException
+ * Class DuplicateEventHandlerException
  * @package EricksonReyes\DomainDrivenDesign\Application\Exception
  */
-final class DuplicateCommandHandlerException extends RuntimeException
+final class DuplicateEventHandlerException extends RuntimeException
 {
 }
