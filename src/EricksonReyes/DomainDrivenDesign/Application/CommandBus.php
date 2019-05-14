@@ -10,7 +10,7 @@ use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandExcep
  * Class CommandHandler
  * @package EricksonReyes\DomainDrivenDesign\Application
  */
-class CommandHandler
+class CommandBus
 {
 
     /**

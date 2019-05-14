@@ -2,89 +2,68 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Application;
 
-use EricksonReyes\DomainDrivenDesign\Application\CommandHandler;
+use EricksonReyes\DomainDrivenDesign\Application\CommandBus;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateCommandHandlerException;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\MissingHandlerMethodException;
 use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandException;
 use PhpSpec\ObjectBehavior;
 
-class CommandHandlerSpec extends ObjectBehavior
+class CommandBusSpec extends ObjectBehavior
 {
     /**
-     * @var Handler
+     * @var MockHandler
      */
     private $handler;
 
     /**
-     * @var Command
+     * @var MockCommand
      */
     private $command;
 
     public function let()
     {
-        $this->command = new Command();
-        $this->handler = new Handler();
+        $this->command = new MockCommand();
+        $this->handler = new MockHandler();
     }
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(CommandHandler::class);
+        $this->shouldHaveType(CommandBus::class);
     }
 
     public function it_accepts_handlers()
     {
-        $this->addHandler(new Handler(), Command::class)->shouldBeNull();
+        $this->addHandler(new MockHandler(), MockCommand::class)->shouldBeNull();
     }
 
     public function it_executes_commands()
     {
-        $this->addHandler(new Handler(), Command::class);
-        $this->execute(new Command())->shouldReturn([Handler::class => Command::name()]);
+        $this->addHandler(new MockHandler(), MockCommand::class);
+        $this->execute(new MockCommand())->shouldReturn([MockHandler::class => MockCommand::name()]);
     }
 
     public function it_requires_a_handler_for_commands()
     {
         $this->shouldThrow(UnhandledCommandException::class)->during('execute', [
-            new Command()
+            new MockCommand()
         ]);
     }
 
     public function it_requires_handler_to_have_handler_methods()
     {
         $this->shouldThrow(MissingHandlerMethodException::class)->during('addHandler', [
-            new EmptyHandler(),
-            Command::class
+            new MockEmptyHandler(),
+            MockCommand::class
         ]);
     }
 
     public function it_prevents_duplicate_handler_for_a_command()
     {
-        $handler = new Handler();
-        $this->addHandler($handler, Command::class);
+        $handler = new MockHandler();
+        $this->addHandler($handler, MockCommand::class);
         $this->shouldThrow(DuplicateCommandHandlerException::class)->during('addHandler', [
             $handler,
-            Command::class
+            MockCommand::class
         ]);
     }
-}
-
-class Command
-{
-    public static function name()
-    {
-        return __CLASS__;
-    }
-}
-
-class Handler
-{
-    public function handleThis(Command $command)
-    {
-        return $command::name();
-    }
-}
-
-class EmptyHandler
-{
-
 }
