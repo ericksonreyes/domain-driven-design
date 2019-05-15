@@ -108,6 +108,13 @@ class AddressSpec extends ObjectBehavior
     public function it_can_be_mismatched(Address $aDifferentAddress)
     {
         $aDifferentAddress->street()->shouldBeCalled()->willReturn($this->street);
+        $aDifferentAddress->city()->shouldBeCalled()->willReturn($this->seeder->city);
+        $this->doesNotMatch($aDifferentAddress)->shouldReturn(true);
+    }
+
+    public function it_can_be_mismatched_by_country(Address $aDifferentAddress)
+    {
+        $aDifferentAddress->street()->shouldBeCalled()->willReturn($this->street);
         $aDifferentAddress->city()->shouldBeCalled()->willReturn($this->city);
         $aDifferentAddress->state()->shouldBeCalled()->willReturn($this->state);
         $aDifferentAddress->country()->shouldBeCalled()->willReturn($this->country);
