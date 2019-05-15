@@ -6,6 +6,10 @@ use DateTimeImmutable;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
 
+/**
+ * Class EventSourcedDomainEntity
+ * @package EricksonReyes\DomainDrivenDesign\Example
+ */
 class EventSourcedDomainEntity extends EventSourcedEntity
 {
     /**

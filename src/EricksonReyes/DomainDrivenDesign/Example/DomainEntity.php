@@ -4,6 +4,10 @@ namespace EricksonReyes\DomainDrivenDesign\Example;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 
+/**
+ * Class DomainEntity
+ * @package EricksonReyes\DomainDrivenDesign\Example
+ */
 class DomainEntity implements Entity
 {
     /**

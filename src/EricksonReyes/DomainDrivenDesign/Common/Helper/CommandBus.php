@@ -5,6 +5,10 @@ namespace EricksonReyes\DomainDrivenDesign\Common\Helper;
 use EricksonReyes\DomainDrivenDesign\Common\Helper\Exception\MissingHandleThisMethodException;
 use EricksonReyes\DomainDrivenDesign\Common\Helper\Exception\NoAssignedCommandHandlerException;
 
+/**
+ * Class CommandBus
+ * @package EricksonReyes\DomainDrivenDesign\Common\Helper
+ */
 class CommandBus
 {
     /**

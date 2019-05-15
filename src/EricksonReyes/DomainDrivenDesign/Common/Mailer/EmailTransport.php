@@ -2,6 +2,10 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Mailer;
 
+/**
+ * Interface EmailTransport
+ * @package EricksonReyes\DomainDrivenDesign\Common\Mailer
+ */
 interface EmailTransport
 {
     /**

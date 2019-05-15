@@ -1,15 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ericksonreyes
- * Date: 2019-05-14
- * Time: 17:11
- */
 
 namespace EricksonReyes\DomainDrivenDesign\Infrastructure;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
 
+/**
+ * Interface EventBus
+ * @package EricksonReyes\DomainDrivenDesign\Infrastructure
+ */
 interface EventBus
 {
     /**
@@ -31,4 +29,9 @@ interface EventBus
      * @param ExceptionHandler $exceptionHandler
      */
     public function registerExceptionHandler(ExceptionHandler $exceptionHandler): void;
+
+    /**
+     * @return ExceptionHandler[]
+     */
+    public function exceptionHandlers(): array;
 }

@@ -1,13 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Erickson Reyes
- * Date: 12/12/2018
- * Time: 8:10 PM
- */
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Mailer;
 
+/**
+ * Class EmailAddress
+ * @package EricksonReyes\DomainDrivenDesign\Common\Mailer
+ */
 class EmailAddress implements EmailAddressInterface
 {
     /**

@@ -2,6 +2,10 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Mailer;
 
+/**
+ * Interface AttachmentInterface
+ * @package EricksonReyes\DomainDrivenDesign\Common\Mailer
+ */
 interface AttachmentInterface
 {
     /**

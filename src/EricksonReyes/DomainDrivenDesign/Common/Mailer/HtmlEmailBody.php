@@ -1,13 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Erickson Reyes
- * Date: 12/12/2018
- * Time: 7:07 PM
- */
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Mailer;
 
+/**
+ * Class HtmlEmailBody
+ * @package EricksonReyes\DomainDrivenDesign\Common\Mailer
+ */
 class HtmlEmailBody implements EmailBodyInterface
 {
     /**
