@@ -1,14 +1,14 @@
 <?php
 
-namespace spec\EricksonReyes\DomainDrivenDesign\Example;
+namespace spec\EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 use DateTimeImmutable;
 use EricksonReyes\DomainDrivenDesign\Common\Exception\DomainEventOwnershipException;
 use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodException;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
-use EricksonReyes\DomainDrivenDesign\Example\DomainEntityWasDeletedEvent;
-use EricksonReyes\DomainDrivenDesign\Example\EventSourcedDomainEntity;
+use EricksonReyes\DomainDrivenDesign\Example\Domain\DomainEntityWasDeletedEvent;
+use EricksonReyes\DomainDrivenDesign\Example\Domain\EventSourcedDomainEntity;
 use spec\EricksonReyes\DomainDrivenDesign\Domain\EventSourcedDomainEntityUnitTest;
 
 class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest

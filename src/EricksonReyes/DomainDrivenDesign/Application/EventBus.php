@@ -9,6 +9,10 @@ use EricksonReyes\DomainDrivenDesign\Infrastructure\EventHandler;
 use EricksonReyes\DomainDrivenDesign\Infrastructure\ExceptionHandler;
 use Exception;
 
+/**
+ * Class EventBus
+ * @package EricksonReyes\DomainDrivenDesign\Application
+ */
 class EventBus implements EventBusInterface
 {
     /**

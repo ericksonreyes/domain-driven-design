@@ -1,9 +1,13 @@
 <?php
 
-namespace EricksonReyes\DomainDrivenDesign\Example;
+namespace EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 
+/**
+ * Class DomainEntity
+ * @package EricksonReyes\DomainDrivenDesign\Example\Domain
+ */
 class DomainEntity implements Entity
 {
     /**

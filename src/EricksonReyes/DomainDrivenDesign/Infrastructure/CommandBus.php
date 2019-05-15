@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ericksonreyes
- * Date: 2019-05-14
- * Time: 16:56
- */
 
 namespace EricksonReyes\DomainDrivenDesign\Infrastructure;
 

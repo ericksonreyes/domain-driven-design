@@ -2,6 +2,10 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Mailer;
 
+/**
+ * Interface EmailBodyInterface
+ * @package EricksonReyes\DomainDrivenDesign\Common\Mailer
+ */
 interface EmailBodyInterface
 {
     /**
