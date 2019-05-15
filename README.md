@@ -22,6 +22,17 @@ composer require ericksonreyes/domain-driven-design
 * [Country Factory](docs/common/factory/COUNTRY_FACTORY.MD)
 * [Class Composition Validator](docs/common/validation/CLASS_COMPOSITION_VALIDATOR.MD)
 
+## Value Objects
+* [Address](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address.php)
+* [Country](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Country.php)
+* [Currency](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Currency.php)
+* [Email](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Email.php)
+* [Float](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/FloatValue.php)
+* [Integer](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/IntegerValue.php)
+* [Money](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address.php)
+* [Person Name](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/PersonName.php)
+* [String Value](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/StringValue.php)
+
 ## Examples
 * [Domain Entity](src/EricksonReyes/DomainDrivenDesign/Example/Domain/DomainEntity.php)
 * [Domain Event](src/EricksonReyes/DomainDrivenDesign/Example/Domain/DomainEntityWasDeletedEvent.php)
