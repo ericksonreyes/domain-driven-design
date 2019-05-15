@@ -71,4 +71,28 @@ class StringValueSpec extends ObjectBehavior
         $this->isEmpty()->shouldReturn(false);
         $this->isNotEmpty()->shouldReturn(true);
     }
+
+    public function it_can_be_lower_cased()
+    {
+        $lowerCasedString = strtolower($this->value);
+        $this->lowercased()->shouldReturn($lowerCasedString);
+    }
+
+    public function it_can_be_upper_cased()
+    {
+        $upperCasedString = strtoupper($this->value);
+        $this->uppercased()->shouldReturn($upperCasedString);
+    }
+
+    public function it_can_be_sentence_cased()
+    {
+        $upperCasedString = ucfirst($this->value);
+        $this->sentenceCased()->shouldReturn($upperCasedString);
+    }
+
+    public function it_can_be_title_cased()
+    {
+        $upperCasedString = ucwords($this->value);
+        $this->titleCased()->shouldReturn($upperCasedString);
+    }
 }

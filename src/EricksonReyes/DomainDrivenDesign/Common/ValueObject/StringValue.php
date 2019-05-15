@@ -121,4 +121,36 @@ class StringValue implements ValueObject, HasLength
     {
         return strlen($this->value()) <= $maximumLength;
     }
+
+    /**
+     * @return string
+     */
+    public function lowerCased(): string
+    {
+        return strtolower($this->value());
+    }
+
+    /**
+     * @return string
+     */
+    public function upperCased(): string
+    {
+        return strtoupper($this->value());
+    }
+
+    /**
+     * @return string
+     */
+    public function sentenceCased(): string
+    {
+        return ucfirst($this->value());
+    }
+
+    /**
+     * @return string
+     */
+    public function titleCased(): string
+    {
+        return ucwords($this->value());
+    }
 }
