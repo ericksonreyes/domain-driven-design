@@ -1,6 +1,6 @@
 <?php
 
-namespace EricksonReyes\DomainDrivenDesign\Example;
+namespace EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 use DateTimeImmutable;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
@@ -8,7 +8,7 @@ use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
 
 /**
  * Class EventSourcedDomainEntity
- * @package EricksonReyes\DomainDrivenDesign\Example
+ * @package EricksonReyes\DomainDrivenDesign\Example\Domain
  */
 class EventSourcedDomainEntity extends EventSourcedEntity
 {

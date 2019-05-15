@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\EricksonReyes\DomainDrivenDesign\Example;
+namespace spec\EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
-use EricksonReyes\DomainDrivenDesign\Example\DomainEntity;
+use EricksonReyes\DomainDrivenDesign\Example\Domain\DomainEntity;
 use spec\EricksonReyes\DomainDrivenDesign\Domain\DomainEntityUnitTest;
 
 class DomainEntitySpec extends DomainEntityUnitTest

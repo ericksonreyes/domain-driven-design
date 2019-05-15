@@ -1,6 +1,6 @@
 <?php
 
-namespace EricksonReyes\DomainDrivenDesign\Example;
+namespace EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 use DateTime;
 use DateTimeImmutable;
@@ -8,7 +8,7 @@ use EricksonReyes\DomainDrivenDesign\Domain\Event;
 
 /**
  * Class DomainEvent
- * @package EricksonReyes\DomainDrivenDesign\Example
+ * @package EricksonReyes\DomainDrivenDesign\Example\Domain
  *
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */

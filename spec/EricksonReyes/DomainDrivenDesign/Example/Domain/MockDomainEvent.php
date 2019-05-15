@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\EricksonReyes\DomainDrivenDesign\Example;
+namespace spec\EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 
 use DateTimeImmutable;

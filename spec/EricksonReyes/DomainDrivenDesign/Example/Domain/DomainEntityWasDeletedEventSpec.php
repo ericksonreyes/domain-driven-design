@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\EricksonReyes\DomainDrivenDesign\Example;
+namespace spec\EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
-use EricksonReyes\DomainDrivenDesign\Example\DomainEntityWasDeletedEvent;
+use EricksonReyes\DomainDrivenDesign\Example\Domain\DomainEntityWasDeletedEvent;
 use spec\EricksonReyes\DomainDrivenDesign\Domain\DomainEventUnitTest;
 
 class DomainEntityWasDeletedEventSpec extends DomainEventUnitTest

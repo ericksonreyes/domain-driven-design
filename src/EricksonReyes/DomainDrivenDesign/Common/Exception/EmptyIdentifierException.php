@@ -8,7 +8,7 @@ use InvalidArgumentException;
  * Class EmptyIdentifierException
  * @package EricksonReyes\DomainDrivenDesign\Common\Exception
  */
-class EmptyIdentifierException extends InvalidArgumentException
+abstract class EmptyIdentifierException extends InvalidArgumentException
 {
 
 }
