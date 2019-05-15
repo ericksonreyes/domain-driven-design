@@ -38,10 +38,10 @@ final class ComposedClass
     }
 
     /**
-     * @param $theClassBeingSearchedFor
-     * @return mixed
+     * @param string $theClassBeingSearchedFor
+     * @return mixed|null
      */
-    public function extract($theClassBeingSearchedFor)
+    public function extract(string $theClassBeingSearchedFor)
     {
         return ClassExtractor::extract($this->composedClass(), $theClassBeingSearchedFor);
     }
