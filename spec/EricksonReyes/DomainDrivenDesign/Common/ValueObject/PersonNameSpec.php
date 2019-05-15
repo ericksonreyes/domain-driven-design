@@ -87,7 +87,7 @@ class PersonNameSpec extends ObjectBehavior
         $this->withPostNominals($postNominals)->lastName()->shouldReturn($this->lastName);
     }
 
-    public function it_can_be_compared(PersonName $anotherPersonName)
+    public function it_can_be_compared(PersonName $anotherPersonName, PersonName $aDifferentPersonName)
     {
         $anotherPersonName->firstName()->shouldBeCalled()->willReturn($this->firstName);
         $anotherPersonName->lastName()->shouldBeCalled()->willReturn($this->lastName);
@@ -130,6 +130,12 @@ class PersonNameSpec extends ObjectBehavior
         $sameNameButWithHonorific->postNominals()->shouldReturn($expectedPostNominals);
         $this->matches($sameNameButWithHonorific)->shouldReturn(true);
         $this->doesNotMatch($sameNameButWithHonorific)->shouldReturn(false);
+
+
+        $aDifferentPersonName->firstName()->shouldBeCalled()->willReturn($this->firstName);
+        $aDifferentPersonName->lastName()->shouldBeCalled()->willReturn($this->seeder->lastName);
+        $this->matches($aDifferentPersonName)->shouldReturn(false);
+        $this->doesNotMatch($aDifferentPersonName)->shouldReturn(true);
     }
 
     public function it_has_an_array_representation()
