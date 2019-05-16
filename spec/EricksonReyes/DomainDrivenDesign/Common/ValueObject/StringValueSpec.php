@@ -95,4 +95,15 @@ class StringValueSpec extends ObjectBehavior
         $upperCasedString = ucwords($this->value);
         $this->titleCased()->shouldReturn($upperCasedString);
     }
+
+    public function it_knows_when_it_contains_a_string()
+    {
+        $words = explode(' ', $this->value);
+        $word = $words[mt_rand(0, count($words) - 1)];
+        $this->contains($word)->shouldReturn(true);
+        $this->contains('Ginebra')->shouldReturn(false);
+
+        $this->doesNotContain($word)->shouldReturn(false);
+        $this->doesNotContain('Ginebra')->shouldReturn(true);
+    }
 }
