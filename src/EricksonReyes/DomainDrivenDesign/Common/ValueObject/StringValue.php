@@ -153,4 +153,22 @@ class StringValue implements ValueObject, HasLength
     {
         return ucwords($this->value());
     }
+
+    /**
+     * @param string $keyword
+     * @return bool
+     */
+    public function contains(string $keyword): bool
+    {
+        return strpos($this->value(), $keyword) !== false;
+    }
+
+    /**
+     * @param string $keyword
+     * @return bool
+     */
+    public function doesNotContain(string $keyword): bool
+    {
+        return $this->contains($keyword) === false;
+    }
 }
