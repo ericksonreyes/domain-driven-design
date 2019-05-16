@@ -106,4 +106,27 @@ class StringValueSpec extends ObjectBehavior
         $this->doesNotContain($word)->shouldReturn(false);
         $this->doesNotContain('Ginebra')->shouldReturn(true);
     }
+
+    public function it_can_be_broken_down_into_words()
+    {
+        $words = explode(' ', $this->value);
+        $strings = [];
+
+        foreach ($words as $word) {
+            $strings[] = new StringValue($word);
+        }
+
+        $this->words()->shouldHaveCount(count($strings));
+
+        foreach ($this->words() as $wordObject) {
+            $wordObject->shouldHaveType(StringValue::class);
+        }
+    }
+
+    public function it_counts_the_number_of_words()
+    {
+        $words = explode(' ', $this->value);
+        $numberOfWords = count($words);
+        $this->numberOfWords()->shouldReturn($numberOfWords);
+    }
 }

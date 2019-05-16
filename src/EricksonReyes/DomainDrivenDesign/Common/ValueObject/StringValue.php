@@ -171,4 +171,28 @@ class StringValue implements ValueObject, HasLength
     {
         return $this->contains($keyword) === false;
     }
+
+    /**
+     * @return array
+     */
+    public function words(): array
+    {
+        $words = explode(' ', $this->value());
+        $strings = [];
+
+        foreach ($words as $word) {
+            $strings[] = new StringValue($word);
+        }
+
+        return $strings;
+    }
+
+    /**
+     * @return int
+     */
+    public function numberOfWords(): int
+    {
+        $words = explode(' ', $this->value());
+        return count($words);
+    }
 }
