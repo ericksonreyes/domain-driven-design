@@ -80,6 +80,7 @@ class DomainEntityWasDeletedEvent implements Event
     /**
      * @param array $array
      * @return Event
+     * @throws \Exception
      */
     public static function fromArray(array $array): Event
     {

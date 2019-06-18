@@ -69,7 +69,8 @@ class Email implements EmailInterface
         EmailAddressInterface $sender,
         EmailAddressInterface $recipient,
         EmailBodyInterface $body
-    ) {
+    )
+    {
         $this->sender = $sender;
         $this->recipients[] = $recipient;
         $this->body = $body;
