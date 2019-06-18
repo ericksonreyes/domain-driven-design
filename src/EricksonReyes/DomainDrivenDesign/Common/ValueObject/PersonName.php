@@ -34,7 +34,7 @@ class PersonName implements ValueObject, HasLength
     private $lastName;
 
     /**
-     * @var
+     * @var string
      */
     private $postNominals;
 
