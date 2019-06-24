@@ -24,8 +24,15 @@ class AddressFactory
         string $state,
         string $countryIso2Code,
         string $zipCode
-    ): Address {
+    ): Address
+    {
         $country = CountryFactory::create($countryIso2Code);
-        return new Address($street, $city, $state, $country, $zipCode);
+        return new Address(
+            trim($street),
+            trim($city),
+            trim($state),
+            $country,
+            trim($zipCode)
+        );
     }
 }
