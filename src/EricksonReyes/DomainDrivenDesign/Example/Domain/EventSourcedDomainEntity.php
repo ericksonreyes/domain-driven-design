@@ -5,6 +5,7 @@ namespace EricksonReyes\DomainDrivenDesign\Example\Domain;
 use DateTimeImmutable;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
+use Exception;
 
 /**
  * Class EventSourcedDomainEntity
@@ -66,7 +67,7 @@ class EventSourcedDomainEntity extends EventSourcedEntity
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function delete(): void
     {
@@ -76,8 +77,7 @@ class EventSourcedDomainEntity extends EventSourcedEntity
             $this->additionalData()
         );
 
-        if (
-            $this->eventNeverHappened(DomainEntityWasDeletedEvent::class) &&
+        if ($this->eventNeverHappened(DomainEntityWasDeletedEvent::class) &&
             $this->isTheFirstOccurrenceOfThis($event)
         ) {
             $this->storeAndReplayThis($event);
