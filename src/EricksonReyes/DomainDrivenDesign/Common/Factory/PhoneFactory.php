@@ -15,8 +15,7 @@ class PhoneFactory
      */
     public static function create(int $phoneNumber, ?int $countryIso2Code = 0, ?int $areaCode = 0): PhoneNumber
     {
-        if (
-            self::hasCountryIso2Code($countryIso2Code) &&
+        if (self::hasCountryIso2Code($countryIso2Code) &&
             self::hasAreaCode($areaCode)
         ) {
             return PhoneNumber::createWithCountryAndAreaCode(

@@ -22,8 +22,7 @@ class PersonNameFactory
         ?string $middleName = '',
         ?string $postNominal = '',
         ?string $honorific = ''
-    ): PersonName
-    {
+    ): PersonName {
         if (self::hasLastName($lastName) === false) {
             throw new MissingLastNameException('Last name is required.');
         }
