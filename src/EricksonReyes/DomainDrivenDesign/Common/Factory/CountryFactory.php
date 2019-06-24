@@ -2,6 +2,7 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Factory;
 
+use EricksonReyes\DomainDrivenDesign\Common\Factory\Exception\InvalidCountryISO2CodeException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Country;
 
 /**
@@ -5319,11 +5320,20 @@ class CountryFactory
      */
     public static function create($iso2Code): ?Country
     {
-        if (array_key_exists($iso2Code, self::COUNTRIES)) {
+        if (static::validate($iso2Code)) {
             $country = self::COUNTRIES[$iso2Code];
             return new Country($country['ISO'], $country['ISO3'], $country['Country']);
         }
 
-        return null;
+        throw new InvalidCountryISO2CodeException("{$iso2Code} is not a valid Country ISO 2 Code.");
+    }
+
+    /**
+     * @param string $iso2Code
+     * @return bool
+     */
+    public static function validate(string $iso2Code): bool
+    {
+        return array_key_exists($iso2Code, self::COUNTRIES);
     }
 }
