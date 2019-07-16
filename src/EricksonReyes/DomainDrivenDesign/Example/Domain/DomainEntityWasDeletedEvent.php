@@ -5,6 +5,7 @@ namespace EricksonReyes\DomainDrivenDesign\Example\Domain;
 use DateTime;
 use DateTimeImmutable;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
+use Exception;
 
 /**
  * Class DomainEvent
@@ -20,7 +21,7 @@ class DomainEntityWasDeletedEvent implements Event
     private $entityId;
 
     /**
-     * @var \DateTimeImmutable;
+     * @var DateTimeImmutable;
      */
     private $happenedOn;
 
@@ -80,7 +81,7 @@ class DomainEntityWasDeletedEvent implements Event
     /**
      * @param array $array
      * @return Event
-     * @throws \Exception
+     * @throws Exception
      */
     public static function fromArray(array $array): Event
     {
