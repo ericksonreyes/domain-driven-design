@@ -12,5 +12,4 @@ interface AccountableEvent extends Event
      * @return string
      */
     public function raisedBy(): string;
-
 }

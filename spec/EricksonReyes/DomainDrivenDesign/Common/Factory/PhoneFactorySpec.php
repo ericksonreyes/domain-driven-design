@@ -25,9 +25,9 @@ class PhoneFactorySpec extends ObjectBehavior
 
     public function it_can_create_fully_formatted_phone_numbers()
     {
-        $expectedAreaCode = (int)$this->seeder->numberBetween(0, 1);
+        $expectedAreaCode = (int)$this->seeder->numberBetween(1, 100000);
         $expectedPhoneNumber = (int)$this->seeder->numberBetween(10000, 9999999);
-        $expectedCountryCode = (int)$this->seeder->numberBetween(0, 1);
+        $expectedCountryCode = (int)$this->seeder->numberBetween(1, 10000);
 
         $this::create(
             $expectedPhoneNumber,
