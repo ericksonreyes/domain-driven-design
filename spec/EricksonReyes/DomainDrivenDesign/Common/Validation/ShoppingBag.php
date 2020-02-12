@@ -8,7 +8,7 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\Validation;
 
-use EricksonReyes\DomainDrivenDesign\Common\HasComposition;
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasComposition;
 
 class ShoppingBag implements HasComposition
 {
@@ -24,7 +24,7 @@ class ShoppingBag implements HasComposition
     /**
      * @return mixed
      */
-    public function getComposition()
+    public function composition()
     {
         return $this->boughtItems;
     }

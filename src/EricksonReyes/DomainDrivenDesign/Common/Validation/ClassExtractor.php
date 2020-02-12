@@ -2,7 +2,8 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Validation;
 
-use EricksonReyes\DomainDrivenDesign\Common\HasComposition;
+
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasComposition;
 
 /**
  * Class ClassExtractor
@@ -22,7 +23,7 @@ final class ClassExtractor
         }
 
         if ($aClassWithComposition instanceof HasComposition) {
-            $aClassWithComposition = $aClassWithComposition->getComposition();
+            $aClassWithComposition = $aClassWithComposition->composition();
         }
 
         if (is_array($aClassWithComposition)) {
@@ -53,7 +54,7 @@ final class ClassExtractor
         }
 
         if ($aClassWithComposition instanceof HasComposition) {
-            $aClassWithComposition = $aClassWithComposition->getComposition();
+            $aClassWithComposition = $aClassWithComposition->composition();
         }
 
         if (is_array($aClassWithComposition)) {

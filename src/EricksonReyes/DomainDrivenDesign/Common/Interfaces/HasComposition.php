@@ -1,6 +1,6 @@
 <?php
 
-namespace EricksonReyes\DomainDrivenDesign\Common;
+namespace EricksonReyes\DomainDrivenDesign\Common\Interfaces;
 
 /**
  * Interface HasComposition
@@ -11,5 +11,5 @@ interface HasComposition
     /**
      * @return mixed
      */
-    public function getComposition();
+    public function composition();
 }
