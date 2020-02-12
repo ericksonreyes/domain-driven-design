@@ -15,7 +15,7 @@ class EmailAddressSpec extends ObjectBehavior
     use UnitTestTrait;
 
     /**
-     * @var
+     * @var string
      */
     private $emailAddress;
 
@@ -40,6 +40,23 @@ class EmailAddressSpec extends ObjectBehavior
                 $this->seeder->paragraph
             ]
         );
+    }
+
+    public function it_has_username()
+    {
+        $expectedUsername = explode('@', $this->emailAddress)[0];
+        $this->username()->shouldReturn($expectedUsername);
+    }
+
+    public function it_has_domain()
+    {
+        $expectedDomain = explode('@', $this->emailAddress)[1];
+        $this->domain()->shouldReturn($expectedDomain);
+    }
+
+    public function it_has_string_representaion()
+    {
+        $this->__toString()->shouldReturn($this->emailAddress);
     }
 
     public function it_has_length()
@@ -126,7 +143,7 @@ class EmailAddressSpec extends ObjectBehavior
 
     public function it_can_search_for_mismatched_keywords()
     {
-        $unexpectedKeyword = $this->seeder->word;
+        $unexpectedKeyword = strrev($this->seeder->word);
         $this->contains($unexpectedKeyword)->shouldReturn(false);
         $this->doesNotContain($unexpectedKeyword)->shouldReturn(true);
     }
@@ -140,7 +157,7 @@ class EmailAddressSpec extends ObjectBehavior
 
     public function it_can_determine_if_it_does_not_start_with_a_keyword()
     {
-        $keyword = $this->seeder->word;
+        $keyword = strrev($this->seeder->word);
         $this->startsWith($keyword)->shouldReturn(false);
         $this->doesNotStartWith($keyword)->shouldReturn(true);
     }
@@ -154,21 +171,9 @@ class EmailAddressSpec extends ObjectBehavior
 
     public function it_can_determine_if_it_does_not_end_with_a_keyword()
     {
-        $keyword = $this->seeder->word;
+        $keyword = strrev($this->seeder->word);
         $this->endsWith($keyword)->shouldReturn(false);
         $this->doesNotEndWith($keyword)->shouldReturn(true);
-    }
-
-    public function it_has_username()
-    {
-        $expectedUsername = explode('@', $this->emailAddress)[0];
-        $this->username()->shouldReturn($expectedUsername);
-    }
-
-    public function it_has_domain()
-    {
-        $expectedDomain = explode('@', $this->emailAddress)[1];
-        $this->domain()->shouldReturn($expectedDomain);
     }
 
 }

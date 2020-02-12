@@ -1,0 +1,234 @@
+<?php
+
+namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
+
+use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareAmount;
+use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasAmount;
+use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasArrayRepresentation;
+use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\CurrencyMismatchException;
+use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountException;
+use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountException;
+
+/**
+ * Class Money
+ * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
+ */
+class Money implements HasAmount, CanCompareAmount, HasArrayRepresentation
+{
+    /**
+     * @var Currency
+     */
+    private $currency;
+
+    /**
+     * @var int
+     */
+    private $amount;
+
+    public function __construct($amount, Currency $currency)
+    {
+        if ($amount < 0) {
+            throw new InvalidMoneyAmountException(
+                'Amount should not be less than zero. ' . $amount . ' is a negative number.'
+            );
+        }
+        $this->amount = $amount;
+        $this->currency = $currency;
+    }
+
+    /**
+     * @return int
+     */
+    public function amount(): int
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @return Currency
+     */
+    public function currency(): Currency
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsEqualsTo(int $amount): bool
+    {
+        return $this->amount() === $amount;
+    }
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsNotEqualTo(int $amount): bool
+    {
+        return !$this->amountIsEqualsTo($amount);
+    }
+
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsLessThan(int $amount): bool
+    {
+        return $this->amount() < $amount;
+    }
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsGreaterThan(int $amount): bool
+    {
+        return $this->amount() > $amount;
+    }
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsEqualOrLessThan(int $amount): bool
+    {
+        return $this->amount() <= $amount;
+    }
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsEqualOrGreaterThan(int $amount): bool
+    {
+        return $this->amountIsEqualsTo($amount) || $this->amountIsGreaterThan($amount);
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'amount' => $this->amount(),
+            'currency' => (string)$this->currency()
+        ];
+    }
+
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isEqualsTo(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() === $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isNotEqualTo(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return !$this->isEqualsTo($anotherMoney);
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isLessThan(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() < $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isGreaterThan(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() > $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isEqualOrLessThan(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() <= $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isEqualOrGreaterThan(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() >= $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return Money
+     */
+    public function addWith(Money $anotherMoney): Money
+    {
+        $this->currenciesMustMatch($anotherMoney);
+
+        $newAmount = $this->amount() + $anotherMoney->amount();
+        return new Money($newAmount, $this->currency());
+    }
+
+    /**
+     * @param $anotherMoney
+     * @return Money
+     */
+    public function subtractWith(Money $anotherMoney): Money
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        $this->moneyMustHaveSufficientAmount($anotherMoney);
+
+        $newAmount = $this->amount() - $anotherMoney->amount();
+        return new Money($newAmount, $this->currency());
+    }
+
+    /**
+     * @param Money $anotherMoney
+     */
+    private function currenciesMustMatch(Money $anotherMoney): void
+    {
+        $actualCurrency = (string)$this->currency();
+        $anotherCurrency = (string)$anotherMoney->currency();
+        if ($actualCurrency !== $anotherCurrency) {
+            throw new CurrencyMismatchException(
+                'Can\'t compare ' . $actualCurrency . ' with ' . $anotherCurrency
+            );
+        }
+    }
+
+    /**
+     * @param Money $anotherMoney
+     */
+    private function moneyMustHaveSufficientAmount(Money $anotherMoney): void
+    {
+        if ($this->isLessThan($anotherMoney)) {
+            throw new InsufficientMoneyAmountException(
+                'The amount you are trying to subtract (' . $anotherMoney->amount() .
+                ') is greater than ' . $this->amount() . '.'
+            );
+        }
+    }
+
+}

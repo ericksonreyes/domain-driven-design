@@ -156,16 +156,6 @@ class EmailAddress implements CanCompareLength, HasLength, CanMatchString
     }
 
     /**
-     * @param string $emailAddress
-     * @return bool
-     */
-    private function emailIsInValid(string $emailAddress): bool
-    {
-        $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$^";
-        return (bool)preg_match($pattern, $emailAddress) === false;
-    }
-
-    /**
      * @return string
      */
     public function username(): string
@@ -179,6 +169,24 @@ class EmailAddress implements CanCompareLength, HasLength, CanMatchString
     public function domain(): string
     {
         return explode('@', $this->emailAddress)[1];
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->emailAddress;
+    }
+
+    /**
+     * @param string $emailAddress
+     * @return bool
+     */
+    private function emailIsInValid(string $emailAddress): bool
+    {
+        $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$^";
+        return (bool)preg_match($pattern, $emailAddress) === false;
     }
 
 

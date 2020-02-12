@@ -19,6 +19,12 @@ interface CanCompareAmount
      * @param int $amount
      * @return bool
      */
+    public function amountIsNotEqualTo(int $amount): bool;
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
     public function amountIsLessThan(int $amount): bool;
 
     /**
