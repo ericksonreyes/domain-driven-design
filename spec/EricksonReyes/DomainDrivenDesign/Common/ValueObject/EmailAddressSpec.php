@@ -143,7 +143,7 @@ class EmailAddressSpec extends ObjectBehavior
 
     public function it_can_search_for_mismatched_keywords()
     {
-        $unexpectedKeyword = strrev($this->seeder->word);
+        $unexpectedKeyword = md5($this->seeder->word);
         $this->contains($unexpectedKeyword)->shouldReturn(false);
         $this->doesNotContain($unexpectedKeyword)->shouldReturn(true);
     }
@@ -157,7 +157,7 @@ class EmailAddressSpec extends ObjectBehavior
 
     public function it_can_determine_if_it_does_not_start_with_a_keyword()
     {
-        $keyword = strrev($this->seeder->word);
+        $keyword = md5($this->seeder->word);
         $this->startsWith($keyword)->shouldReturn(false);
         $this->doesNotStartWith($keyword)->shouldReturn(true);
     }
@@ -171,7 +171,7 @@ class EmailAddressSpec extends ObjectBehavior
 
     public function it_can_determine_if_it_does_not_end_with_a_keyword()
     {
-        $keyword = strrev($this->seeder->word);
+        $keyword = md5($this->seeder->word);
         $this->endsWith($keyword)->shouldReturn(false);
         $this->doesNotEndWith($keyword)->shouldReturn(true);
     }
