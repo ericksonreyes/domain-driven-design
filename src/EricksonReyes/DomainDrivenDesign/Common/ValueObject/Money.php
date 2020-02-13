@@ -12,6 +12,8 @@ use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\
 /**
  * Class Money
  * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class Money implements HasAmount, CanCompareAmount, HasArrayRepresentation
 {
@@ -230,5 +232,4 @@ class Money implements HasAmount, CanCompareAmount, HasArrayRepresentation
             );
         }
     }
-
 }

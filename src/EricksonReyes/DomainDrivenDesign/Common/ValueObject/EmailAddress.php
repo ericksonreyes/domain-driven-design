@@ -2,12 +2,17 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-
 use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareLength;
 use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanMatchString;
 use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasLength;
 use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidEmailAddressException;
 
+/**
+ * Class EmailAddress
+ * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class EmailAddress implements CanCompareLength, HasLength, CanMatchString
 {
     /**
@@ -188,6 +193,4 @@ class EmailAddress implements CanCompareLength, HasLength, CanMatchString
         $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$^";
         return (bool)preg_match($pattern, $emailAddress) === false;
     }
-
-
 }

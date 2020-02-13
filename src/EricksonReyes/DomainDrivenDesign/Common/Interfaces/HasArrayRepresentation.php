@@ -13,5 +13,4 @@ interface HasArrayRepresentation
      * @return array
      */
     public function toArray(): array;
-
 }

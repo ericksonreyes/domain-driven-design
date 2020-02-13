@@ -19,5 +19,4 @@ interface CanDetermineIfEmpty
      * @return bool
      */
     public function isNotEmpty(): bool;
-
 }

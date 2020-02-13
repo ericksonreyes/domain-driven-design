@@ -2,7 +2,6 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Validation;
 
-
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasComposition;
 
 /**

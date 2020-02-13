@@ -13,5 +13,4 @@ interface HasAmount
      * @return int
      */
     public function amount(): int;
-
 }
