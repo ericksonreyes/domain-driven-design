@@ -16,7 +16,7 @@ use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\
 class EmailAddress implements CanCompareLength, HasLength, CanMatchString
 {
     /**
-     * @var
+     * @var string
      */
     private $emailAddress;
 
