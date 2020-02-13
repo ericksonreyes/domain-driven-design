@@ -3,8 +3,8 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingNameException;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MissingIdentifierException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyNameException;
+use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyIdentifierException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -32,7 +32,7 @@ class IdentifierSpec extends ObjectBehavior
 
     public function it_prevents_empty_identifiers()
     {
-        $this->shouldThrow(MissingIdentifierException::class)->during(
+        $this->shouldThrow(EmptyIdentifierException::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

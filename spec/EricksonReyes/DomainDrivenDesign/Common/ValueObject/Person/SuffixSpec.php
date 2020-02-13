@@ -2,7 +2,7 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingSuffixException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptySuffixException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Suffix;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -31,7 +31,7 @@ class SuffixSpec extends ObjectBehavior
 
     public function it_prevents_empty_suffix()
     {
-        $this->shouldThrow(MissingSuffixException::class)->during(
+        $this->shouldThrow(EmptySuffixException::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

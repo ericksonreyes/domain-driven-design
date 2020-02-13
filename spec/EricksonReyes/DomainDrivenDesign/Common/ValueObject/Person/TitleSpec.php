@@ -2,7 +2,7 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingTitleException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyTitleException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Title;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -31,7 +31,7 @@ class TitleSpec extends ObjectBehavior
 
     public function it_prevents_empty_titles()
     {
-        $this->shouldThrow(MissingTitleException::class)->during(
+        $this->shouldThrow(EmptyTitleException::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

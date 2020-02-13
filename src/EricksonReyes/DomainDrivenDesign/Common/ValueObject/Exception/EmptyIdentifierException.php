@@ -5,7 +5,7 @@ namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exce
 
 use InvalidArgumentException;
 
-final class MissingIdentifierException extends InvalidArgumentException
+final class EmptyIdentifierException extends InvalidArgumentException
 {
 
 }

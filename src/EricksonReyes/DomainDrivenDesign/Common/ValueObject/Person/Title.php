@@ -4,7 +4,7 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingTitleException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyTitleException;
 
 class Title extends SizeableAndMatchableString
 {
@@ -17,7 +17,7 @@ class Title extends SizeableAndMatchableString
     {
         $trimmedTitle = trim($title);
         if ($trimmedTitle === '') {
-            throw new MissingTitleException('Title is required.');
+            throw new EmptyTitleException('Title must not be empty.');
         }
         parent::__construct($trimmedTitle);
     }

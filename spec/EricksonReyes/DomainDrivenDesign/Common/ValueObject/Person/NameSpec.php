@@ -3,7 +3,7 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Name;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingNameException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyNameException;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
@@ -31,7 +31,7 @@ class NameSpec extends ObjectBehavior
 
     public function it_prevents_empty_names()
     {
-        $this->shouldThrow(MissingNameException::class)->during(
+        $this->shouldThrow(EmptyNameException::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

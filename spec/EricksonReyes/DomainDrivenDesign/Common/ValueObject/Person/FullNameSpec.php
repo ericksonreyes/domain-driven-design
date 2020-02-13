@@ -4,8 +4,8 @@ namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\FullName;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Name;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingSuffixException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingTitleException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptySuffixException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyTitleException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Suffix;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Title;
 use PhpSpec\ObjectBehavior;
