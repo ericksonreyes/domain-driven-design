@@ -14,11 +14,11 @@ class Name extends SizeableAndMatchableString
 
     /**
      * Name constructor.
-     * @param string $name
+     * @param string $identifier
      */
-    public function __construct(string $name)
+    public function __construct(string $identifier)
     {
-        $trimmedName = trim($name);
+        $trimmedName = trim($identifier);
         if ($trimmedName === '') {
             throw new MissingNameException('Name is required.');
         }
