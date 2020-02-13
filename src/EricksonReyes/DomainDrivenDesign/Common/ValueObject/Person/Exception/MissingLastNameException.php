@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception;
+namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception;
 
 use InvalidArgumentException;
 

@@ -3,7 +3,7 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Currency;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeException;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 

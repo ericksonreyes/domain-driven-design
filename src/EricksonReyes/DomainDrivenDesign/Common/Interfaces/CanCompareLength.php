@@ -1,41 +1,41 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces;
+namespace EricksonReyes\DomainDrivenDesign\Common\Interfaces;
 
 /**
  * Interface HasComparableLength
- * @package EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces
+ * @package EricksonReyes\DomainDrivenDesign\Common\Interfaces
  */
 interface CanCompareLength
 {
     /**
      * @param int $length
-     * @return mixed
+     * @return bool
      */
-    public function lengthIsEqualTo(int $length);
+    public function lengthIsEqualTo(int $length): bool;
 
     /**
      * @param int $length
-     * @return mixed
+     * @return bool
      */
-    public function lengthIsLessThan(int $length);
+    public function lengthIsLessThan(int $length): bool;
 
     /**
      * @param int $length
-     * @return mixed
+     * @return bool
      */
-    public function lengthIsGreaterThan(int $length);
+    public function lengthIsGreaterThan(int $length): bool;
 
     /**
      * @param int $length
-     * @return mixed
+     * @return bool
      */
-    public function lengthIsEqualOrLessThan(int $length);
+    public function lengthIsEqualOrLessThan(int $length): bool;
 
     /**
      * @param int $length
-     * @return mixed
+     * @return bool
      */
-    public function lengthIsEqualOrGreaterThan(int $length);
+    public function lengthIsEqualOrGreaterThan(int $length): bool;
 }

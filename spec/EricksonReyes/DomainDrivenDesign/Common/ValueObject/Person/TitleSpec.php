@@ -2,36 +2,36 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Name;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingNameException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\MissingTitleException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Title;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
-class NameSpec extends ObjectBehavior
+class TitleSpec extends ObjectBehavior
 {
+
     use UnitTestTrait;
 
     /**
      * @var string
      */
-    private $name;
+    private $title;
 
     public function let()
     {
-        $this->name = $this->seeder->firstName;
         $this->beConstructedWith(
-            str_repeat(' ', mt_rand(0, 5)) . $this->name . str_repeat(' ', mt_rand(0, 5))
+            $this->title = $this->seeder->century
         );
     }
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(Name::class);
+        $this->shouldHaveType(Title::class);
     }
 
-    public function it_prevents_empty_names()
+    public function it_prevents_empty_titles()
     {
-        $this->shouldThrow(MissingNameException::class)->during(
+        $this->shouldThrow(MissingTitleException::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))
@@ -41,44 +41,55 @@ class NameSpec extends ObjectBehavior
 
     public function it_has_string_representation()
     {
-        $this->__toString()->shouldReturn($this->name);
+        $this->__toString()->shouldReturn($this->title);
     }
 
     public function it_has_length()
     {
-        $actualLength = strlen($this->name);
+        $actualLength = strlen($this->title);
 
         $this->length()->shouldReturn($actualLength);
     }
 
-    public function it_can_compare_length()
+    public function it_can_compare_equal_length()
     {
-        $actualLength = strlen($this->name);
+        $actualLength = strlen($this->title);
+
         $this->lengthIsEqualTo($actualLength)->shouldReturn(true);
         $this->lengthIsEqualOrLessThan($actualLength)->shouldReturn(true);
         $this->lengthIsEqualOrGreaterThan($actualLength)->shouldReturn(true);
         $this->lengthIsLessThan($actualLength)->shouldReturn(false);
         $this->lengthIsGreaterThan($actualLength)->shouldReturn(false);
+    }
 
-        $shorterThanActualLength = $actualLength - mt_rand(1, $actualLength - 1);
-        $this->lengthIsEqualTo($shorterThanActualLength)->shouldReturn(false);
-        $this->lengthIsEqualOrLessThan($shorterThanActualLength)->shouldReturn(false);
-        $this->lengthIsEqualOrGreaterThan($shorterThanActualLength)->shouldReturn(true);
-        $this->lengthIsLessThan($shorterThanActualLength)->shouldReturn(false);
-        $this->lengthIsGreaterThan($shorterThanActualLength)->shouldReturn(true);
+    public function it_can_compare_if_length_exceeds_the_limit()
+    {
+        $actualLength = strlen($this->title);
+        $limit = $actualLength - 1;
 
-        $higherThanActualLength = $actualLength + mt_rand(1, $actualLength - 1);
-        $this->lengthIsEqualTo($higherThanActualLength)->shouldReturn(false);
-        $this->lengthIsEqualOrLessThan($higherThanActualLength)->shouldReturn(true);
-        $this->lengthIsEqualOrGreaterThan($higherThanActualLength)->shouldReturn(false);
-        $this->lengthIsLessThan($higherThanActualLength)->shouldReturn(true);
-        $this->lengthIsGreaterThan($higherThanActualLength)->shouldReturn(false);
+        $this->lengthIsEqualTo($limit)->shouldReturn(false);
+        $this->lengthIsEqualOrLessThan($limit)->shouldReturn(false);
+        $this->lengthIsEqualOrGreaterThan($limit)->shouldReturn(true);
+        $this->lengthIsLessThan($limit)->shouldReturn(false);
+        $this->lengthIsGreaterThan($limit)->shouldReturn(true);
+    }
+
+    public function it_can_compare_if_length_missing_the_limit()
+    {
+        $actualLength = strlen($this->title);
+        $limit = $actualLength + 1;
+
+        $this->lengthIsEqualTo($limit)->shouldReturn(false);
+        $this->lengthIsEqualOrLessThan($limit)->shouldReturn(true);
+        $this->lengthIsEqualOrGreaterThan($limit)->shouldReturn(false);
+        $this->lengthIsLessThan($limit)->shouldReturn(true);
+        $this->lengthIsGreaterThan($limit)->shouldReturn(false);
     }
 
 
     public function it_can_match_keywords()
     {
-        $keyword = $this->name;
+        $keyword = $this->title;
         $upperCasedKeyword = strtoupper($keyword);
         $lowerCasedKeyword = strtolower($keyword);
         $snakeCasedKeyword = ucwords($lowerCasedKeyword);
@@ -98,10 +109,11 @@ class NameSpec extends ObjectBehavior
 
     public function it_can_search_for_matching_keywords()
     {
-        $length = strlen($this->name);
-        $randomPosition = mt_rand(0, $length - 2);
-        $randomLength = mt_rand($randomPosition, $length);
-        $expectedKeyword = substr($this->name, $randomPosition, $randomLength);
+        $length = strlen($this->title);
+        $randomPosition = mt_rand(0, $length - 1);
+        $randomLength = $length - $randomPosition;
+        $expectedKeyword = substr($this->title, $randomPosition, $randomLength);
+
         $lowerCasedExpectedKeyword = strtolower($expectedKeyword);
         $upperCasedExpectedKeyword = strtoupper($expectedKeyword);
         $snakeCasedExpectedKeyword = ucwords($expectedKeyword);
@@ -128,7 +140,7 @@ class NameSpec extends ObjectBehavior
 
     public function it_can_determine_if_it_starts_with_a_keyword()
     {
-        $keyword = substr($this->name, 0, 2);
+        $keyword = substr($this->title, 0, 2);
         $this->startsWith($keyword)->shouldReturn(true);
         $this->doesNotStartWith($keyword)->shouldReturn(false);
     }
@@ -142,7 +154,7 @@ class NameSpec extends ObjectBehavior
 
     public function it_can_determine_if_it_ends_with_a_keyword()
     {
-        $keyword = substr($this->name, -2);
+        $keyword = substr($this->title, -2);
         $this->endsWith($keyword)->shouldReturn(true);
         $this->doesNotEndWith($keyword)->shouldReturn(false);
     }

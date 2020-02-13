@@ -2,12 +2,12 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareAmount;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasAmount;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasArrayRepresentation;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\CurrencyMismatchException;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountException;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountException;
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareAmount;
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasAmount;
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasArrayRepresentation;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\CurrencyMismatchException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountException;
 
 /**
  * Class Money

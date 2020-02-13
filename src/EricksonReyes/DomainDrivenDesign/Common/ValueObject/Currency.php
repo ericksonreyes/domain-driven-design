@@ -2,7 +2,7 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeException;
 
 /**
  * Class Currency

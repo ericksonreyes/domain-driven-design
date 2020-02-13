@@ -1,11 +1,11 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces;
+namespace EricksonReyes\DomainDrivenDesign\Common\Interfaces;
 
 /**
  * Interface HasLength
- * @package EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces
+ * @package EricksonReyes\DomainDrivenDesign\Common\Interfaces
  */
 interface HasLength
 {
