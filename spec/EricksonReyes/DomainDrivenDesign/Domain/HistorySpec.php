@@ -44,4 +44,17 @@ class HistorySpec extends ObjectBehavior
             \assert($storedEvent === $events[$index]);
         }
     }
+
+    public function it_can_determine_if_its_empty()
+    {
+        $this->isEmpty()->shouldBe(true);
+        $this->isNotEmpty()->shouldBe(false);
+    }
+
+    public function it_can_determine_if_its_not_empty(Event $event)
+    {
+        $this->recordThis($event);
+        $this->isEmpty()->shouldBe(false);
+        $this->isNotEmpty()->shouldBe(true);
+    }
 }

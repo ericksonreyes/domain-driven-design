@@ -11,15 +11,14 @@ use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandExcep
 interface CommandBus
 {
     /**
-     * @param $commandHandlerInstance
-     * @param string $commandClassName
+     * @param $handler
+     * @param string $command
      */
-    public function addHandler($commandHandlerInstance, string $commandClassName): void;
+    public function addHandler($handler, string $command): void;
 
     /**
-     * @param $commandClassInstance
-     * @return array
+     * @param $command
      * @throws UnhandledCommandException
      */
-    public function execute($commandClassInstance): array;
+    public function execute($command): void;
 }

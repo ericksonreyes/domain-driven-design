@@ -44,7 +44,13 @@ class CommandBusSpec extends ObjectBehavior
     public function it_executes_commands()
     {
         $this->addHandler(new MockHandler(), MockCommand::class);
-        $this->execute(new MockCommand())->shouldReturn([MockHandler::class => MockCommand::name()]);
+        $this->execute(new MockCommand())->shouldBeNull();
+    }
+
+    public function it_can_handle_interface_dependent_commands()
+    {
+        $this->addHandler(new MockInterfaceDependentCommandHandler(), InterfaceDependentCommand::class);
+        $this->execute(new MockInterfaceDependentCommand())->shouldBeNull();
     }
 
     public function it_requires_a_handler_for_commands()
