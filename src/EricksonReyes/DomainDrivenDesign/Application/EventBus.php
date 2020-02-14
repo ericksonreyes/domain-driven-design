@@ -32,7 +32,7 @@ class EventBus implements EventBusInterface
     {
         foreach ($this->handlers() as $registeredHandler) {
             $registeredHandlerClassName = get_class($registeredHandler);
-            if ($handler instanceof $registeredHandlerClassName) {
+            if ($handler === $registeredHandlerClassName) {
                 throw new DuplicateEventHandlerException(
                     $handler->name() . ' is already registered in the event bus.'
                 );
