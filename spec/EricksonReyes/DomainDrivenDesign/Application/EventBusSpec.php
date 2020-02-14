@@ -53,8 +53,8 @@ class EventBusSpec extends ObjectBehavior
     )
     {
         $interestedEventHandler->isInterestedInThis($event)->shouldBeCalled()->willReturn(true);
-        $eventHandler->isInterestedInThis($event)->shouldBeCalled()->willReturn(false);
         $interestedEventHandler->beNotifiedAbout($event)->shouldBeCalled();
+        $eventHandler->isInterestedInThis($event)->shouldBeCalled()->willReturn(false);
 
         $this->register($interestedEventHandler);
         $this->register($eventHandler);

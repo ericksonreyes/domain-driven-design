@@ -2,96 +2,41 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\Attributes\ValueObject;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyCurrencyCodeException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyCurrencyNameException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeException;
 
 /**
  * Class Currency
  * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
  */
-class Currency implements ValueObject
+class Currency
 {
     /**
      * @var string
      */
     private $code;
 
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * Currency constructor.
-     * @param string $code
-     * @param string $name
-     */
-    public function __construct(string $code, string $name)
+    public function __construct($code)
     {
-        if (trim($code) === '') {
-            throw new EmptyCurrencyCodeException('Currency code must not be an empty string.');
+        $trimmed = trim($code);
+        $spacelessCode = str_replace(' ', '', $trimmed);
+        $upperCasedCode = strtoupper($spacelessCode);
+        $codeLength = strlen($upperCasedCode);
+
+        if ((ctype_alpha($upperCasedCode) === false)) {
+            throw new InvalidCurrencyCodeException('Currency code must only consist of letters.');
         }
-        if (trim($name) === '') {
-            throw new EmptyCurrencyNameException('Currency name must not be an empty string.');
+        if ($codeLength < 3) {
+            throw new InvalidCurrencyCodeException('Currency code must consist of three letters.');
         }
 
-        $this->code = $code;
-        $this->name = $name;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return [
-            'code' => $this->code(),
-            'name' => $this->name()
-        ];
+        $this->code = $upperCasedCode;
     }
 
     /**
      * @return string
      */
-    public function code(): string
+    public function __toString(): string
     {
         return $this->code;
-    }
-
-    /**
-     * @return string
-     */
-    public function name(): string
-    {
-        return $this->name;
-    }
-
-
-    /**
-     * @param Currency $anotherCurrency
-     * @return bool
-     */
-    public function matches(Currency $anotherCurrency): bool
-    {
-        $fields = ['name', 'code'];
-
-        foreach ($fields as $field) {
-            if ($anotherCurrency->$field() !== $this->$field()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @param Currency $anotherCurrency
-     * @return bool
-     */
-    public function doesNotMatch(Currency $anotherCurrency): bool
-    {
-        return !$this->matches($anotherCurrency);
     }
 }

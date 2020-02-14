@@ -2,6 +2,8 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Domain;
 
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
+
 /**
  * Interface Entity
  * @package EricksonReyes\DomainDrivenDesign\Domain
@@ -9,12 +11,20 @@ namespace EricksonReyes\DomainDrivenDesign\Domain;
 interface Entity
 {
     /**
-     * @return string
+     * @return Identifier
      */
-    public function id(): string;
+    public function id(): Identifier;
+
 
     /**
+     * @param Entity $anotherEntity
      * @return bool
      */
-    public function isDeleted(): bool;
+    public function matches(Entity $anotherEntity): bool;
+
+    /**
+     * @param Entity $anotherEntity
+     * @return bool
+     */
+    public function doesNotMatch(Entity $anotherEntity): bool;
 }

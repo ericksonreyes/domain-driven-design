@@ -2,16 +2,10 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\Attributes\ValueObject;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\LongPhoneNumberException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeAreaCodeException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeCountryCodeException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeExtensionNumberException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativePhoneNumberException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\ShortPhoneNumberException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\ZeroAreaCodeException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\ZeroCountryCodeException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\ZeroPhoneNumberException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\PhoneNumber;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -43,14 +37,26 @@ class PhoneNumberSpec extends ObjectBehavior
     public function let()
     {
         $this->beConstructedWith(
-            $this->phoneNumber = $this->seeder->numberBetween(1000000, 9999999)
+            $this->countryCode = $this->generateCountryCode(),
+            $this->areaCode = $this->generateAreaCode(),
+            $this->phoneNumber = $this->generatePhoneNumber()
         );
+        $this->extensionNumber = mt_rand(0, 9);
     }
 
     public function it_is_initializable()
     {
         $this->shouldHaveType(PhoneNumber::class);
-        $this->shouldHaveType(ValueObject::class);
+    }
+
+    public function it_has_country_code()
+    {
+        $this->countryCode()->shouldReturn($this->countryCode);
+    }
+
+    public function it_has_area_code()
+    {
+        $this->areaCode()->shouldReturn($this->areaCode);
     }
 
     public function it_has_phone_number()
@@ -58,164 +64,129 @@ class PhoneNumberSpec extends ObjectBehavior
         $this->phoneNumber()->shouldReturn($this->phoneNumber);
     }
 
-    public function it_can_be_created_with_country_and_area_code()
+    public function it_does_not_have_an_extension_number_by_default()
     {
-        $phoneWithCountryAndAreaCode = $this::createWithCountryAndAreaCode(
-            $this->countryCode = $this->seeder->numberBetween(10, 99),
-            $this->areaCode = $this->seeder->numberBetween(1, 999),
-            $this->phoneNumber
-        );
-
-        $phoneWithCountryAndAreaCode->countryCode()->shouldReturn($this->countryCode);
-        $phoneWithCountryAndAreaCode->areaCode()->shouldReturn($this->areaCode);
-        $phoneWithCountryAndAreaCode->phoneNumber()->shouldReturn($this->phoneNumber);
-    }
-
-    public function it_does_not_accept_zero_numbers()
-    {
-        $this->countryCode = $this->seeder->numberBetween(10, 99);
-        $this->areaCode = $this->seeder->numberBetween(1, 999);
-
-        $this->shouldThrow(ZeroCountryCodeException::class)->during(
-            'createWithCountryAndAreaCode',
-            [
-                0,
-                $this->areaCode,
-                $this->phoneNumber
-            ]
-        );
-
-        $this->shouldThrow(ZeroAreaCodeException::class)->during(
-            'createWithCountryAndAreaCode',
-            [
-                $this->countryCode,
-                0,
-                $this->phoneNumber
-            ]
-        );
-
-        $this->shouldThrow(ZeroPhoneNumberException::class)->during(
-            'createWithCountryAndAreaCode',
-            [
-                $this->countryCode,
-                $this->areaCode,
-                0
-            ]
-        );
-
-        $this->shouldThrow(ZeroPhoneNumberException::class)->during(
-            '__construct',
-            [
-                0
-            ]
-        );
-    }
-
-    public function it_does_not_accept_negative_numbers()
-    {
-        $this->countryCode = $this->seeder->numberBetween(10, 99);
-        $this->areaCode = $this->seeder->numberBetween(1, 999);
-
-
-        $this->shouldThrow(NegativeExtensionNumberException::class)->during(
-            'withExtensionNumber',
-            [
-                $this->seeder->numberBetween(-9999999, -1000000)
-            ]
-        );
-
-        $this->shouldThrow(NegativeCountryCodeException::class)->during(
-            'createWithCountryAndAreaCode',
-            [
-                $this->seeder->numberBetween(-99, -1),
-                $this->areaCode,
-                $this->phoneNumber
-            ]
-        );
-
-        $this->shouldThrow(NegativeAreaCodeException::class)->during(
-            'createWithCountryAndAreaCode',
-            [
-                $this->countryCode,
-                $this->seeder->numberBetween(-999, -1),
-                $this->phoneNumber
-            ]
-        );
-
-        $this->shouldThrow(NegativePhoneNumberException::class)->during(
-            'createWithCountryAndAreaCode',
-            [
-                $this->countryCode,
-                $this->areaCode,
-                $this->seeder->numberBetween(-9999999, -1000000),
-            ]
-        );
-
-        $this->shouldThrow(NegativePhoneNumberException::class)->during(
-            '__construct',
-            [
-                $this->seeder->numberBetween(-9999999, -1000000),
-            ]
-        );
+        $this->extensionNumber()->shouldBeNull();
     }
 
     public function it_can_have_an_extension_number()
     {
-        $expectedExtensionNumber = $this->seeder->numberBetween(1, 999);
+        $this->withExtensionNumber($this->extensionNumber)->shouldHaveType(PhoneNumber::class);
+        $this->extensionNumber()->shouldBeNull();
 
-        $this->withExtensionNumber($expectedExtensionNumber)->shouldHaveType(PhoneNumber::class);
-        $this->withExtensionNumber($expectedExtensionNumber)->phoneNumber()->shouldReturn($this->phoneNumber);
-        $this->withExtensionNumber($expectedExtensionNumber)->extensionNumber()->shouldReturn($expectedExtensionNumber);
+        $this->withExtensionNumber($this->extensionNumber)->countryCode()->shouldReturn($this->countryCode);
+        $this->withExtensionNumber($this->extensionNumber)->areaCode()->shouldReturn($this->areaCode);
+        $this->withExtensionNumber($this->extensionNumber)->phoneNumber()->shouldReturn($this->phoneNumber);
+        $this->withExtensionNumber($this->extensionNumber)->extensionNumber()->shouldReturn($this->extensionNumber);
     }
 
-    public function it_does_not_accept_short_phone_numbers()
+    public function it_does_not_accept_negative_numbers()
     {
-        $this->shouldThrow(ShortPhoneNumberException::class)->during(
+        $negativeCountryCode = 0 - $this->generateCountryCode();
+        $negativeAreaCode = 0 - $this->generateAreaCode();
+        $negativePhoneNumber = 0 - $this->generatePhoneNumber();
+        $negativeExtensionNumber = 0 - mt_rand(1, 9);
+
+        $this->shouldThrow(NegativeCountryCodeException::class)->during(
             '__construct',
-            [$this->seeder->numberBetween(1, 999)]
+            [
+                $negativeCountryCode,
+                $this->generateAreaCode(),
+                $this->generatePhoneNumber()
+            ]
+        );
+
+        $this->shouldThrow(NegativeAreaCodeException::class)->during(
+            '__construct',
+            [
+                $this->generateCountryCode(),
+                $negativeAreaCode,
+                $this->generatePhoneNumber()
+            ]
+        );
+
+        $this->shouldThrow(NegativePhoneNumberException::class)->during(
+            '__construct',
+            [
+                $this->generateCountryCode(),
+                $this->generateAreaCode(),
+                $negativePhoneNumber
+            ]
+        );
+
+        $this->beConstructedWith(
+            $this->countryCode = $this->generateCountryCode(),
+            $this->areaCode = $this->generateAreaCode(),
+            $this->phoneNumber = $this->generatePhoneNumber()
+        );
+
+        $this->shouldThrow(NegativeExtensionNumberException::class)->during(
+            'withExtensionNumber',
+            [
+                $negativeExtensionNumber
+            ]
         );
     }
 
-    public function it_does_not_accept_long_phone_numbers()
+    public function it_can_compare_matching_phone_numbers(PhoneNumber $phoneNumber)
     {
-        $this->shouldThrow(LongPhoneNumberException::class)->during(
-            '__construct',
-            [$this->seeder->numberBetween(10000000, 90000000)]
-        );
+        $matchingExtensionNumber = mt_rand(0, 5);
+
+        $phoneNumber->countryCode()->shouldBeCalled()->willReturn($this->countryCode);
+        $phoneNumber->areaCode()->shouldBeCalled()->willReturn($this->areaCode);
+        $phoneNumber->phoneNumber()->shouldBeCalled()->willReturn($this->phoneNumber);
+        $phoneNumber->extensionNumber()->shouldBeCalled()->willReturn($matchingExtensionNumber);
+
+        $this->withExtensionNumber($matchingExtensionNumber)->matches($phoneNumber)->shouldReturn(true);
+        $this->withExtensionNumber($matchingExtensionNumber)->doesNotMatch($phoneNumber)->shouldReturn(false);
     }
 
-    public function it_can_be_compared(PhoneNumber $anotherPhoneNumber, PhoneNumber $aDifferentPhoneNumber)
+    public function it_can_compare_mismatched_phone_numbers(PhoneNumber $phoneNumber)
     {
-        $anotherPhoneNumber->countryCode()->shouldBeCalled()->willReturn($this->countryCode);
-        $anotherPhoneNumber->areaCode()->shouldBeCalled()->willReturn($this->areaCode);
-        $anotherPhoneNumber->phoneNumber()->shouldBeCalled()->willReturn($this->phoneNumber);
-        $anotherPhoneNumber->extensionNumber()->shouldBeCalled()->willReturn($this->extensionNumber);
-        $this->matches($anotherPhoneNumber)->shouldReturn(true);
-        $this->doesNotMatch($anotherPhoneNumber)->shouldReturn(false);
+        $phoneNumber->countryCode()->shouldBeCalled()->willReturn($this->generateCountryCode());
+        $this->matches($phoneNumber)->shouldReturn(false);
 
-        $aDifferentPhoneNumber->phoneNumber()->shouldBeCalled()->willReturn($this->seeder->numberBetween(10000000, 90000000));
-        $this->matches($aDifferentPhoneNumber)->shouldReturn(false);
-        $this->doesNotMatch($aDifferentPhoneNumber)->shouldReturn(true);
+        $phoneNumber->countryCode()->shouldBeCalled()->willReturn($this->countryCode);
+        $phoneNumber->areaCode()->shouldBeCalled()->willReturn($this->generateAreaCode());
+        $this->matches($phoneNumber)->shouldReturn(false);
 
-        $aDifferentPhoneNumber->areaCode()->shouldBeCalled()->willReturn(mt_rand(-999, -1));
-        $aDifferentPhoneNumber->phoneNumber()->shouldBeCalled()->willReturn($this->phoneNumber);
-        $this->matches($aDifferentPhoneNumber)->shouldReturn(false);
-        $this->doesNotMatch($aDifferentPhoneNumber)->shouldReturn(true);
+        $phoneNumber->countryCode()->shouldBeCalled()->willReturn($this->countryCode);
+        $phoneNumber->areaCode()->shouldBeCalled()->willReturn($this->areaCode);
+        $phoneNumber->phoneNumber()->shouldBeCalled()->willReturn($this->generatePhoneNumber());
+        $this->matches($phoneNumber)->shouldReturn(false);
 
-        $aDifferentPhoneNumber->countryCode()->shouldBeCalled()->willReturn(mt_rand(-99, -1));
-        $aDifferentPhoneNumber->areaCode()->shouldBeCalled()->willReturn($this->areaCode);
-        $aDifferentPhoneNumber->phoneNumber()->shouldBeCalled()->willReturn($this->phoneNumber);
-        $this->matches($aDifferentPhoneNumber)->shouldReturn(false);
-        $this->doesNotMatch($aDifferentPhoneNumber)->shouldReturn(true);
+        $phoneNumber->countryCode()->shouldBeCalled()->willReturn($this->countryCode);
+        $phoneNumber->areaCode()->shouldBeCalled()->willReturn($this->areaCode);
+        $phoneNumber->phoneNumber()->shouldBeCalled()->willReturn($this->phoneNumber);
+        $phoneNumber->extensionNumber()->shouldBeCalled()->willReturn(mt_rand(6, 9));
+
+        $this->withExtensionNumber(mt_rand(0, 5))->matches($phoneNumber)->shouldReturn(false);
+        $this->withExtensionNumber(mt_rand(0, 5))->doesNotMatch($phoneNumber)->shouldReturn(true);
     }
 
-    public function it_has_an_array_representation()
+    /**
+     * @return int
+     */
+    private function generateCountryCode(): int
     {
-        $this->toArray()->shouldReturn([
-            'countryCode' => $this->countryCode,
-            'areaCode' => $this->areaCode,
-            'phoneNumber' => $this->phoneNumber,
-            'extensionNumber' => $this->extensionNumber
-        ]);
+        return mt_rand(1, 99);
     }
+
+    /**
+     * @return int
+     */
+    private function generateAreaCode(): int
+    {
+        return mt_rand(1, 999);
+    }
+
+    /**
+     * @return int
+     */
+    private function generatePhoneNumber(): int
+    {
+
+        return mt_rand(1000000, 9999999);
+    }
+
 }

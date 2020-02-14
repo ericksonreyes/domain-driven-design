@@ -2,6 +2,7 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Domain;
 
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
 use Faker\Factory;
 use Faker\Generator;
 use PhpSpec\ObjectBehavior;
@@ -9,7 +10,7 @@ use PhpSpec\ObjectBehavior;
 abstract class DomainEntityUnitTest extends ObjectBehavior
 {
     /**
-     * @var
+     * @var Identifier
      */
     protected $id;
 
@@ -28,6 +29,4 @@ abstract class DomainEntityUnitTest extends ObjectBehavior
     {
         $this->id()->shouldReturn($this->id);
     }
-
-    abstract public function it_can_be_mark_as_deleted();
 }

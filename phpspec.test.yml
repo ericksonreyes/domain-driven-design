@@ -1,2 +1,2 @@
-formatter.name: dot
+formatter.name: pretty
 stop_on_failure: true

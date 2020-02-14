@@ -44,7 +44,7 @@ abstract class EventSourcedEntity implements Entity
             );
         }
 
-        if ($domainEvent->entityId() !== $this->id()) {
+        if ($this->id()->doesNotMatch($domainEvent->entityId())) {
             throw new DomainEventOwnershipException(
                 'This entity does not own this ' . $domainEvent->eventName() . ' domain event.'
             );

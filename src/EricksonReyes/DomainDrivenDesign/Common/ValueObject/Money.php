@@ -2,45 +2,48 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\Attributes\ValueObject;
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareAmount;
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasAmount;
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasArrayRepresentation;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\CurrencyMismatchException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountException;
 
 /**
  * Class Money
  * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class Money implements ValueObject
+class Money implements HasAmount, CanCompareAmount, HasArrayRepresentation
 {
     /**
-     * @var Currency;
+     * @var Currency
      */
     private $currency;
 
     /**
      * @var int
      */
-    private $value;
+    private $amount;
 
-    /**
-     * Money constructor.
-     * @param Currency $currency
-     * @param int $value
-     */
-    public function __construct(Currency $currency, int $value)
+    public function __construct($amount, Currency $currency)
     {
+        if ($amount < 0) {
+            throw new InvalidMoneyAmountException(
+                'Amount should not be less than zero. ' . $amount . ' is a negative number.'
+            );
+        }
+        $this->amount = $amount;
         $this->currency = $currency;
-        $this->value = $value;
     }
 
     /**
-     * @return array
+     * @return int
      */
-    public function toArray(): array
+    public function amount(): int
     {
-        return [
-            'currency' => $this->currency->toArray(),
-            'value' => $this->value()
-        ];
+        return $this->amount;
     }
 
     /**
@@ -52,58 +55,80 @@ class Money implements ValueObject
     }
 
     /**
-     * @return int
+     * @param int $amount
+     * @return bool
      */
-    public function value(): int
+    public function amountIsEqualsTo(int $amount): bool
     {
-        return $this->value;
+        return $this->amount() === $amount;
     }
 
     /**
-     * @param Money $moneyToBeAdded
-     * @return Money
+     * @param int $amount
+     * @return bool
      */
-    public function add(Money $moneyToBeAdded): self
+    public function amountIsNotEqualTo(int $amount): bool
     {
-        if ($this->currencyIsAllowed($moneyToBeAdded->currency())) {
-            throw new CurrencyMismatchException(
-                'You can\'t add ' . $moneyToBeAdded->currency()->code() . ' with '
-                . $this->currency()->code() . '.'
-            );
-        }
+        return !$this->amountIsEqualsTo($amount);
+    }
 
-        $value = $this->value() + $moneyToBeAdded->value();
-        return new self($this->currency, $value);
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsLessThan(int $amount): bool
+    {
+        return $this->amount() < $amount;
     }
 
     /**
-     * @param Money $moneyToBeDeducted
-     * @return Money
+     * @param int $amount
+     * @return bool
      */
-    public function deduct(Money $moneyToBeDeducted): self
+    public function amountIsGreaterThan(int $amount): bool
     {
-        if ($this->currencyIsAllowed($moneyToBeDeducted->currency())) {
-            throw new CurrencyMismatchException(
-                'You can\'t deduct ' . $moneyToBeDeducted->currency()->code() . ' from '
-                . $this->currency()->code() . '.'
-            );
-        }
-
-        $value = $this->value() - $moneyToBeDeducted->value();
-        return new self($this->currency, $value);
+        return $this->amount() > $amount;
     }
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsEqualOrLessThan(int $amount): bool
+    {
+        return $this->amount() <= $amount;
+    }
+
+    /**
+     * @param int $amount
+     * @return bool
+     */
+    public function amountIsEqualOrGreaterThan(int $amount): bool
+    {
+        return $this->amountIsEqualsTo($amount) || $this->amountIsGreaterThan($amount);
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'amount' => $this->amount(),
+            'currency' => (string)$this->currency()
+        ];
+    }
+
 
     /**
      * @param Money $anotherMoney
      * @return bool
      */
-    public function isEqualTo(Money $anotherMoney): bool
+    public function isEqualsTo(Money $anotherMoney): bool
     {
-        if ($anotherMoney->value() !== $this->value()) {
-            return false;
-        }
-
-        return $this->currency()->matches($anotherMoney->currency());
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() === $anotherMoney->amount();
     }
 
     /**
@@ -112,15 +137,99 @@ class Money implements ValueObject
      */
     public function isNotEqualTo(Money $anotherMoney): bool
     {
-        return !$this->isEqualTo($anotherMoney);
+        $this->currenciesMustMatch($anotherMoney);
+        return !$this->isEqualsTo($anotherMoney);
     }
 
     /**
-     * @param Currency $currency
+     * @param Money $anotherMoney
      * @return bool
      */
-    protected function currencyIsAllowed(Currency $currency): bool
+    public function isLessThan(Money $anotherMoney): bool
     {
-        return $this->currency()->doesNotMatch($currency);
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() < $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isGreaterThan(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() > $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isEqualOrLessThan(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() <= $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return bool
+     */
+    public function isEqualOrGreaterThan(Money $anotherMoney): bool
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        return $this->amount() >= $anotherMoney->amount();
+    }
+
+    /**
+     * @param Money $anotherMoney
+     * @return Money
+     */
+    public function addWith(Money $anotherMoney): Money
+    {
+        $this->currenciesMustMatch($anotherMoney);
+
+        $newAmount = $this->amount() + $anotherMoney->amount();
+        return new Money($newAmount, $this->currency());
+    }
+
+    /**
+     * @param $anotherMoney
+     * @return Money
+     */
+    public function subtractWith(Money $anotherMoney): Money
+    {
+        $this->currenciesMustMatch($anotherMoney);
+        $this->moneyMustHaveSufficientAmount($anotherMoney);
+
+        $newAmount = $this->amount() - $anotherMoney->amount();
+        return new Money($newAmount, $this->currency());
+    }
+
+    /**
+     * @param Money $anotherMoney
+     */
+    private function currenciesMustMatch(Money $anotherMoney): void
+    {
+        $actualCurrency = (string)$this->currency();
+        $anotherCurrency = (string)$anotherMoney->currency();
+        if ($actualCurrency !== $anotherCurrency) {
+            throw new CurrencyMismatchException(
+                'Can\'t compare ' . $actualCurrency . ' with ' . $anotherCurrency
+            );
+        }
+    }
+
+    /**
+     * @param Money $anotherMoney
+     */
+    private function moneyMustHaveSufficientAmount(Money $anotherMoney): void
+    {
+        if ($this->isLessThan($anotherMoney)) {
+            throw new InsufficientMoneyAmountException(
+                'The amount you are trying to subtract (' . $anotherMoney->amount() .
+                ') is greater than ' . $this->amount() . '.'
+            );
+        }
     }
 }

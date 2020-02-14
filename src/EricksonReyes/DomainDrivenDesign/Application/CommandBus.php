@@ -20,53 +20,44 @@ class CommandBus implements CommandBusInterface
     private $commands = [];
 
     /**
-     * @param $commandHandlerInstance
-     * @param string $commandClassName
+     * @param $handler
+     * @param string $command
      */
-    public function addHandler($commandHandlerInstance, string $commandClassName): void
+    public function addHandler($handler, string $command): void
     {
-        $this->registerCommand($commandClassName);
-        $handlerInstanceClassName = get_class($commandHandlerInstance);
+        $handlerInstanceClassName = get_class($handler);
 
-        if ($this->handlerHasAHandlerMethod($commandHandlerInstance)) {
+        if ($this->handlerHasAHandlerMethod($handler)) {
             throw new MissingHandlerMethodException(
                 "{$handlerInstanceClassName} must have a handleThis method."
             );
         }
 
-        if ($this->commandIsBeingHandledAlready($commandHandlerInstance, $commandClassName)) {
+        if ($this->commandIsBeingHandledAlready($command)) {
             throw new DuplicateCommandHandlerException(
-                "{$handlerInstanceClassName} is already handling {$commandClassName}."
+                "{$command} is already being handled by " .
+                $this->getCommandHandlerName($command) . "."
             );
         }
 
-        $this->assignHandlerInstanceToCommandName($commandHandlerInstance, $commandClassName);
+        $this->assignHandlerInstanceToCommandName($handler, $command);
     }
 
     /**
-     * @param $commandClassInstance
-     * @return array
+     * @param $command
      * @throws UnhandledCommandException
      */
-    public function execute($commandClassInstance): array
+    public function execute($command): void
     {
-        $executionResult = [];
-        $commandClassName = get_class($commandClassInstance);
+        $commandClassName = get_class($command);
 
-        foreach ($this->commands() as $storedCommandClassName => $commandHandlers) {
-            if ($storedCommandClassName === $commandClassName) {
-                foreach ($commandHandlers as $commandHandler) {
-                    $commandHandlerClassName = get_class($commandHandler);
-                    $executionResult[$commandHandlerClassName] = $commandHandler->handleThis($commandClassInstance);
-                }
+        foreach ($this->commands() as $storedCommandClassName => $commandHandler) {
+            if ($this->commandMatchesAHandler($storedCommandClassName, $command)) {
+                $commandHandler->handleThis($command);
+                return;
             }
         }
-
-        if ($executionResult === []) {
-            throw new UnhandledCommandException("There is no command handler for {$commandClassName}");
-        }
-
-        return $executionResult;
+        throw new UnhandledCommandException("There is no command handler for {$commandClassName}");
     }
 
     /**
@@ -78,13 +69,12 @@ class CommandBus implements CommandBusInterface
     }
 
     /**
-     * @param $commandHandlerInstance
-     * @param string $commandClassName
+     * @param string $command
      * @return bool
      */
-    private function commandIsBeingHandledAlready($commandHandlerInstance, string $commandClassName): bool
+    private function commandIsBeingHandledAlready(string $command): bool
     {
-        return in_array($commandHandlerInstance, $this->commands[$commandClassName], true);
+        return array_key_exists($command, $this->commands());
     }
 
     /**
@@ -97,21 +87,33 @@ class CommandBus implements CommandBusInterface
     }
 
     /**
-     * @param string $commandClassName
+     * @param $commandHandler
+     * @param string $command
      */
-    private function registerCommand(string $commandClassName): void
+    private function assignHandlerInstanceToCommandName($commandHandler, string $command): void
     {
-        if (array_key_exists($commandClassName, $this->commands) === false) {
-            $this->commands[$commandClassName] = [];
-        }
+        $this->commands[$command] = $commandHandler;
     }
 
     /**
-     * @param $commandHandlerInstance
-     * @param string $commandClassName
+     * @param $command
+     * @return string
      */
-    private function assignHandlerInstanceToCommandName($commandHandlerInstance, string $commandClassName): void
+    private function getCommandHandlerName($command)
     {
-        $this->commands[$commandClassName][] = $commandHandlerInstance;
+        return get_class($this->commands()[$command]);
+    }
+
+    /**
+     * @param $storedCommandClassName
+     * @param $command
+     * @return bool
+     */
+    private function commandMatchesAHandler($storedCommandClassName, $command): bool
+    {
+        $commandClassName = get_class($command);
+
+        return $storedCommandClassName === $commandClassName ||
+            $command instanceof $storedCommandClassName;
     }
 }

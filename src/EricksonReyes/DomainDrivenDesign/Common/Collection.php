@@ -3,13 +3,14 @@
 namespace EricksonReyes\DomainDrivenDesign\Common;
 
 use Countable;
+use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanDetermineIfEmpty;
 use Iterator;
 
 /**
  * Class Collection
  * @package EricksonReyes\DomainDrivenDesign\Common
  */
-abstract class Collection implements Iterator, Countable
+abstract class Collection implements Iterator, Countable, CanDetermineIfEmpty
 {
     /**
      * @var int
@@ -72,6 +73,22 @@ abstract class Collection implements Iterator, Countable
     public function count(): int
     {
         return $this->count;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->count() === 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotEmpty(): bool
+    {
+        return !$this->isEmpty();
     }
 
     /**

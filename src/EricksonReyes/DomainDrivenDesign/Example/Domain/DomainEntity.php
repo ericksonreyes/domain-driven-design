@@ -2,6 +2,7 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Example\Domain;
 
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 
 /**
@@ -11,42 +12,42 @@ use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 class DomainEntity implements Entity
 {
     /**
-     * @var string
+     * @var Identifier
      */
     private $id;
 
     /**
-     * @var bool
-     */
-    private $deleted = false;
-
-    /**
      * DomainEntity constructor.
-     * @param $id
+     * @param Identifier $id
      */
-    public function __construct(string $id)
+    public function __construct(Identifier $id)
     {
         $this->id = $id;
     }
 
     /**
-     * @return string
+     * @return Identifier
      */
-    public function id(): string
+    public function id(): Identifier
     {
         return $this->id;
     }
 
     /**
+     * @param Entity $anotherEntity
      * @return bool
      */
-    public function isDeleted(): bool
+    public function matches(Entity $anotherEntity): bool
     {
-        return $this->deleted;
+        return $this->id()->matches($anotherEntity->id());
     }
 
-    public function delete(): void
+    /**
+     * @param Entity $anotherEntity
+     * @return bool
+     */
+    public function doesNotMatch(Entity $anotherEntity): bool
     {
-        $this->deleted = true;
+        return !$this->matches($anotherEntity);
     }
 }

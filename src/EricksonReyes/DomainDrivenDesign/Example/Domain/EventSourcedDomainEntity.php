@@ -3,6 +3,8 @@
 namespace EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 use DateTimeImmutable;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
+use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
 use Exception;
@@ -14,7 +16,7 @@ use Exception;
 class EventSourcedDomainEntity extends EventSourcedEntity
 {
     /**
-     * @var string
+     * @var Identifier
      */
     private $id;
 
@@ -34,20 +36,39 @@ class EventSourcedDomainEntity extends EventSourcedEntity
     private $deletedOn;
 
     /**
-     * DomainEntity constructor.
-     * @param $id
+     * EventSourcedDomainEntity constructor.
+     * @param Identifier $id
      */
-    public function __construct(string $id)
+    public function __construct(Identifier $id)
     {
         $this->id = $id;
     }
 
     /**
-     * @return string
+     * @return Identifier
      */
-    public function id(): string
+    public function id(): Identifier
     {
         return $this->id;
+    }
+
+
+    /**
+     * @param Entity $anotherEntity
+     * @return bool
+     */
+    public function matches(Entity $anotherEntity): bool
+    {
+        return $this->id()->matches($anotherEntity->id());
+    }
+
+    /**
+     * @param Entity $anotherEntity
+     * @return bool
+     */
+    public function doesNotMatch(Entity $anotherEntity): bool
+    {
+        return !$this->matches($anotherEntity);
     }
 
     /**
@@ -59,20 +80,12 @@ class EventSourcedDomainEntity extends EventSourcedEntity
     }
 
     /**
-     * @return bool
-     */
-    public function isDeleted(): bool
-    {
-        return $this->deleted;
-    }
-
-    /**
      * @throws Exception
      */
     public function delete(): void
     {
         $event = DomainEntityWasDeletedEvent::raise(
-            $this->id(),
+            (string) $this->id(),
             new DateTimeImmutable(),
             $this->additionalData()
         );

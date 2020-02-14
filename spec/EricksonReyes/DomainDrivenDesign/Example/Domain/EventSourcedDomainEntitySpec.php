@@ -5,6 +5,7 @@ namespace spec\EricksonReyes\DomainDrivenDesign\Example\Domain;
 use DateTimeImmutable;
 use EricksonReyes\DomainDrivenDesign\Common\Exception\DomainEventOwnershipException;
 use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
 use EricksonReyes\DomainDrivenDesign\Example\Domain\DomainEntityWasDeletedEvent;
@@ -14,10 +15,10 @@ use spec\EricksonReyes\DomainDrivenDesign\Domain\EventSourcedDomainEntityUnitTes
 class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
 {
 
-    public function let()
+    public function let(Identifier $identifier)
     {
         $this->beConstructedWith(
-            $this->id = $this->seeder->uuid
+            $this->id = $identifier
         );
     }
 
@@ -28,51 +29,55 @@ class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
         $this->shouldHaveType(Entity::class);
     }
 
-    public function it_can_be_mark_as_deleted()
+    public function it_cant_be_deleted_twice()
     {
         // Arrange
-        $this->isDeleted()->shouldReturn(false);
+        $uuid = $this->seeder->uuid;
+        $this->id->__toString()->shouldBeCalled()->willReturn($uuid);
+        $this->id->doesNotMatch($uuid)->shouldBeCalled()->willReturn(false);
 
         // Act
+        $this->delete()->shouldBeNull();
         $this->delete()->shouldBeNull();
 
         // Assert
         foreach ($this->storedEvents() as $storedEvent) {
             $storedEvent->shouldContain(DomainEntityWasDeletedEvent::class);
         }
-        $this->isDeleted()->shouldReturn(true);
 
     }
-
-    public function it_can_only_be_deleted_once()
+    public function it_can_be_deleted()
     {
         // Arrange
-        $this->isDeleted()->shouldReturn(false);
+        $uuid = $this->seeder->uuid;
+        $this->id->__toString()->shouldBeCalled()->willReturn($uuid);
+        $this->id->doesNotMatch($uuid)->shouldBeCalled()->willReturn(false);
 
         // Act
-        $this->delete()->shouldBeNull();
         $this->delete()->shouldBeNull();
 
         // Assert
         foreach ($this->storedEvents() as $storedEvent) {
             $storedEvent->shouldContain(DomainEntityWasDeletedEvent::class);
         }
-        $this->isDeleted()->shouldReturn(true);
 
     }
 
     public function it_can_be_restored_from_event(DomainEntityWasDeletedEvent $event)
     {
-        $event->entityId()->shouldBeCalled()->wilLReturn($this->id);
+        // Arrange
+        $uuid = $this->seeder->uuid;
+        $event->entityId()->shouldBeCalled()->willReturn($uuid);
         $event->eventName()->shouldBeCalled()->willReturn('DomainEntityWasDeleted');
         $event->happenedOn()->shouldBeCalled()->willReturn(new DateTimeImmutable());
+
+        $this->id->doesNotMatch($uuid)->shouldBeCalled()->willReturn(false);
         $this->restoreFromEvent($event);
-        $this->isDeleted()->shouldReturn(true);
     }
 
     public function it_requires_domain_events_to_have_replay_methods()
     {
-        $event = new MockDomainEvent($this->id);
+        $event = new MockDomainEvent($this->seeder->uuid);
         $this->shouldThrow(MissingEventReplayMethodException::class)->during(
             'restoreFromEvent',
             [$event]
@@ -81,12 +86,36 @@ class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
 
     public function it_prevents_restoration_from_events_that_doesnt_belong_to_it(DomainEntityWasDeletedEvent $event)
     {
-        $event->entityId()->shouldBeCalled()->wilLReturn($this->seeder->uuid);
+        $uuid = $this->seeder->uuid;
+        $event->entityId()->shouldBeCalled()->willReturn($uuid);
         $event->eventName()->shouldBeCalled()->willReturn('DomainEntityWasDeleted');
+        $this->id->doesNotMatch($uuid)->shouldBeCalled()->willReturn(true);
         $this->shouldThrow(DomainEventOwnershipException::class)->during(
             'restoreFromEvent',
             [$event]
         );
     }
 
+
+    public function it_can_be_matched(Entity $anotherEntity, Identifier $anotherIdentifier)
+    {
+        $uuid = $this->seeder->uuid;
+        $anotherIdentifier->__toString()->shouldBeCalled()->willReturn($uuid);
+        $anotherEntity->id()->shouldBeCalled()->willReturn($anotherIdentifier);
+
+        $this->id->matches($uuid)->shouldBeCalled()->willReturn(true);
+        $this->matches($anotherEntity)->shouldReturn(true);
+        $this->doesNotMatch($anotherEntity)->shouldReturn(false);
+    }
+
+    public function it_can_be_mismatched(Entity $anotherEntity, Identifier $anotherIdentifier)
+    {
+        $uuid = $this->seeder->uuid;
+        $anotherIdentifier->__toString()->shouldBeCalled()->willReturn($uuid);
+        $anotherEntity->id()->shouldBeCalled()->willReturn($anotherIdentifier);
+
+        $this->id->matches($uuid)->shouldBeCalled()->willReturn(false);
+        $this->matches($anotherEntity)->shouldReturn(false);
+        $this->doesNotMatch($anotherEntity)->shouldReturn(true);
+    }
 }
