@@ -40,9 +40,9 @@
     <!-- ============================================  -->
     <target name="Beautify source code" description="PHP Code Beautifier">
         <exec
-                logoutput="false"
+                logoutput="true"
                 checkreturn="false"
-                passthru="false"
+                passthru="true"
                 command="./php '${project.basedir}/bin/phpcbf' --standard=PSR2 '${source}'"
         />
     </target>
@@ -53,9 +53,9 @@
     <target name="Check PSR2 coding standard compliance" description="Check for coding standard violations">
 
         <exec
-                logoutput="false"
+                logoutput="true"
                 checkreturn="true"
-                passthru="false"
+                passthru="true"
                 command="./php '${project.basedir}/bin/phpcs' '${source}' --standard=PSR2"
         />
     </target>
@@ -65,9 +65,9 @@
     <!-- ============================================  -->
     <target name="Check for clean code violations" description="Detect clean code violations">
         <exec
-                logoutput="false"
+                logoutput="true"
                 checkreturn="true"
-                passthru="false"
+                passthru="true"
                 command="./php '${project.basedir}/bin/phpmd' '${source}' html '${project.basedir}/phpmd.xml'"
         />
     </target>
@@ -77,9 +77,9 @@
     <!-- ============================================  -->
     <target name="Check for duplicate codes" description="Generate pmd-cpd.xml using PHPCPD">
         <exec
-                logoutput="false"
+                logoutput="true"
                 checkreturn="true"
-                passthru="false"
+                passthru="true"
                 command="./php bin/phpcpd --log-pmd '${source}'"
         />
     </target>
@@ -89,10 +89,10 @@
     <!-- ============================================  -->
     <target name="Perform unit testing" description="Unit Testing">
         <exec
-                logoutput="false"
+                logoutput="true"
                 checkreturn="true"
-                passthru="false"
-                command="./php '${project.basedir}/bin/phpspec' run --config '${project.basedir}/phpspec.test.yml' --no-ansi"
+                passthru="true"
+                command="./php '${project.basedir}/bin/phpspec' run --config '${project.basedir}/phpspec.test.yml'"
         />
     </target>
 
