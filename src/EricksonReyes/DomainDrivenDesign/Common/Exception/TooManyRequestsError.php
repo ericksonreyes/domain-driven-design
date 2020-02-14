@@ -4,6 +4,6 @@ namespace EricksonReyes\DomainDrivenDesign\Common\Exception;
 
 use Exception;
 
-abstract class TooManyRequestsException extends Exception
+abstract class TooManyRequestsError extends Exception
 {
 }

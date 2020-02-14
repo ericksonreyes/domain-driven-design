@@ -2,10 +2,10 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeAreaCodeException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeCountryCodeException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeExtensionNumberException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativePhoneNumberException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeAreaCodeError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeCountryCodeError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeExtensionNumberError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativePhoneNumberError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\PhoneNumber;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -87,7 +87,7 @@ class PhoneNumberSpec extends ObjectBehavior
         $negativePhoneNumber = 0 - $this->generatePhoneNumber();
         $negativeExtensionNumber = 0 - mt_rand(1, 9);
 
-        $this->shouldThrow(NegativeCountryCodeException::class)->during(
+        $this->shouldThrow(NegativeCountryCodeError::class)->during(
             '__construct',
             [
                 $negativeCountryCode,
@@ -96,7 +96,7 @@ class PhoneNumberSpec extends ObjectBehavior
             ]
         );
 
-        $this->shouldThrow(NegativeAreaCodeException::class)->during(
+        $this->shouldThrow(NegativeAreaCodeError::class)->during(
             '__construct',
             [
                 $this->generateCountryCode(),
@@ -105,7 +105,7 @@ class PhoneNumberSpec extends ObjectBehavior
             ]
         );
 
-        $this->shouldThrow(NegativePhoneNumberException::class)->during(
+        $this->shouldThrow(NegativePhoneNumberError::class)->during(
             '__construct',
             [
                 $this->generateCountryCode(),
@@ -120,7 +120,7 @@ class PhoneNumberSpec extends ObjectBehavior
             $this->phoneNumber = $this->generatePhoneNumber()
         );
 
-        $this->shouldThrow(NegativeExtensionNumberException::class)->during(
+        $this->shouldThrow(NegativeExtensionNumberError::class)->during(
             'withExtensionNumber',
             [
                 $negativeExtensionNumber

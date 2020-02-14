@@ -3,7 +3,7 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\CountryCode;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCountryCodeException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCountryCodeError;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
@@ -31,7 +31,7 @@ class CountryCodeSpec extends ObjectBehavior
 
     public function it_prevents_empty_countries()
     {
-        $this->shouldThrow(EmptyCountryCodeException::class)->during(
+        $this->shouldThrow(EmptyCountryCodeError::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

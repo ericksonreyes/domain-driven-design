@@ -2,7 +2,7 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStreetException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStreetError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Street;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -31,7 +31,7 @@ class StreetSpec extends ObjectBehavior
 
     public function it_prevents_empty_streets()
     {
-        $this->shouldThrow(EmptyStreetException::class)->during(
+        $this->shouldThrow(EmptyStreetError::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

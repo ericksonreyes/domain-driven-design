@@ -3,7 +3,7 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyNameException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyNameError;
 
 /**
  * Class Name
@@ -20,7 +20,7 @@ class Name extends SizeableAndMatchableString
     {
         $trimmedName = trim($identifier);
         if ($trimmedName === '') {
-            throw new EmptyNameException('Name must not be empty.');
+            throw new EmptyNameError('Name must not be empty.');
         }
         parent::__construct($trimmedName);
     }

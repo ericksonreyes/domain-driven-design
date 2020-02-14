@@ -5,10 +5,9 @@ namespace EricksonReyes\DomainDrivenDesign\Common\Exception;
 use InvalidArgumentException;
 
 /**
- * Class EmptyIdentifierException
+ * Class PermissionDeniedException
  * @package EricksonReyes\DomainDrivenDesign\Common\Exception
  */
-abstract class EmptyIdentifierException extends InvalidArgumentException
+abstract class PermissionDeniedError extends InvalidArgumentException
 {
-
 }

@@ -2,7 +2,7 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeError;
 
 /**
  * Class Currency
@@ -23,10 +23,10 @@ class Currency
         $codeLength = strlen($upperCasedCode);
 
         if ((ctype_alpha($upperCasedCode) === false)) {
-            throw new InvalidCurrencyCodeException('Currency code must only consist of letters.');
+            throw new InvalidCurrencyCodeError('Currency code must only consist of letters.');
         }
         if ($codeLength < 3) {
-            throw new InvalidCurrencyCodeException('Currency code must consist of three letters.');
+            throw new InvalidCurrencyCodeError('Currency code must consist of three letters.');
         }
 
         $this->code = $upperCasedCode;

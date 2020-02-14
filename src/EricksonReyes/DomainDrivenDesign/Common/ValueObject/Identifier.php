@@ -3,7 +3,7 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyIdentifierException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyIdentifierError;
 
 class Identifier extends SizeableAndMatchableString
 {
@@ -16,7 +16,7 @@ class Identifier extends SizeableAndMatchableString
     {
         $trimmedIdentifier = trim($identifier);
         if ($trimmedIdentifier === '') {
-            throw new EmptyIdentifierException('Identifier must not be empty.');
+            throw new EmptyIdentifierError('Identifier must not be empty.');
         }
         parent::__construct($trimmedIdentifier);
     }

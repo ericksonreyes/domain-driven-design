@@ -2,12 +2,13 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Exception;
 
-use InvalidArgumentException;
+use BadMethodCallException;
 
 /**
- * Class PermissionDeniedException
+ * Class DomainEventOwnershipException
  * @package EricksonReyes\DomainDrivenDesign\Common\Exception
  */
-abstract class PermissionDeniedException extends InvalidArgumentException
+final class DomainEventOwnershipError extends BadMethodCallException
 {
+
 }

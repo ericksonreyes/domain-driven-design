@@ -5,10 +5,9 @@ namespace EricksonReyes\DomainDrivenDesign\Common\Exception;
 use BadMethodCallException;
 
 /**
- * Class DomainEventOwnershipException
+ * Class MissingEventReplayMethodException
  * @package EricksonReyes\DomainDrivenDesign\Common\Exception
  */
-final class DomainEventOwnershipException extends BadMethodCallException
+final class MissingEventReplayMethodError extends BadMethodCallException
 {
-
 }

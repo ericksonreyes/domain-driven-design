@@ -5,10 +5,9 @@ namespace EricksonReyes\DomainDrivenDesign\Common\Exception;
 use InvalidArgumentException;
 
 /**
- * Class MissingActionPerformerException
+ * Class DeletedRecordException
  * @package EricksonReyes\DomainDrivenDesign\Common\Exception
  */
-abstract class MissingActionPerformerException extends InvalidArgumentException
+abstract class DeletedRecordError extends InvalidArgumentException
 {
-
 }

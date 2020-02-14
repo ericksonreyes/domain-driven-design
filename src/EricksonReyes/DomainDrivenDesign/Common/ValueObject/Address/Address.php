@@ -3,6 +3,10 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
+/**
+ * Class Address
+ * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address
+ */
 class Address
 {
 

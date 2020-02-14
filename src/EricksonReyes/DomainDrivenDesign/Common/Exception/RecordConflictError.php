@@ -8,6 +8,6 @@ use InvalidArgumentException;
  * Class RecordConflictException
  * @package EricksonReyes\DomainDrivenDesign\Common\Exception
  */
-abstract class RecordConflictException extends InvalidArgumentException
+abstract class RecordConflictError extends InvalidArgumentException
 {
 }

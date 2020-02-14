@@ -4,8 +4,12 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStreetException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStreetError;
 
+/**
+ * Class Street
+ * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address
+ */
 class Street extends SizeableAndMatchableString
 {
 
@@ -18,7 +22,7 @@ class Street extends SizeableAndMatchableString
     {
         $trimmedStreet = trim($street);
         if ($trimmedStreet === '') {
-            throw new EmptyStreetException('Street must not be empty.');
+            throw new EmptyStreetError('Street must not be empty.');
         }
         parent::__construct($trimmedStreet);
     }

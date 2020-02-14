@@ -2,12 +2,13 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Exception;
 
-use Exception;
+use InvalidArgumentException;
 
 /**
- * Class AuthenticationFailureException
+ * Class EmptyIdentifierException
  * @package EricksonReyes\DomainDrivenDesign\Common\Exception
  */
-abstract class AuthenticationFailureException extends Exception
+abstract class EmptyIdentifierError extends InvalidArgumentException
 {
+
 }

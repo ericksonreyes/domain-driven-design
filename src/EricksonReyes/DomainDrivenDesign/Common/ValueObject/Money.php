@@ -5,9 +5,9 @@ namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareAmount;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasAmount;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasArrayRepresentation;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\CurrencyMismatchException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MismatchedCurrenciesError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountError;
 
 /**
  * Class Money
@@ -30,7 +30,7 @@ class Money implements HasAmount, CanCompareAmount, HasArrayRepresentation
     public function __construct($amount, Currency $currency)
     {
         if ($amount < 0) {
-            throw new InvalidMoneyAmountException(
+            throw new InvalidMoneyAmountError(
                 'Amount should not be less than zero. ' . $amount . ' is a negative number.'
             );
         }
@@ -214,7 +214,7 @@ class Money implements HasAmount, CanCompareAmount, HasArrayRepresentation
         $actualCurrency = (string)$this->currency();
         $anotherCurrency = (string)$anotherMoney->currency();
         if ($actualCurrency !== $anotherCurrency) {
-            throw new CurrencyMismatchException(
+            throw new MismatchedCurrenciesError(
                 'Can\'t compare ' . $actualCurrency . ' with ' . $anotherCurrency
             );
         }
@@ -226,7 +226,7 @@ class Money implements HasAmount, CanCompareAmount, HasArrayRepresentation
     private function moneyMustHaveSufficientAmount(Money $anotherMoney): void
     {
         if ($this->isLessThan($anotherMoney)) {
-            throw new InsufficientMoneyAmountException(
+            throw new InsufficientMoneyAmountError(
                 'The amount you are trying to subtract (' . $anotherMoney->amount() .
                 ') is greater than ' . $this->amount() . '.'
             );

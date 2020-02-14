@@ -6,9 +6,9 @@ use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareAmount;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasAmount;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasArrayRepresentation;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Currency;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\CurrencyMismatchException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MismatchedCurrenciesError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Money;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -47,7 +47,7 @@ class MoneySpec extends ObjectBehavior
     {
         $negativeNumber = 0 - mt_rand(1, 10);
 
-        $this->shouldThrow(InvalidMoneyAmountException::class)->during(
+        $this->shouldThrow(InvalidMoneyAmountError::class)->during(
             '__construct',
             [
                 $negativeNumber,
@@ -190,7 +190,7 @@ class MoneySpec extends ObjectBehavior
         $amountToLessen = mt_rand($this->amount + 1, $this->amount + 10);
 
         $anotherMoney = new Money($amountToLessen, $this->currency);
-        $this->shouldThrow(InsufficientMoneyAmountException::class)->during(
+        $this->shouldThrow(InsufficientMoneyAmountError::class)->during(
             'subtractWith',
             [
                 $anotherMoney
@@ -201,28 +201,28 @@ class MoneySpec extends ObjectBehavior
     public function it_will_not_compare_mismatched_currencies()
     {
         $anotherMoney = new Money(100, new Currency($this->seeder->currencyCode));
-        $this->shouldThrow(CurrencyMismatchException::class)->during(
+        $this->shouldThrow(MismatchedCurrenciesError::class)->during(
             'isEqualsTo', [$anotherMoney]
         );
-        $this->shouldThrow(CurrencyMismatchException::class)->during(
+        $this->shouldThrow(MismatchedCurrenciesError::class)->during(
             'isNotEqualTo', [$anotherMoney]
         );
-        $this->shouldThrow(CurrencyMismatchException::class)->during(
+        $this->shouldThrow(MismatchedCurrenciesError::class)->during(
             'isLessThan', [$anotherMoney]
         );
-        $this->shouldThrow(CurrencyMismatchException::class)->during(
+        $this->shouldThrow(MismatchedCurrenciesError::class)->during(
             'isGreaterThan', [$anotherMoney]
         );
-        $this->shouldThrow(CurrencyMismatchException::class)->during(
+        $this->shouldThrow(MismatchedCurrenciesError::class)->during(
             'isEqualOrLessThan', [$anotherMoney]
         );
-        $this->shouldThrow(CurrencyMismatchException::class)->during(
+        $this->shouldThrow(MismatchedCurrenciesError::class)->during(
             'isEqualOrGreaterThan', [$anotherMoney]
         );
-        $this->shouldThrow(CurrencyMismatchException::class)->during(
+        $this->shouldThrow(MismatchedCurrenciesError::class)->during(
             'addWith', [$anotherMoney]
         );
-        $this->shouldThrow(CurrencyMismatchException::class)->during(
+        $this->shouldThrow(MismatchedCurrenciesError::class)->during(
             'subtractWith', [$anotherMoney]
         );
     }

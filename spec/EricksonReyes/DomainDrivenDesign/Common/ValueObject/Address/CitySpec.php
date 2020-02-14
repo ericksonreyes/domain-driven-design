@@ -3,7 +3,7 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\City;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCityException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCityError;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
@@ -31,7 +31,7 @@ class CitySpec extends ObjectBehavior
 
     public function it_prevents_empty_cities()
     {
-        $this->shouldThrow(EmptyCityException::class)->during(
+        $this->shouldThrow(EmptyCityError::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

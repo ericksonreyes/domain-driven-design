@@ -2,12 +2,12 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\Exception;
 
-use InvalidArgumentException;
+use Exception;
 
 /**
- * Class DeletedRecordException
+ * Class AuthenticationFailureError
  * @package EricksonReyes\DomainDrivenDesign\Common\Exception
  */
-abstract class DeletedRecordException extends InvalidArgumentException
+abstract class AuthenticationFailureError extends Exception
 {
 }

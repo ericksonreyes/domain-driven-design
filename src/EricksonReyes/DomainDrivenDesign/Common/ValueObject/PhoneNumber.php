@@ -2,10 +2,10 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeAreaCodeException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeCountryCodeException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeExtensionNumberException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativePhoneNumberException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeAreaCodeError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeCountryCodeError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeExtensionNumberError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativePhoneNumberError;
 
 class PhoneNumber
 {
@@ -38,19 +38,19 @@ class PhoneNumber
     public function __construct(int $countryCode, int $areaCode, int $phoneNumber)
     {
         if ($countryCode < 0) {
-            throw new NegativeCountryCodeException(
+            throw new NegativeCountryCodeError(
                 'Country code (' . $countryCode . ') must not be negative number.'
             );
         }
 
         if ($areaCode < 0) {
-            throw new NegativeAreaCodeException(
+            throw new NegativeAreaCodeError(
                 'Area code (' . $areaCode . ') must not be negative number.'
             );
         }
 
         if ($phoneNumber < 0) {
-            throw new NegativePhoneNumberException(
+            throw new NegativePhoneNumberError(
                 'Phone number (' . $phoneNumber . ') must not be negative number.'
             );
         }
@@ -99,7 +99,7 @@ class PhoneNumber
     public function withExtensionNumber(int $extensionNumber): PhoneNumber
     {
         if ($extensionNumber < 0) {
-            throw new NegativeExtensionNumberException(
+            throw new NegativeExtensionNumberError(
                 'Extension number (' . $extensionNumber . ') must not be negative number.'
             );
         }

@@ -6,7 +6,7 @@ use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareLength;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanMatchString;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasLength;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\EmailAddress;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidEmailAddressException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidEmailAddressError;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
@@ -34,7 +34,7 @@ class EmailAddressSpec extends ObjectBehavior
 
     public function it_rejects_invalid_email_addresses()
     {
-        $this->shouldThrow(InvalidEmailAddressException::class)->during(
+        $this->shouldThrow(InvalidEmailAddressError::class)->during(
             '__construct',
             [
                 $this->seeder->paragraph
