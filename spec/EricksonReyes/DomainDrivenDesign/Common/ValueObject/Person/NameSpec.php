@@ -2,8 +2,8 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Name;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyNameException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Name;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
@@ -100,8 +100,7 @@ class NameSpec extends ObjectBehavior
     {
         $length = strlen($this->name);
         $randomPosition = mt_rand(0, $length - 2);
-        $randomLength = mt_rand($randomPosition, $length);
-        $expectedKeyword = substr($this->name, $randomPosition, $randomLength);
+        $expectedKeyword = substr($this->name, $randomPosition);
         $lowerCasedExpectedKeyword = strtolower($expectedKeyword);
         $upperCasedExpectedKeyword = strtoupper($expectedKeyword);
         $snakeCasedExpectedKeyword = ucwords($expectedKeyword);

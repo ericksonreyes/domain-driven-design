@@ -111,8 +111,7 @@ class SuffixSpec extends ObjectBehavior
     {
         $length = strlen($this->suffix);
         $randomPosition = mt_rand(0, $length - 1);
-        $randomLength = $length - $randomPosition;
-        $expectedKeyword = substr($this->suffix, $randomPosition, $randomLength);
+        $expectedKeyword = substr($this->suffix, $randomPosition);
 
         $lowerCasedExpectedKeyword = strtolower($expectedKeyword);
         $upperCasedExpectedKeyword = strtoupper($expectedKeyword);

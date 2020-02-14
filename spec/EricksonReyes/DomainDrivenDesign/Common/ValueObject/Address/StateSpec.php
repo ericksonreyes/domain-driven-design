@@ -2,11 +2,9 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCountryCodeException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStateException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\State;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
 class StateSpec extends ObjectBehavior

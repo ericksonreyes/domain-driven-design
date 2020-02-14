@@ -2,11 +2,9 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStateException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStreetException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Street;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
 class StreetSpec extends ObjectBehavior

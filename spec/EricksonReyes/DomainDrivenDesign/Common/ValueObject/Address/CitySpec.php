@@ -100,8 +100,7 @@ class CitySpec extends ObjectBehavior
     {
         $length = strlen($this->city);
         $randomPosition = mt_rand(0, $length - 1);
-        $randomLength = mt_rand($randomPosition, $length);
-        $expectedKeyword = substr($this->city, $randomPosition, $randomLength);
+        $expectedKeyword = substr($this->city, $randomPosition);
         $lowerCasedExpectedKeyword = strtolower($expectedKeyword);
         $upperCasedExpectedKeyword = strtoupper($expectedKeyword);
         $snakeCasedExpectedKeyword = ucwords($expectedKeyword);

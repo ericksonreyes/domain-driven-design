@@ -2,11 +2,11 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\PhoneNumber;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeAreaCodeException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeCountryCodeException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeExtensionNumberException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativePhoneNumberException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\PhoneNumber;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 

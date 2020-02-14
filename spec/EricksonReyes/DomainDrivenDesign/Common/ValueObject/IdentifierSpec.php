@@ -100,7 +100,7 @@ class IdentifierSpec extends ObjectBehavior
         $length = strlen($this->identifier);
         $randomPosition = mt_rand(0, $length - 2);
         $randomLength = mt_rand($randomPosition, $length);
-        $expectedKeyword = substr($this->identifier, $randomPosition, $randomLength);
+        $expectedKeyword = substr($this->identifier, $randomPosition);
         $lowerCasedExpectedKeyword = strtolower($expectedKeyword);
         $upperCasedExpectedKeyword = strtoupper($expectedKeyword);
         $snakeCasedExpectedKeyword = ucwords($expectedKeyword);

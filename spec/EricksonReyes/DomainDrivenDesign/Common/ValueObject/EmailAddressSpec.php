@@ -2,10 +2,10 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\EmailAddress;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareLength;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanMatchString;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasLength;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\EmailAddress;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidEmailAddressException;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -122,8 +122,7 @@ class EmailAddressSpec extends ObjectBehavior
     {
         $length = strlen($this->emailAddress);
         $randomPosition = mt_rand(0, ceil($length / 2));
-        $randomLength = mt_rand($randomPosition, $length);
-        $expectedKeyword = substr($this->emailAddress, $randomPosition, $randomLength);
+        $expectedKeyword = substr($this->emailAddress, $randomPosition);
         $lowerCasedExpectedKeyword = strtolower($expectedKeyword);
         $upperCasedExpectedKeyword = strtoupper($expectedKeyword);
         $snakeCasedExpectedKeyword = ucwords($expectedKeyword);

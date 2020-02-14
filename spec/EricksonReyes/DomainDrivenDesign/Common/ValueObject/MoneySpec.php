@@ -2,14 +2,14 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Currency;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Money;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareAmount;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasAmount;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasArrayRepresentation;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Currency;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\CurrencyMismatchException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Money;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 

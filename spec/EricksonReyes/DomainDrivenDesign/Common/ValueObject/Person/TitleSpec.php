@@ -111,8 +111,7 @@ class TitleSpec extends ObjectBehavior
     {
         $length = strlen($this->title);
         $randomPosition = mt_rand(0, $length - 1);
-        $randomLength = $length - $randomPosition;
-        $expectedKeyword = substr($this->title, $randomPosition, $randomLength);
+        $expectedKeyword = substr($this->title, $randomPosition);
 
         $lowerCasedExpectedKeyword = strtolower($expectedKeyword);
         $upperCasedExpectedKeyword = strtoupper($expectedKeyword);
