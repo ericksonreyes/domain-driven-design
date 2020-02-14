@@ -19,19 +19,23 @@ composer require ericksonreyes/domain-driven-design
 ## Usage
 * [Command Bus](docs/application/COMMAND_BUS.MD)
 * [Event Bus](docs/application/EVENT_BUS.MD)
-* [Country Factory](docs/common/factory/COUNTRY_FACTORY.MD)
 * [Class Composition Validator](docs/common/validation/CLASS_COMPOSITION_VALIDATOR.MD)
 
 ## Value Objects
-* [Address](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address.php)
-* [Country](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Country.php)
+* [Identifier](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Identifier.php)
 * [Currency](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Currency.php)
-* [Email](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Email.php)
-* [Float](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/FloatValue.php)
-* [Integer](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/IntegerValue.php)
-* [Money](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address.php)
-* [Person Name](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/PersonName.php)
-* [String Value](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/StringValue.php)
+* [Email Address](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/EmailAddress.php)
+* [Money](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Money.php)
+* [Full Name](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Person/FullName.php)
+* [Name Title](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Person/Title.php)
+* [Person Name](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Person/Name.php)
+* [Name Suffix](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Person/Suffix.php)
+* [Address](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/Address.php)
+* [Street](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/Street.php)
+* [City](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/City.php)
+* [State](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/State.php)
+* [Country Code](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/CountryCode.php)
+* [Zip Code](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/ZipCode.php)
 
 ## Examples
 * [Domain Entity](src/EricksonReyes/DomainDrivenDesign/Example/Domain/DomainEntity.php)
