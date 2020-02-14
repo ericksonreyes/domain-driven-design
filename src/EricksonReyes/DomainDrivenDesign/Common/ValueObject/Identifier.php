@@ -3,7 +3,7 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyIdentifierException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyIdentifierException;
 
 class Identifier extends SizeableAndMatchableString
 {

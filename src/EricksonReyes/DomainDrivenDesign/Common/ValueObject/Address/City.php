@@ -1,11 +1,10 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
-
+namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCityException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCityException;
 
 class City extends SizeableAndMatchableString
 {

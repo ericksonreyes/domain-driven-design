@@ -1,12 +1,10 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
-
+namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyNameException;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCountryCodeException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCountryCodeException;
 
 class CountryCode extends SizeableAndMatchableString
 {

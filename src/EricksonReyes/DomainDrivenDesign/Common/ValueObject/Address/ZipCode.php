@@ -1,11 +1,10 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
-
+namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyNameException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyZipCodeException;
 
 class ZipCode extends SizeableAndMatchableString
 {
@@ -19,7 +18,7 @@ class ZipCode extends SizeableAndMatchableString
     {
         $trimmedZipCode = trim($zipCode);
         if ($trimmedZipCode === '') {
-            throw new EmptyNameException('Zip code must not be empty.');
+            throw new EmptyZipCodeException('Zip code must not be empty.');
         }
         parent::__construct($trimmedZipCode);
     }

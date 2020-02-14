@@ -6,7 +6,6 @@ use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeAreaCo
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeCountryCodeException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativeExtensionNumberException;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\NegativePhoneNumberException;
-use i;
 
 class PhoneNumber
 {

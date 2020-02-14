@@ -2,9 +2,6 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Suffix;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Title;
-
 class FullName
 {
     /**

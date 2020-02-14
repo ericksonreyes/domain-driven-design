@@ -1,12 +1,10 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
-
+namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptyNameException;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStateException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStateException;
 
 class State extends SizeableAndMatchableString
 {
@@ -23,5 +21,4 @@ class State extends SizeableAndMatchableString
         }
         parent::__construct($trimmedState);
     }
-
 }

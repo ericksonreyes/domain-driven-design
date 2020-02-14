@@ -1,8 +1,7 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
-
+namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 class Address
 {
@@ -88,6 +87,4 @@ class Address
     {
         return $this->zipCode;
     }
-
-
 }

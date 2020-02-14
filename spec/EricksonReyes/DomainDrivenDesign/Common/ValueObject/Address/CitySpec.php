@@ -1,36 +1,37 @@
 <?php
 
-namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
+namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyIdentifierException;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\City;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyCityException;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
-class IdentifierSpec extends ObjectBehavior
+class CitySpec extends ObjectBehavior
 {
     use UnitTestTrait;
 
     /**
      * @var string
      */
-    private $identifier;
+    private $city;
 
     public function let()
     {
+        $this->city = $this->seeder->city;
         $this->beConstructedWith(
-            $this->identifier = $this->seeder->uuid
+            str_repeat(' ', mt_rand(0, 5)) . $this->city . str_repeat(' ', mt_rand(0, 5))
         );
     }
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(Identifier::class);
+        $this->shouldHaveType(City::class);
     }
 
-    public function it_prevents_empty_identifiers()
+    public function it_prevents_empty_cities()
     {
-        $this->shouldThrow(EmptyIdentifierException::class)->during(
+        $this->shouldThrow(EmptyCityException::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))
@@ -40,19 +41,19 @@ class IdentifierSpec extends ObjectBehavior
 
     public function it_has_string_representation()
     {
-        $this->__toString()->shouldReturn($this->identifier);
+        $this->__toString()->shouldReturn($this->city);
     }
 
     public function it_has_length()
     {
-        $actualLength = strlen($this->identifier);
+        $actualLength = strlen($this->city);
 
         $this->length()->shouldReturn($actualLength);
     }
 
     public function it_can_compare_length()
     {
-        $actualLength = strlen($this->identifier);
+        $actualLength = strlen($this->city);
         $this->lengthIsEqualTo($actualLength)->shouldReturn(true);
         $this->lengthIsEqualOrLessThan($actualLength)->shouldReturn(true);
         $this->lengthIsEqualOrGreaterThan($actualLength)->shouldReturn(true);
@@ -77,7 +78,7 @@ class IdentifierSpec extends ObjectBehavior
 
     public function it_can_match_keywords()
     {
-        $keyword = $this->identifier;
+        $keyword = $this->city;
         $upperCasedKeyword = strtoupper($keyword);
         $lowerCasedKeyword = strtolower($keyword);
         $snakeCasedKeyword = ucwords($lowerCasedKeyword);
@@ -90,17 +91,17 @@ class IdentifierSpec extends ObjectBehavior
 
     public function it_can_mismatch_keywords()
     {
-        $name = $this->seeder->uuid;
+        $name = $this->seeder->name;
         $this->matches($name)->shouldReturn(false);
         $this->doesNotMatch($name)->shouldReturn(true);
     }
 
     public function it_can_search_for_matching_keywords()
     {
-        $length = strlen($this->identifier);
-        $randomPosition = mt_rand(0, $length - 2);
+        $length = strlen($this->city);
+        $randomPosition = mt_rand(0, $length - 1);
         $randomLength = mt_rand($randomPosition, $length);
-        $expectedKeyword = substr($this->identifier, $randomPosition, $randomLength);
+        $expectedKeyword = substr($this->city, $randomPosition, $randomLength);
         $lowerCasedExpectedKeyword = strtolower($expectedKeyword);
         $upperCasedExpectedKeyword = strtoupper($expectedKeyword);
         $snakeCasedExpectedKeyword = ucwords($expectedKeyword);
@@ -127,28 +128,28 @@ class IdentifierSpec extends ObjectBehavior
 
     public function it_can_determine_if_it_starts_with_a_keyword()
     {
-        $keyword = substr($this->identifier, 0, 2);
+        $keyword = substr($this->city, 0, 2);
         $this->startsWith($keyword)->shouldReturn(true);
         $this->doesNotStartWith($keyword)->shouldReturn(false);
     }
 
     public function it_can_determine_if_it_does_not_start_with_a_keyword()
     {
-        $keyword = md5($this->seeder->uuid);
+        $keyword = md5($this->seeder->name);
         $this->startsWith($keyword)->shouldReturn(false);
         $this->doesNotStartWith($keyword)->shouldReturn(true);
     }
 
     public function it_can_determine_if_it_ends_with_a_keyword()
     {
-        $keyword = substr($this->identifier, -2);
+        $keyword = substr($this->city, -2);
         $this->endsWith($keyword)->shouldReturn(true);
         $this->doesNotEndWith($keyword)->shouldReturn(false);
     }
 
     public function it_can_determine_if_it_does_not_end_with_a_keyword()
     {
-        $keyword = md5($this->seeder->uuid);
+        $keyword = md5($this->seeder->name);
         $this->endsWith($keyword)->shouldReturn(false);
         $this->doesNotEndWith($keyword)->shouldReturn(true);
     }
