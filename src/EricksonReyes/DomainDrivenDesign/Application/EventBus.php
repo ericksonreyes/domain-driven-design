@@ -2,7 +2,7 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Application;
 
-use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateEventHandlerException;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateEventHandlerError;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
 use EricksonReyes\DomainDrivenDesign\Infrastructure\EventBus as EventBusInterface;
 use EricksonReyes\DomainDrivenDesign\Infrastructure\EventHandler;
@@ -32,7 +32,7 @@ class EventBus implements EventBusInterface
     {
         foreach ($this->handlers() as $registeredHandler) {
             if ($handler === $registeredHandler) {
-                throw new DuplicateEventHandlerException(
+                throw new DuplicateEventHandlerError(
                     $handler->name() . ' is already registered in the event bus.'
                 );
             }

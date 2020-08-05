@@ -3,9 +3,9 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Application;
 
 use EricksonReyes\DomainDrivenDesign\Application\CommandBus;
-use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateCommandHandlerException;
-use EricksonReyes\DomainDrivenDesign\Application\Exception\MissingHandlerMethodException;
-use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandException;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateCommandHandlerError;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\MissingHandlerMethodError;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandError;
 use EricksonReyes\DomainDrivenDesign\Infrastructure\CommandBus as CommandBusInterface;
 use PhpSpec\ObjectBehavior;
 
@@ -55,14 +55,14 @@ class CommandBusSpec extends ObjectBehavior
 
     public function it_requires_a_handler_for_commands()
     {
-        $this->shouldThrow(UnhandledCommandException::class)->during('execute', [
+        $this->shouldThrow(UnhandledCommandError::class)->during('execute', [
             new MockCommand()
         ]);
     }
 
     public function it_requires_handler_to_have_handler_methods()
     {
-        $this->shouldThrow(MissingHandlerMethodException::class)->during('addHandler', [
+        $this->shouldThrow(MissingHandlerMethodError::class)->during('addHandler', [
             new MockEmptyHandler(),
             MockCommand::class
         ]);
@@ -72,7 +72,7 @@ class CommandBusSpec extends ObjectBehavior
     {
         $handler = new MockHandler();
         $this->addHandler($handler, MockCommand::class);
-        $this->shouldThrow(DuplicateCommandHandlerException::class)->during('addHandler', [
+        $this->shouldThrow(DuplicateCommandHandlerError::class)->during('addHandler', [
             $handler,
             MockCommand::class
         ]);

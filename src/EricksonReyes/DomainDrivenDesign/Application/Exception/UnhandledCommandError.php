@@ -8,6 +8,6 @@ use BadMethodCallException;
  * Class UnhandledCommandException
  * @package EricksonReyes\DomainDrivenDesign\Application\Exception
  */
-final class UnhandledCommandException extends BadMethodCallException
+final class UnhandledCommandError extends BadMethodCallException
 {
 }

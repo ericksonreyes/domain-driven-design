@@ -3,7 +3,7 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Application;
 
 use EricksonReyes\DomainDrivenDesign\Application\EventBus;
-use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateEventHandlerException;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateEventHandlerError;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
 use EricksonReyes\DomainDrivenDesign\Infrastructure\EventBus as EventBusInterface;
 use EricksonReyes\DomainDrivenDesign\Infrastructure\EventHandler;
@@ -41,7 +41,7 @@ class EventBusSpec extends ObjectBehavior
     {
         $eventHandler->name()->shouldBeCalled()->willReturn(Factory::create()->word);
         $this->register($eventHandler);
-        $this->shouldThrow(DuplicateEventHandlerException::class)->during('register', [
+        $this->shouldThrow(DuplicateEventHandlerError::class)->during('register', [
             $eventHandler
         ]);
     }

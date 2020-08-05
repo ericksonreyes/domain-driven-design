@@ -2,9 +2,9 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Application;
 
-use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateCommandHandlerException;
-use EricksonReyes\DomainDrivenDesign\Application\Exception\MissingHandlerMethodException;
-use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandException;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\DuplicateCommandHandlerError;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\MissingHandlerMethodError;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandError;
 use EricksonReyes\DomainDrivenDesign\Infrastructure\CommandBus as CommandBusInterface;
 
 /**
@@ -28,13 +28,13 @@ class CommandBus implements CommandBusInterface
         $handlerInstanceClassName = get_class($handler);
 
         if ($this->handlerHasAHandlerMethod($handler)) {
-            throw new MissingHandlerMethodException(
+            throw new MissingHandlerMethodError(
                 "{$handlerInstanceClassName} must have a handleThis method."
             );
         }
 
         if ($this->commandIsBeingHandledAlready($command)) {
-            throw new DuplicateCommandHandlerException(
+            throw new DuplicateCommandHandlerError(
                 "{$command} is already being handled by " .
                 $this->getCommandHandlerName($command) . "."
             );
@@ -45,7 +45,7 @@ class CommandBus implements CommandBusInterface
 
     /**
      * @param $command
-     * @throws UnhandledCommandException
+     * @throws UnhandledCommandError
      */
     public function execute($command): void
     {
@@ -57,7 +57,7 @@ class CommandBus implements CommandBusInterface
                 return;
             }
         }
-        throw new UnhandledCommandException("There is no command handler for {$commandClassName}");
+        throw new UnhandledCommandError("There is no command handler for {$commandClassName}");
     }
 
     /**

@@ -2,12 +2,12 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Application\Exception;
 
-use RuntimeException;
+use InvalidArgumentException;
 
 /**
- * Class DuplicateEventHandlerException
+ * Class MissingHandlerMethodException
  * @package EricksonReyes\DomainDrivenDesign\Application\Exception
  */
-final class DuplicateEventHandlerException extends RuntimeException
+final class MissingHandlerMethodError extends InvalidArgumentException
 {
 }

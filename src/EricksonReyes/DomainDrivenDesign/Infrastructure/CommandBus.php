@@ -2,7 +2,7 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Infrastructure;
 
-use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandException;
+use EricksonReyes\DomainDrivenDesign\Application\Exception\UnhandledCommandError;
 
 /**
  * Class CommandHandler
@@ -18,7 +18,7 @@ interface CommandBus
 
     /**
      * @param $command
-     * @throws UnhandledCommandException
+     * @throws UnhandledCommandError
      */
     public function execute($command): void;
 }

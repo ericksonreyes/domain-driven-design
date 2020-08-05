@@ -5,9 +5,9 @@ namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareAmount;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasAmount;
 use EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasArrayRepresentation;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MismatchedCurrenciesError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InsufficientMoneyAmountError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidMoneyAmountError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MismatchedCurrenciesError;
 
 /**
  * Class Money
