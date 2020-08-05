@@ -2,7 +2,7 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyIdentifierException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\EmptyIdentifierError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -30,7 +30,7 @@ class IdentifierSpec extends ObjectBehavior
 
     public function it_prevents_empty_identifiers()
     {
-        $this->shouldThrow(EmptyIdentifierException::class)->during(
+        $this->shouldThrow(EmptyIdentifierError::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

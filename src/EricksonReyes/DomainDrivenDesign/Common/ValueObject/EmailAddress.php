@@ -3,7 +3,7 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidEmailAddressException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidEmailAddressError;
 
 /**
  * Class EmailAddress
@@ -21,7 +21,7 @@ class EmailAddress extends SizeableAndMatchableString
     {
         $trimmedEmailAddress = trim($emailAddress);
         if ($this->emailIsInValid($emailAddress)) {
-            throw new InvalidEmailAddressException($trimmedEmailAddress . ' is not a valid e-mail address.');
+            throw new InvalidEmailAddressError($trimmedEmailAddress . ' is not a valid e-mail address.');
         }
         parent::__construct($trimmedEmailAddress);
     }

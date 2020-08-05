@@ -3,7 +3,7 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Currency;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\InvalidCurrencyCodeError;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 
@@ -27,7 +27,7 @@ class CurrencySpec extends ObjectBehavior
 
     public function it_only_requires_only_letters()
     {
-        $this->shouldThrow(InvalidCurrencyCodeException::class)->during(
+        $this->shouldThrow(InvalidCurrencyCodeError::class)->during(
             '__construct',
             [
                 'A2S'
@@ -37,7 +37,7 @@ class CurrencySpec extends ObjectBehavior
 
     public function it_only_requires_three_letters()
     {
-        $this->shouldThrow(InvalidCurrencyCodeException::class)->during(
+        $this->shouldThrow(InvalidCurrencyCodeError::class)->during(
             '__construct',
             [
                 'US'

@@ -4,7 +4,7 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptySuffixException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person\Exception\EmptySuffixError;
 
 class Suffix extends SizeableAndMatchableString
 {
@@ -17,7 +17,7 @@ class Suffix extends SizeableAndMatchableString
     {
         $trimmedSuffix = trim($suffix);
         if ($trimmedSuffix === '') {
-            throw new EmptySuffixException('Suffix must not be empty.');
+            throw new EmptySuffixError('Suffix must not be empty.');
         }
         parent::__construct($trimmedSuffix);
     }

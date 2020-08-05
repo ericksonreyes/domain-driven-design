@@ -3,8 +3,8 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Example\Domain;
 
 use DateTimeImmutable;
-use EricksonReyes\DomainDrivenDesign\Common\Exception\DomainEventOwnershipException;
-use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodException;
+use EricksonReyes\DomainDrivenDesign\Common\Exception\DomainEventOwnershipError;
+use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
 use EricksonReyes\DomainDrivenDesign\Domain\Entity;
 use EricksonReyes\DomainDrivenDesign\EventSourcedEntity;
@@ -78,7 +78,7 @@ class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
     public function it_requires_domain_events_to_have_replay_methods()
     {
         $event = new MockDomainEvent($this->seeder->uuid);
-        $this->shouldThrow(MissingEventReplayMethodException::class)->during(
+        $this->shouldThrow(MissingEventReplayMethodError::class)->during(
             'restoreFromEvent',
             [$event]
         );
@@ -90,7 +90,7 @@ class EventSourcedDomainEntitySpec extends EventSourcedDomainEntityUnitTest
         $event->entityId()->shouldBeCalled()->willReturn($uuid);
         $event->eventName()->shouldBeCalled()->willReturn('DomainEntityWasDeleted');
         $this->id->doesNotMatch($uuid)->shouldBeCalled()->willReturn(true);
-        $this->shouldThrow(DomainEventOwnershipException::class)->during(
+        $this->shouldThrow(DomainEventOwnershipError::class)->during(
             'restoreFromEvent',
             [$event]
         );

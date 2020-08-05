@@ -2,7 +2,7 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyZipCodeException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyZipCodeError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\ZipCode;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -31,7 +31,7 @@ class ZipCodeSpec extends ObjectBehavior
 
     public function it_prevents_empty_zipcodes()
     {
-        $this->shouldThrow(EmptyZipCodeException::class)->during(
+        $this->shouldThrow(EmptyZipCodeError::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))

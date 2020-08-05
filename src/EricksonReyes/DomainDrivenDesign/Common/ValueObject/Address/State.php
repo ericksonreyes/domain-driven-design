@@ -4,8 +4,12 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
 use EricksonReyes\DomainDrivenDesign\Common\Abstracts\SizeableAndMatchableString;
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStateException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStateError;
 
+/**
+ * Class State
+ * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address
+ */
 class State extends SizeableAndMatchableString
 {
 
@@ -17,7 +21,7 @@ class State extends SizeableAndMatchableString
     {
         $trimmedState = trim($state);
         if ($trimmedState === '') {
-            throw new EmptyStateException('State must not be empty.');
+            throw new EmptyStateError('State must not be empty.');
         }
         parent::__construct($trimmedState);
     }

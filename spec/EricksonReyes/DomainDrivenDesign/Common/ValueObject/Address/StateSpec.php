@@ -2,7 +2,7 @@
 
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address;
 
-use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStateException;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\Exception\EmptyStateError;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Address\State;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
@@ -31,7 +31,7 @@ class StateSpec extends ObjectBehavior
 
     public function it_prevents_empty_states()
     {
-        $this->shouldThrow(EmptyStateException::class)->during(
+        $this->shouldThrow(EmptyStateError::class)->during(
             '__construct',
             [
                 str_repeat(' ', mt_rand(0, 5))
