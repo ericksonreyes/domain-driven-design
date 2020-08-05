@@ -15,7 +15,7 @@ class Currency
      */
     private $code;
 
-    public function __construct($code)
+    public function __construct(string $code)
     {
         $trimmed = trim($code);
         $spacelessCode = str_replace(' ', '', $trimmed);

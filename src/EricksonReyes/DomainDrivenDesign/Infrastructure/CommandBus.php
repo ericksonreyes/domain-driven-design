@@ -12,9 +12,9 @@ interface CommandBus
 {
     /**
      * @param $handler
-     * @param string $command
+     * @param string $commandName
      */
-    public function addHandler($handler, string $command): void;
+    public function addHandler($handler, string $commandName): void;
 
     /**
      * @param $command
