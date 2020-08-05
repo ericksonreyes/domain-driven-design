@@ -2,6 +2,12 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person;
 
+/**
+ * Class FullName
+ * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject\Person
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class FullName
 {
     /**

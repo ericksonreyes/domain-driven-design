@@ -7,6 +7,12 @@ use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MissingFileTyp
 use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareSize;
 use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasSize;
 
+/**
+ * Class File
+ * @package EricksonReyes\DomainDrivenDesign\Common\ValueObject
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class File implements HasSize, CanCompareSize
 {
 
@@ -156,5 +162,4 @@ class File implements HasSize, CanCompareSize
     {
         $this->fileLocation = trim($fileLocation);
     }
-
 }

@@ -3,11 +3,14 @@
 
 namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Domain;
 
-
 use EricksonReyes\DomainDrivenDesign\Common\Exception\DomainEventOwnershipError;
 use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodError;
 use EricksonReyes\DomainDrivenDesign\Domain\Event;
 
+/**
+ * Trait EventSourcedEntityTrait
+ * @package EricksonReyes\EricksonReyes\DomainDrivenDesign\Domain
+ */
 trait EventSourcedEntityTrait
 {
 

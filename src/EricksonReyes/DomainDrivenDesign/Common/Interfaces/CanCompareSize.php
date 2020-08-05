@@ -3,7 +3,6 @@
 
 namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces;
 
-
 interface CanCompareSize
 {
     /**
@@ -41,5 +40,4 @@ interface CanCompareSize
      * @return bool
      */
     public function sizeIsEqualOrGreaterThan(int $expectedSize): bool;
-
 }
