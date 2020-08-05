@@ -142,4 +142,33 @@ class FullName
 
         return $newName;
     }
+
+    /**
+     * @param FullName $anotherFullName
+     * @return bool
+     */
+    public function matches(FullName $anotherFullName): bool
+    {
+        if ($anotherFullName->title() !== $this->title()) {
+            return false;
+        }
+
+        if ($anotherFullName->firstName() !== $this->firstName()) {
+            return false;
+        }
+
+        if ($anotherFullName->middleName() !== $this->middleName()) {
+            return false;
+        }
+
+        if ($anotherFullName->lastName() !== $this->lastName()) {
+            return false;
+        }
+
+        if ($anotherFullName->suffix() !== $this->suffix()) {
+            return false;
+        }
+
+        return true;
+    }
 }
