@@ -93,6 +93,7 @@ class AddressSpec extends ObjectBehavior
     public function it_can_be_matched()
     {
         $this->matches($this)->shouldReturn(true);
+        $this->doesNotMatch($this)->shouldReturn(false);
     }
 
     public function it_can_compare_streets(Address $anotherAddress) {

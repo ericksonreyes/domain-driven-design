@@ -119,4 +119,13 @@ class Address
         }
         return true;
     }
+
+    /**
+     * @param Address $anotherAddress
+     * @return bool
+     */
+    public function doesNotMatch(Address $anotherAddress): bool
+    {
+        return !$this->matches($anotherAddress);
+    }
 }

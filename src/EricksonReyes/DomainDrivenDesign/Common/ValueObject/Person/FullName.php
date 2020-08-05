@@ -171,4 +171,13 @@ class FullName
 
         return true;
     }
+
+    /**
+     * @param FullName $anotherFullName
+     * @return bool
+     */
+    public function doesNotMatch(FullName $anotherFullName): bool
+    {
+        return !$this->matches($anotherFullName);
+    }
 }

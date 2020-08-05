@@ -149,6 +149,7 @@ class FullNameSpec extends ObjectBehavior
     public function it_can_be_compared()
     {
         $this->matches($this)->shouldReturn(true);
+        $this->doesNotMatch($this)->shouldReturn(false);
     }
 
     public function it_can_compare_titles(FullName $anotherFullName)
