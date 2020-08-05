@@ -15,7 +15,7 @@ class Currency
      */
     private $code;
 
-    public function __construct($code)
+    public function __construct(string $code)
     {
         $trimmed = trim($code);
         $spacelessCode = str_replace(' ', '', $trimmed);
@@ -38,5 +38,26 @@ class Currency
     public function __toString(): string
     {
         return $this->code;
+    }
+
+    /**
+     * @param Currency $anotherCurrency
+     * @return bool
+     */
+    public function matches(Currency $anotherCurrency): bool
+    {
+        if ($this->code !== $anotherCurrency->code) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param Currency $anotherCurrency
+     * @return bool
+     */
+    public function doesNotMatch(Currency $anotherCurrency): bool
+    {
+        return !$this->matches($anotherCurrency);
     }
 }

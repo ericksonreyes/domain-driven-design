@@ -145,4 +145,61 @@ class FullNameSpec extends ObjectBehavior
             $this->actualSuffix
         );
     }
+
+    public function it_can_be_compared()
+    {
+        $this->matches($this)->shouldReturn(true);
+        $this->doesNotMatch($this)->shouldReturn(false);
+    }
+
+    public function it_can_compare_titles(FullName $anotherFullName)
+    {
+        $aDifferentTitle = new Title($this->seeder->title);
+        $anotherFullName->title()->shouldBeCalled()->willReturn($aDifferentTitle);
+        $this->matches($anotherFullName)->shouldReturn(false);
+
+    }
+
+    public function it_can_compare_first_names(FullName $anotherFullName)
+    {
+        $anotherFullName->title()->shouldBeCalled()->willReturn($this->title());
+
+        $aDifferentFirstName = new Name($this->seeder->firstName);
+        $anotherFullName->firstName()->shouldBeCalled()->willReturn($aDifferentFirstName);
+        $this->matches($anotherFullName)->shouldReturn(false);
+
+    }
+
+    public function it_can_compare_middle_names(FullName $anotherFullName)
+    {
+        $anotherFullName->title()->shouldBeCalled()->willReturn($this->title());
+        $anotherFullName->firstName()->shouldBeCalled()->willReturn($this->firstName());
+
+        $aDifferentMiddleName = new Name($this->seeder->firstName);
+        $anotherFullName->middleName()->shouldBeCalled()->willReturn($aDifferentMiddleName);
+        $this->matches($anotherFullName)->shouldReturn(false);
+    }
+
+    public function it_can_compare_last_names(FullName $anotherFullName)
+    {
+        $anotherFullName->title()->shouldBeCalled()->willReturn($this->title());
+        $anotherFullName->firstName()->shouldBeCalled()->willReturn($this->firstName());
+        $anotherFullName->middleName()->shouldBeCalled()->willReturn($this->middleName());
+
+        $aDifferentLastName = new Name($this->seeder->firstName);
+        $anotherFullName->lastName()->shouldBeCalled()->willReturn($aDifferentLastName);
+        $this->matches($anotherFullName)->shouldReturn(false);
+    }
+
+    public function it_can_compare_suffix(FullName $anotherFullName)
+    {
+        $anotherFullName->title()->shouldBeCalled()->willReturn($this->title());
+        $anotherFullName->firstName()->shouldBeCalled()->willReturn($this->firstName());
+        $anotherFullName->middleName()->shouldBeCalled()->willReturn($this->middleName());
+        $anotherFullName->lastName()->shouldBeCalled()->willReturn($this->lastName());
+
+        $aDifferentSuffix = new Suffix($this->seeder->randomLetter);
+        $anotherFullName->suffix()->shouldBeCalled()->willReturn($aDifferentSuffix);
+        $this->matches($anotherFullName)->shouldReturn(false);
+    }
 }

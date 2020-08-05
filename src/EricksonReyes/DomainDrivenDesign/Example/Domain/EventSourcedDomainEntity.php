@@ -85,7 +85,7 @@ class EventSourcedDomainEntity extends EventSourcedEntity
     public function delete(): void
     {
         $event = DomainEntityWasDeletedEvent::raise(
-            (string) $this->id(),
+            (string)$this->id(),
             new DateTimeImmutable(),
             $this->additionalData()
         );
