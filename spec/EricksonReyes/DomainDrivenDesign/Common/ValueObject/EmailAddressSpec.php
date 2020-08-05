@@ -70,6 +70,7 @@ class EmailAddressSpec extends ObjectBehavior
         $exactLength = strlen($this->emailAddress);
 
         $this->lengthIsEqualTo($exactLength)->shouldReturn(true);
+        $this->lengthIsNotEqualTo($exactLength)->shouldReturn(false);
         $this->lengthIsLessThan($exactLength)->shouldReturn(false);
         $this->lengthIsEqualOrLessThan($exactLength)->shouldReturn(true);
         $this->lengthIsGreaterThan($exactLength)->shouldReturn(false);

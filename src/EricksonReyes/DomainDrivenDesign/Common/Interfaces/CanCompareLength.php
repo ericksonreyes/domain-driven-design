@@ -10,32 +10,38 @@ namespace EricksonReyes\DomainDrivenDesign\Common\Interfaces;
 interface CanCompareLength
 {
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return bool
      */
-    public function lengthIsEqualTo(int $length): bool;
+    public function lengthIsEqualTo(int $expectedLength): bool;
 
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return bool
      */
-    public function lengthIsLessThan(int $length): bool;
+    public function lengthIsNotEqualTo(int $expectedLength): bool;
 
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return bool
      */
-    public function lengthIsGreaterThan(int $length): bool;
+    public function lengthIsLessThan(int $expectedLength): bool;
 
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return bool
      */
-    public function lengthIsEqualOrLessThan(int $length): bool;
+    public function lengthIsGreaterThan(int $expectedLength): bool;
 
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return bool
      */
-    public function lengthIsEqualOrGreaterThan(int $length): bool;
+    public function lengthIsEqualOrLessThan(int $expectedLength): bool;
+
+    /**
+     * @param int $expectedLength
+     * @return bool
+     */
+    public function lengthIsEqualOrGreaterThan(int $expectedLength): bool;
 }

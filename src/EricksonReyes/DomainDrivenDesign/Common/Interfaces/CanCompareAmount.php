@@ -10,38 +10,38 @@ namespace EricksonReyes\DomainDrivenDesign\Common\Interfaces;
 interface CanCompareAmount
 {
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsEqualsTo(int $amount): bool;
+    public function amountIsEqualsTo(int $expectedAmount): bool;
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsNotEqualTo(int $amount): bool;
+    public function amountIsNotEqualTo(int $expectedAmount): bool;
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsLessThan(int $amount): bool;
+    public function amountIsLessThan(int $expectedAmount): bool;
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsGreaterThan(int $amount): bool;
+    public function amountIsGreaterThan(int $expectedAmount): bool;
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsEqualOrLessThan(int $amount): bool;
+    public function amountIsEqualOrLessThan(int $expectedAmount): bool;
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsEqualOrGreaterThan(int $amount): bool;
+    public function amountIsEqualOrGreaterThan(int $expectedAmount): bool;
 }
