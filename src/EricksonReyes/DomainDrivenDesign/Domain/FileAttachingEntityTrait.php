@@ -3,10 +3,13 @@
 
 namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Domain;
 
-
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\File;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
 
+/**
+ * Trait FileAttachingEntityTrait
+ * @package EricksonReyes\EricksonReyes\DomainDrivenDesign\Domain
+ */
 trait FileAttachingEntityTrait
 {
 
