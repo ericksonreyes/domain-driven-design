@@ -39,4 +39,25 @@ class Currency
     {
         return $this->code;
     }
+
+    /**
+     * @param Currency $anotherCurrency
+     * @return bool
+     */
+    public function matches(Currency $anotherCurrency): bool
+    {
+        if ($this->code !== $anotherCurrency->code) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param Currency $anotherCurrency
+     * @return bool
+     */
+    public function doesNotMatch(Currency $anotherCurrency): bool
+    {
+        return !$this->matches($anotherCurrency);
+    }
 }

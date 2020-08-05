@@ -49,4 +49,18 @@ class CurrencySpec extends ObjectBehavior
     {
         $this->__toString()->shouldReturn($this->currency);
     }
+
+    public function it_can_be_compared()
+    {
+        $anotherCurrency = new Currency($this->currency);
+        $this->matches($anotherCurrency)->shouldReturn(true);
+        $this->doesNotMatch($anotherCurrency)->shouldReturn(false);
+    }
+
+    public function it_can_compare_mismatches()
+    {
+        $anotherCurrency = new Currency($this->seeder->currencyCode);
+        $this->matches($anotherCurrency)->shouldReturn(false);
+        $this->doesNotMatch($anotherCurrency)->shouldReturn(true);
+    }
 }
