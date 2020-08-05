@@ -3,8 +3,8 @@
 namespace spec\EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\File;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Exception\MissingFileNameError;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Exception\MissingFileTypeError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MissingFileNameError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MissingFileTypeError;
 use PhpSpec\ObjectBehavior;
 use spec\EricksonReyes\DomainDrivenDesign\Common\UnitTestTrait;
 

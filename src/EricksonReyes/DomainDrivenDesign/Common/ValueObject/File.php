@@ -2,9 +2,8 @@
 
 namespace EricksonReyes\DomainDrivenDesign\Common\ValueObject;
 
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Exception\EmptyFileContentError;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Exception\MissingFileNameError;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Exception\MissingFileTypeError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MissingFileNameError;
+use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Exception\MissingFileTypeError;
 use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\CanCompareSize;
 use EricksonReyes\EricksonReyes\DomainDrivenDesign\Common\Interfaces\HasSize;
 
