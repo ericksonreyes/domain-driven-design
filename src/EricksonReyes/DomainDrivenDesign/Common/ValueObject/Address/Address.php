@@ -91,4 +91,32 @@ class Address
     {
         return $this->zipCode;
     }
+
+    /**
+     * @param Address $anotherAddress
+     * @return bool
+     */
+    public function matches(Address $anotherAddress): bool
+    {
+        if ($this->street() !== $anotherAddress->street()) {
+            return false;
+        }
+
+        if ($this->city() !== $anotherAddress->city()) {
+            return false;
+        }
+
+        if ($this->state() !== $anotherAddress->state()) {
+            return false;
+        }
+
+        if ($this->countryCode() !== $anotherAddress->countryCode()) {
+            return false;
+        }
+
+        if ($this->zipCode() !== $anotherAddress->zipCode()) {
+            return false;
+        }
+        return true;
+    }
 }
