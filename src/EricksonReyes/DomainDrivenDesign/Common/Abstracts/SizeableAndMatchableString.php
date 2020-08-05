@@ -28,48 +28,57 @@ abstract class SizeableAndMatchableString implements HasLength, CanCompareLength
     }
 
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return mixed
      */
-    public function lengthIsEqualTo(int $length): bool
+    public function lengthIsEqualTo(int $expectedLength): bool
     {
-        return $this->length() === $length;
+        return $this->length() === $expectedLength;
     }
 
     /**
-     * @param int $length
-     * @return mixed
+     * @param int $expectedLength
+     * @return bool
      */
-    public function lengthIsLessThan(int $length): bool
+    public function lengthIsNotEqualTo(int $expectedLength): bool
     {
-        return $this->length() < $length;
+        return !$this->lengthIsEqualTo($expectedLength);
     }
 
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return mixed
      */
-    public function lengthIsGreaterThan(int $length): bool
+    public function lengthIsLessThan(int $expectedLength): bool
     {
-        return $this->length() > $length;
+        return $this->length() < $expectedLength;
     }
 
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return mixed
      */
-    public function lengthIsEqualOrLessThan(int $length): bool
+    public function lengthIsGreaterThan(int $expectedLength): bool
     {
-        return $this->length() <= $length;
+        return $this->length() > $expectedLength;
     }
 
     /**
-     * @param int $length
+     * @param int $expectedLength
      * @return mixed
      */
-    public function lengthIsEqualOrGreaterThan(int $length): bool
+    public function lengthIsEqualOrLessThan(int $expectedLength): bool
     {
-        return $this->length() >= $length;
+        return $this->length() <= $expectedLength;
+    }
+
+    /**
+     * @param int $expectedLength
+     * @return mixed
+     */
+    public function lengthIsEqualOrGreaterThan(int $expectedLength): bool
+    {
+        return $this->length() >= $expectedLength;
     }
 
     /**

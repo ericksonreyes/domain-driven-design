@@ -15,7 +15,6 @@ trait UnitTestTrait
 
     /**
      * UnitTestTrait constructor.
-     * @param Generator $seeder
      */
     public function __construct()
     {

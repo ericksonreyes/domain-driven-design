@@ -4,7 +4,7 @@
 namespace EricksonReyes\DomainDrivenDesign\Common\Interfaces;
 
 /**
- * Interface HasValidity
+ * Interface CanBeValidated
  * @package EricksonReyes\DomainDrivenDesign\Common\Interfaces
  */
 interface CanBeValidated

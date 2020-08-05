@@ -55,58 +55,58 @@ class Money implements HasAmount, CanCompareAmount, HasArrayRepresentation
     }
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsEqualsTo(int $amount): bool
+    public function amountIsEqualsTo(int $expectedAmount): bool
     {
-        return $this->amount() === $amount;
+        return $this->amount() === $expectedAmount;
     }
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsNotEqualTo(int $amount): bool
+    public function amountIsNotEqualTo(int $expectedAmount): bool
     {
-        return !$this->amountIsEqualsTo($amount);
+        return !$this->amountIsEqualsTo($expectedAmount);
     }
 
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsLessThan(int $amount): bool
+    public function amountIsLessThan(int $expectedAmount): bool
     {
-        return $this->amount() < $amount;
+        return $this->amount() < $expectedAmount;
     }
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsGreaterThan(int $amount): bool
+    public function amountIsGreaterThan(int $expectedAmount): bool
     {
-        return $this->amount() > $amount;
+        return $this->amount() > $expectedAmount;
     }
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsEqualOrLessThan(int $amount): bool
+    public function amountIsEqualOrLessThan(int $expectedAmount): bool
     {
-        return $this->amount() <= $amount;
+        return $this->amount() <= $expectedAmount;
     }
 
     /**
-     * @param int $amount
+     * @param int $expectedAmount
      * @return bool
      */
-    public function amountIsEqualOrGreaterThan(int $amount): bool
+    public function amountIsEqualOrGreaterThan(int $expectedAmount): bool
     {
-        return $this->amountIsEqualsTo($amount) || $this->amountIsGreaterThan($amount);
+        return $this->amountIsEqualsTo($expectedAmount) || $this->amountIsGreaterThan($expectedAmount);
     }
 
     /**
