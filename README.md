@@ -36,11 +36,13 @@ composer require ericksonreyes/domain-driven-design
 * [State](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/State.php)
 * [Country Code](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/CountryCode.php)
 * [Zip Code](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/Address/ZipCode.php)
+* [File](src/EricksonReyes/DomainDrivenDesign/Common/ValueObject/File.php)
 
 ## Examples
 * [Domain Entity](src/EricksonReyes/DomainDrivenDesign/Example/Domain/DomainEntity.php)
 * [Domain Event](src/EricksonReyes/DomainDrivenDesign/Example/Domain/DomainEntityWasDeletedEvent.php)
 * [Event Sourced Domain Entity](src/EricksonReyes/DomainDrivenDesign/Example/Domain/EventSourcedDomainEntity.php)
+* [File Attaching Domain Entity](src/EricksonReyes/DomainDrivenDesign/Example/Domain/FileAttachingDomainEntity.php)
 
 ## Interfaces
 * [Command Bus](src/EricksonReyes/DomainDrivenDesign/Infrastructure/CommandBus.php)
