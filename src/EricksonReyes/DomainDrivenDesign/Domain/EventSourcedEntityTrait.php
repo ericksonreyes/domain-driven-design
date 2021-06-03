@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Domain;
+namespace EricksonReyes\DomainDrivenDesign\Domain;
 
 use EricksonReyes\DomainDrivenDesign\Common\Exception\DomainEventOwnershipError;
 use EricksonReyes\DomainDrivenDesign\Common\Exception\MissingEventReplayMethodError;

@@ -4,7 +4,7 @@
   "license": "MIT",
   "type": "library",
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "EricksonReyes\\": "src",
+      "EricksonReyes\\": "src/EricksonReyes",
       "spec\\": "spec"
     },
     "psr-0": {

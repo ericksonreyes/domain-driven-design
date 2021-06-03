@@ -1,9 +1,7 @@
 <?php
 
-namespace EricksonReyes\DomainDrivenDesign;
+namespace EricksonReyes\DomainDrivenDesign\Domain;
 
-use EricksonReyes\DomainDrivenDesign\Domain\Entity;
-use EricksonReyes\EricksonReyes\DomainDrivenDesign\Domain\EventSourcedEntityTrait;
 
 /**
  * Class EventSourcedEntity
