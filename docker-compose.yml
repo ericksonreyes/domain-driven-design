@@ -1,0 +1,26 @@
+version: "3.8"
+
+
+
+services:
+
+  composer:
+    build:
+      context: .
+      dockerfile: docker/composer.Dockerfile
+    volumes:
+      - "./:/var/www/html"
+      - "./vendor:/var/www/html/vendor:delegated"
+      - "./bin:/var/www/html/bin:delegated"
+    tty: true
+
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php-cli.Dockerfile
+    volumes:
+      - "./:/var/www/html"
+      - "./vendor:/var/www/html/vendor:delegated"
+      - "./bin:/var/www/html/bin:delegated"
+    tty: true

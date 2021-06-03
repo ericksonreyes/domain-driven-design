@@ -1,0 +1,8 @@
+.gitlab/
+.git/
+/__pycache__/
+/.idea
+node_modules/
+vendor/
+bin/
+build/logs/*

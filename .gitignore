@@ -4,16 +4,10 @@
 /.idea
 /nbproject/
 /build/logs/clover.xml
-/build/logs/*
-
 .DS_Store
 Homestead.json
 Homestead.yaml
 .env
 composer.phar
-composer.lock
-
 phpspec.yml
 cghooks.lock
-php.ini
-php-silent.ini

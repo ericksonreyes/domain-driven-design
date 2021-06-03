@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EricksonReyes\EricksonReyes\DomainDrivenDesign\Domain;
+namespace EricksonReyes\DomainDrivenDesign\Domain;
 
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\File;
 use EricksonReyes\DomainDrivenDesign\Common\ValueObject\Identifier;
